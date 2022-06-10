@@ -1,0 +1,44 @@
+.date {
+    display: flex;
+    flex-direction: row;
+    border: solid 1px black;
+    padding: 2rem;
+    justify-content: space-around;
+}
+
+.dayLocation {
+    text-align: center;
+    line-height: 0.5rem;
+}
+
+.detail__date {
+    display: flex;
+    justify-content: center;
+    font-weight: 800;
+    margin-bottom: 2rem;
+}
+
+.showAddress {
+    margin-left: 10%;
+    margin-top: 5%;
+}
+
+.showdetails {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+}
+
+.essentials {
+    border: solid 1px black;
+    padding: 2rem;
+    padding-top: 0.7rem;
+    margin-top: 1rem;
+    background-color: lightcoral;
+}
+
+.addShowButton {
+    margin-top: 1rem;
+    margin-left: 45%;
+    padding: 1rem;
+}
