@@ -1,0 +1,19 @@
+.navbar {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+}
+
+li {
+    list-style: none;
+}
+
+.logo {
+    font-weight: bold;
+    font-size: larger;
+    margin-right: 15rem;
+}
+
+.navbar__logout {
+    margin-left: 5rem;
+}

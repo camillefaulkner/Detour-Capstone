@@ -4,7 +4,7 @@ import { getAllDates } from "../ApiManager"
 import { Date } from "./ShowDate"
 import "./DateList.css"
 
-export const DateList = () => {
+export const DateList = ({ setLocations }) => {
     const [showDates, setShowDates] = useState([])
     const navigate = useNavigate()
     const localUser = localStorage.getItem("detour_user")
@@ -15,6 +15,7 @@ export const DateList = () => {
             getAllDates()
                 .then((dateArray) => {
                     setShowDates(dateArray)
+                    setLocations(dateArray)
                 })
         }, []
     )

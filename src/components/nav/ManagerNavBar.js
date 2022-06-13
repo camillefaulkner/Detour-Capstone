@@ -6,36 +6,37 @@ export const ManagerNav = () => {
 
     return (
         <ul className="navbar">
+            <li className="logo">detour</li>
             <li className="navbar__item">
                 <Link className="navbar__link" to="/dates">
-                    Dates
+                    dates
                 </Link>
             </li>
             <li className="navbar__item">
                 <Link className="navbar__link" to="/guests">
-                    Guest List
+                    guest list
                 </Link>
             </li>
             <li className="navbar__item">
                 <Link className="navbar__link" to="/crew">
-                    Crew
+                    crew
                 </Link>
             </li>
             <li className="navbar__item">
                 <Link className="navbar__link" to="/">
-                    Home
+                    home
                 </Link>
             </li>
             <li className="navbar__item">
                 <Link className="navbar__link" to="/profile">
-                    Profile
+                    profile
                 </Link>
             </li>
-            <li className="navbar__item navbar__logout">
+            <li className="navbar__logout">
             <Link className="navbar__link" to="" onClick={() => {
                     localStorage.removeItem("detour_user")
                     navigate("/", { replace: true })
-                }}>Logout</Link>
+                }}>logout</Link>
             </li>
         </ul>
     )

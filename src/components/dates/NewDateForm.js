@@ -48,7 +48,7 @@ export const NewDateForm = () => {
                     <label htmlFor="description">Date:</label>
                     <input
                         required autoFocus
-                        type="text"
+                        type="date"
                         className="form-control"
                         value={showDate.date}
                         onChange={

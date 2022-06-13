@@ -1,6 +1,6 @@
 import { ArtistNav } from "./ArtistNavBar"
 import { ManagerNav } from "./ManagerNavBar"
-
+import "./Nav.css"
 
 
 export const NavBar = () => {

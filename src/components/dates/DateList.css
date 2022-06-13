@@ -6,6 +6,11 @@
     justify-content: space-around;
 }
 
+.date:hover {
+    background-color: beige;
+    filter: drop-shadow(0 0 0.75rem black);
+}
+
 .dayLocation {
     text-align: center;
     line-height: 0.5rem;
@@ -41,4 +46,8 @@
     margin-top: 1rem;
     margin-left: 45%;
     padding: 1rem;
+}
+
+.datelist {
+    margin-top: 2rem;
 }

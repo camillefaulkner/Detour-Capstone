@@ -19,35 +19,31 @@ export const Date = ({ id, date, venue, city, state, setter }) => {
     )
 
     if (userObject.manager) {
-        return <section className="date">
-
-            <div>
-                <Link to={`/dates/${id}/edit`}>{date}</Link>
-            </div>
-
-            <div className="dayLocation"><h3>{venue}</h3> <br></br> {city} {state}</div>
-            <button classname="deleteButton" onClick={() => {
-                fetch(`http://localhost:8088/showDates/${id}`, {
-                    method: "DELETE"
-                })
-                    .then(() => {
-                        getAllDates()
-                            .then((dateArray) => {
-                                setter(dateArray)
-                            })
+        return <>
+            <Link className="date" to={`/dates/${id}/edit`}>{date}
+                <div className="dayLocation"><h3>{venue}</h3> <br></br> {city} {state}</div>
+                
+                <button className="deleteButton" onClick={(evt) => {
+                    evt.preventDefault()
+                    fetch(`http://localhost:8088/showDates/${id}`, {
+                        method: "DELETE"
                     })
+                        .then(() => {
+                            getAllDates()
+                                .then((dateArray) => {
+                                    setter(dateArray)
+                                })
+                        })
 
-            }}>Delete</button>
-        </section>
+                }}>Delete</button>
+            </Link>
+        </>
     } else {
 
-        return <section className="date">
-
-            <div>
-                <Link to={`/dates/${id}`}>{date}</Link>
-            </div>
-
-            <div className="dayLocation"><h3>{venue}</h3> <br></br> {city} {state}</div>
-        </section>
+        return <>
+            <Link className="date" to={`/dates/${id}`}>{date}
+                <div className="dayLocation"><h3>{venue}</h3> <br></br> {city} {state}</div>
+            </Link>
+        </>
     }
 }
