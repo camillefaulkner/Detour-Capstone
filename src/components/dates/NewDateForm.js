@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom"
 import { saveNewDate } from "../ApiManager"
 
 
-export const NewDateForm = () => {
+export const NewDateForm = ({ retrieveDates }) => {
     const [showDate, update] = useState({
         userId: 0,
         date: "",
@@ -36,6 +36,7 @@ export const NewDateForm = () => {
 
         return saveNewDate(newShowToSendToAPI)
             .then(() => {
+                retrieveDates()
                 navigate("/dates")
             })
     }
@@ -48,7 +49,7 @@ export const NewDateForm = () => {
                     <label htmlFor="description">Date:</label>
                     <input
                         required autoFocus
-                        type="text"
+                        type="date"
                         className="form-control"
                         value={showDate.date}
                         onChange={

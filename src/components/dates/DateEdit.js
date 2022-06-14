@@ -2,7 +2,7 @@ import { useEffect, useState } from "react"
 import { useNavigate, useParams } from "react-router-dom"
 import { getDateDetailsManager, getGuestRequests, getScheduleItems, saveNewGuest, saveNewScheduleItem, updateShowDate } from "../ApiManager"
 
-export const DateEdit = () => {
+export const DateEdit = ({ retrieveDates }) => {
     const { showDateId } = useParams()
     const navigate = useNavigate()
     const [guests, setGuests] = useState({})
@@ -72,6 +72,7 @@ export const DateEdit = () => {
         event.preventDefault()
         return updateShowDate(showDate)
             .then(() => {
+                retrieveDates()
                 navigate("/dates")
             })
     }
@@ -288,98 +289,98 @@ export const DateEdit = () => {
                                 const copy = { ...scheduleItem }
                                 copy.timeDetail = evt.target.value
                                 updateScheduleItem(copy)
-                            } 
-                        } type="radio" id="am" name="fav_language" value="am"/>
-                            <label htmlFor="am">am</label>
+                            }
+                        } type="radio" id="am" name="fav_language" value="am" />
+                        <label htmlFor="am">am</label>
                         <input onChange={
                             (evt) => {
                                 const copy = { ...scheduleItem }
                                 copy.timeDetail = evt.target.value
                                 updateScheduleItem(copy)
-                            } 
-                        } type="radio" id="pm" name="fav_language" value="pm"/>
-                            <label htmlFor="pm">pm</label><br/>
-                                    <label htmlFor="description">Description:</label>
-                                    <input
-                                        type="text"
-                                        className="form-control"
-                                        value={scheduleItem.description}
-                                        onChange={
-                                            (evt) => {
-                                                const copy = { ...scheduleItem }
-                                                copy.description = evt.target.value
-                                                updateScheduleItem(copy)
-                                            }
-                                        } />
-                                    <button onClick={(clickEvent) => handleSaveScheduleClick(clickEvent)}
-                                        className="btn btn-primary">Add New Schedule Item</button>
-                                </div>
-                            </fieldset>
+                            }
+                        } type="radio" id="pm" name="fav_language" value="pm" />
+                        <label htmlFor="pm">pm</label><br />
+                        <label htmlFor="description">Description:</label>
+                        <input
+                            type="text"
+                            className="form-control"
+                            value={scheduleItem.description}
+                            onChange={
+                                (evt) => {
+                                    const copy = { ...scheduleItem }
+                                    copy.description = evt.target.value
+                                    updateScheduleItem(copy)
+                                }
+                            } />
+                        <button onClick={(clickEvent) => handleSaveScheduleClick(clickEvent)}
+                            className="btn btn-primary">Add New Schedule Item</button>
                     </div>
+                </fieldset>
+            </div>
 
-                    <div>
-                        <h4>Guest List:</h4>
-                        {guests.length
-                            ? guests.map(guest => {
-                                return <div key={`guest--${guest.id}`}> {guest.name} - {guest.quantity} tickets
-                                    <button onClick={(evt) => {
-                                        evt.preventDefault()
+            <div>
+                <h4>Guest List:</h4>
+                {guests.length
+                    ? guests.map(guest => {
+                        return <div key={`guest--${guest.id}`}> {guest.name} - {guest.quantity} tickets
+                            <button onClick={(evt) => {
+                                evt.preventDefault()
 
-                                        fetch(`http://localhost:8088/guestRequests/${guest.id}`, {
-                                            method: "DELETE"
-                                        })
-                                            .then(() => {
-                                                getGuestRequests(showDateId)
-                                                    .then((guestArray) => {
-                                                        setGuests(guestArray)
-                                                    })
+                                fetch(`http://localhost:8088/guestRequests/${guest.id}`, {
+                                    method: "DELETE"
+                                })
+                                    .then(() => {
+                                        getGuestRequests(showDateId)
+                                            .then((guestArray) => {
+                                                setGuests(guestArray)
                                             })
+                                    })
 
-                                    }}>Delete</button></div>
-                            })
-                            : <></>
-                        }
-                        <fieldset>
-                            <div className="form-group">
-                                <h4>Submit New Guest Spot:</h4>
-                                <label htmlFor="description">Name:</label>
-                                <input
+                            }}>Delete</button></div>
+                    })
+                    : <></>
+                }
+                <fieldset>
+                    <div className="form-group">
+                        <h4>Submit New Guest Spot:</h4>
+                        <label htmlFor="description">Name:</label>
+                        <input
 
-                                    type="text"
-                                    className="form-control"
-                                    value={guest.name}
-                                    onChange={
-                                        (evt) => {
-                                            const copy = { ...guest }
-                                            copy.name = evt.target.value
-                                            updateGuest(copy)
-                                        }
-                                    } />
-                                <label htmlFor="description">How Many Tickets?:</label>
-                                <input
+                            type="text"
+                            className="form-control"
+                            value={guest.name}
+                            onChange={
+                                (evt) => {
+                                    const copy = { ...guest }
+                                    copy.name = evt.target.value
+                                    updateGuest(copy)
+                                }
+                            } />
+                        <label htmlFor="description">How Many Tickets?:</label>
+                        <input
 
-                                    type="number"
-                                    className="form-control"
-                                    value={guest.quantity}
-                                    onChange={
-                                        (evt) => {
-                                            const copy = { ...guest }
-                                            copy.quantity = parseInt(evt.target.value)
-                                            updateGuest(copy)
-                                        }
-                                    } />
-                                <button onClick={(clickEvent) => handleSaveGuestClick(clickEvent)}
-                                    className="btn btn-primary">Add New Guest Spot</button>
-                            </div>
-                        </fieldset>
+                            type="number"
+                            className="form-control"
+                            value={guest.quantity}
+                            onChange={
+                                (evt) => {
+                                    const copy = { ...guest }
+                                    copy.quantity = parseInt(evt.target.value)
+                                    updateGuest(copy)
+                                }
+                            } />
+                        <button onClick={(clickEvent) => handleSaveGuestClick(clickEvent)}
+                            className="btn btn-primary">Add New Guest Spot</button>
                     </div>
+                </fieldset>
+            </div>
 
 
-                    <button
-                        onClick={(clickEvent) => handleSaveButtonClick(clickEvent)}
-                        className="btn btn-primary">
-                        Save Show Details
-                    </button>
-                </form>
-            </>
+            <button
+                onClick={(clickEvent) => handleSaveButtonClick(clickEvent)}
+                className="btn btn-primary">
+                Save Show Details
+            </button>
+        </form>
+    </>
 }
