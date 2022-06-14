@@ -121,7 +121,6 @@ export const fetchLatandLong = (street, city, state) => {
     let url = street + ' ' + city + ' ' + state
     let encode = encodeURIComponent(url)
     let API = `https://api.myptv.com/geocoding/v1/locations/by-text?searchText=${encode}&apiKey=${keys.ptv}`
-    console.log(API)
     return fetch(`${API}`) //default method is GET = i want data, give it to me please, give all of the requests
         .then(response => response.json()) //returns array of objects in this scenario
 }
