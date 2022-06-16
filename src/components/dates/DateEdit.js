@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react"
 import { useNavigate, useParams } from "react-router-dom"
-import { getDateDetailsManager, getGuestRequests, getScheduleItems, saveNewGuest, saveNewScheduleItem, updateShowDate } from "../ApiManager"
+import { getAllUsers, getApprovedGuestRequests, getDateDetailsManager, getGuestRequests, getRequests, getScheduleItems, saveNewGuest, saveNewScheduleItem, updateShowDate } from "../ApiManager"
 
 export const DateEdit = ({ retrieveDates }) => {
     const { showDateId } = useParams()
@@ -9,6 +9,11 @@ export const DateEdit = ({ retrieveDates }) => {
     const [scheduleItems, setScheduleItems] = useState({})
     const [morning, setMorning] = useState({})
     const [afternoon, setAfternoon] = useState({})
+    const [requests, setRequests] = useState({})
+    const [users, setUsers] = useState({})
+
+    const localUser = localStorage.getItem("detour_user")
+    const userObject = JSON.parse(localUser)
 
     const [showDate, assignShowDate] = useState({
         userId: 0,
@@ -24,7 +29,9 @@ export const DateEdit = ({ retrieveDates }) => {
     const [guest, updateGuest] = useState({
         name: "",
         quantity: 0,
-        showDateId: parseInt(showDateId)
+        showDateId: parseInt(showDateId),
+        userId: userObject.id,
+        statusId: 2
     })
 
     const [scheduleItem, updateScheduleItem] = useState({
@@ -41,13 +48,21 @@ export const DateEdit = ({ retrieveDates }) => {
                 .then((dateArray) => {
                     assignShowDate(dateArray)
                 })
-            getGuestRequests(showDateId)
+            getApprovedGuestRequests(showDateId)
                 .then((guestArray) => {
                     setGuests(guestArray)
                 })
             getScheduleItems(showDateId)
                 .then((scheduleArray) => {
                     setScheduleItems(scheduleArray)
+                })
+            getRequests(showDateId)
+                .then((requestArray) => {
+                    setRequests(requestArray)
+                })
+            getAllUsers()
+                .then((userArray) => {
+                    setUsers(userArray)
                 })
         },
         [showDateId]
@@ -97,6 +112,20 @@ export const DateEdit = ({ retrieveDates }) => {
                         setGuests(guestArray)
                     })
             })
+    }
+
+    const populateValue = (showDate) => {
+        let value = `${showDate.other}\n`
+        if (requests.length && users.length) {
+            requests.map(request => {
+                let foundUser = users.find((user) => {
+                    return user.id === request.userId
+                })
+                console.log(request)
+                value += `${foundUser?.name} requests ${request.request}\n`
+            })
+            return value
+        }
     }
 
 
@@ -210,14 +239,16 @@ export const DateEdit = ({ retrieveDates }) => {
                             height: "10rem"
                         }}
                         className="form-control"
-                        value={showDate.other}
+                        value={populateValue(showDate)}
                         onChange={
                             (evt) => {
                                 const copy = { ...showDate }
                                 copy.other = evt.target.value
                                 assignShowDate(copy)
                             }
-                        }>{showDate.other}</textarea>
+                        }>{showDate.other}
+
+                    </textarea>
                 </div>
             </fieldset>
 

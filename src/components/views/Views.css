@@ -4,3 +4,7 @@
     margin-left: 20%;
     border-radius: 10px;
 }
+
+.leaflet-tile {
+    filter: hue-rotate(45deg) !important;
+}

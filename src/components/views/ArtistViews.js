@@ -6,6 +6,7 @@ import { MapContainer, Marker, Popup, TileLayer, useMap } from 'react-leaflet'
 import { useEffect, useState } from "react"
 import { getAllDates, fetchLatandLong } from "../ApiManager"
 import "./Views.css"
+import { SubmitRequest } from "../requests/RequestForm"
 
 
 export const ArtistViews = () => {
@@ -75,6 +76,7 @@ export const ArtistViews = () => {
 		<Route path="/dates" element={<DateList />} />
 		<Route path="/dates/:showDateId" element={<DateDetails />} />
 		<Route path="/profile" element={<ProfileView />} />
+		<Route path="/createrequest" element={<SubmitRequest />} />
 	</Routes>
 	)
 }

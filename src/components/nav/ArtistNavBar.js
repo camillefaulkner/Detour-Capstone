@@ -14,7 +14,12 @@ export const ArtistNav = () => {
         </li>
         <li className="navbar__item">
             <Link className="navbar__link" to="/" style={{ textDecoration: 'none' }}>
-                home
+                map
+            </Link>
+        </li>
+        <li className="navbar__item">
+            <Link className="navbar__link" to="/createrequest" style={{ textDecoration: 'none' }}>
+                requests
             </Link>
         </li>
         <li className="navbar__item">

@@ -3,18 +3,19 @@ import { useNavigate } from "react-router-dom"
 import { getAllDates, saveNewGuest } from "../ApiManager"
 
 export const SubmitGuest = () => {
+    const localUser = localStorage.getItem("detour_user")
+    const userObject = JSON.parse(localUser)
     const [showDates, setShowDates] = useState([])
 
     const [guest, update] = useState({
         name: "",
         quantity: 0,
-        showDateId: 1
+        showDateId: 1,
+        userId: userObject.id,
+        statusId: 2
     })
 
     const navigate = useNavigate()
-
-    const localUser = localStorage.getItem("detour_user")
-    const userObject = JSON.parse(localUser)
 
     useEffect(
         () => {
@@ -31,7 +32,9 @@ export const SubmitGuest = () => {
         const newGuestToSendToAPI = {
             name: guest.name,
             quantity: guest.quantity,
-            showDateId: guest.showDateId
+            showDateId: guest.showDateId,
+            statusId: guest.statusId,
+            userId: guest.userId
         }
 
         return saveNewGuest(newGuestToSendToAPI)

@@ -20,7 +20,6 @@ export const ShowDate = ({ id, date, venue, city, state, setter, retrieveDates }
 
     let dateArray = date.split("-")
     let dateDisplay = new Date(dateArray[0], dateArray[1] - 1, dateArray[2])
-    console.log(dateDisplay)
 
     let findMonth = (month) => {
         if (month === 1) {

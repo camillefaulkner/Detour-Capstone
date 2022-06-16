@@ -24,7 +24,17 @@ export const ManagerNav = () => {
             </li>
             <li className="navbar__item">
                 <Link className="navbar__link" to="/" style={{ textDecoration: 'none' }}>
-                    home
+                    map
+                </Link>
+            </li>
+            <li className="navbar__item">
+                <Link className="navbar__link" to="/essentialdocs" style={{ textDecoration: 'none' }}>
+                    essential docs
+                </Link>
+            </li>
+            <li className="navbar__item">
+                <Link className="navbar__link" to="/requests" style={{ textDecoration: 'none' }}>
+                    requests
                 </Link>
             </li>
             <li className="navbar__item">
