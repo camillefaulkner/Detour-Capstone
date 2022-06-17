@@ -10,6 +10,8 @@ import { NewDateForm } from "../dates/NewDateForm"
 import { SubmitGuest } from "../guests/SubmitGuests"
 import { CrewList } from "../crew/CrewList"
 import { CrewProfile } from "../crew/ShowCrewProfile"
+import { EssentialDocs } from "../essentialdocs/EssentialDocs"
+import { Requests } from "../requests/Requests"
 
 
 export const ManagerViews = () => {
@@ -51,7 +53,8 @@ export const ManagerViews = () => {
 	return (<Routes>
 		<Route path="/" element={
 			<>
-				<h1>detour</h1>
+			<div className="manila">
+				{/* <h1>detour</h1> */}
 				{dataForViz.length
 					? <MapContainer center={[40, -100]} zoom={3} scrollWheelZoom={false}>
 						<TileLayer
@@ -72,6 +75,7 @@ export const ManagerViews = () => {
 					</MapContainer>
 					: <></>
 				}
+				</div>
 
 				<Outlet />
 			</>
@@ -80,9 +84,11 @@ export const ManagerViews = () => {
 		<Route path="/dates/:showDateId/edit" element={<DateEdit retrieveDates={RetrieveDates}/>} />
 		<Route path="/dates/create" element={<NewDateForm retrieveDates={RetrieveDates} />} />
 		<Route path="/guests" element={<SubmitGuest />} />
+		<Route path="/requests" element={<Requests />} />
 		<Route path="/crew" element={<CrewList />} />
 		<Route path="/profile/:userId" element={<CrewProfile />} />
 		<Route path="/profile" element={<ProfileView />} />
+		<Route path="/essentialdocs" element={<EssentialDocs />} />
 	</Routes>
 	)
 }

@@ -1,7 +1,9 @@
 import { useState, useEffect } from "react"
 import { useNavigate } from "react-router-dom"
+import { Row } from "reactstrap"
 import { getAllUsers } from "../ApiManager"
 import { Crew } from "./Crew"
+import "./Crew.css"
 
 export const CrewList = () => {
     const [users, setUsers] = useState([])
@@ -18,7 +20,7 @@ export const CrewList = () => {
         }, []
     )
 
-    return <article className="userlist">
+    return <Row>
         {
             users.map(user => <Crew key={`user--${user.id}`}
                 id={user.id}
@@ -29,5 +31,5 @@ export const CrewList = () => {
                 greenRoom={user.greenRoomRequests} />)
         }
 
-    </article>
+    </Row>
 }

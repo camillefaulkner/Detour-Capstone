@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react"
+import { Col, FormGroup, Input, Label, Row } from "reactstrap"
 import { getCustomerProfile, updateCustomerProfile } from "../ApiManager"
-
+import "./Profile.css"
 
 export const ProfileView = () => {
 
@@ -48,85 +49,99 @@ export const ProfileView = () => {
             <div className={`${feedback.includes("Error") ? "error" : "feedback"} ${feedback === "" ? "invisible" : "visible"}`}>
                 {feedback}
             </div>
-            <form className="profile">
                 <h2 className="profile__title">Profile</h2>
-                <fieldset>
-                    <div className="form-group">
-                        <label htmlFor="specialty">Name:</label>
-                        <input
-                            required autoFocus
-                            type="text"
-                            className="form-control"
-                            value={profile.name}
-                            onChange={
-                                (evt) => {
-                                    const copy = { ...profile }
-                                    copy.name = evt.target.value
-                                    updateProfile(copy)
-                                }
-                            } />
-                    </div>
-                </fieldset>
-                <fieldset>
-                    <div className="form-group">
-                        <label htmlFor="name">Phone Number:</label>
-                        <input type="text"
-                            className="form-control"
-                            value={profile.phoneNumber}
-                            onChange={
-                                (evt) => {
-                                    const copy = { ...profile }
-                                    copy.phoneNumber = evt.target.value
-                                    updateProfile(copy)
-                                }
-                            } />
-                    </div>
-                </fieldset>
-                <fieldset>
-                    <div className="form-group">
-                        <label htmlFor="name">Email Address:</label>
-                        <input type="text"
-                            className="form-control"
-                            value={profile.emailAddress}
-                            onChange={
-                                (evt) => {
-                                    const copy = { ...profile }
-                                    copy.emailAddress = evt.target.value
-                                    updateProfile(copy)
-                                }
-                            } />
-                    </div>
-                </fieldset>
-                <fieldset>
-                    <div className="form-group">
-                        <label htmlFor="name">Allergies:</label>
-                        <textarea type="text"
-                            className="form-control"
-                            value={profile.allergies}
-                            onChange={
-                                (evt) => {
-                                    const copy = { ...profile }
-                                    copy.allergies = evt.target.value
-                                    updateProfile(copy)
-                                }
-                            }></textarea>
-                    </div>
-                </fieldset>
-                <fieldset>
-                    <div className="form-group">
-                        <label htmlFor="name">Green Room Requests:</label>
-                        <textarea type="text"
-                            className="form-control"
-                            value={profile.greenRoomRequests}
-                            onChange={
-                                (evt) => {
-                                    const copy = { ...profile }
-                                    copy.greenRoomRequests = evt.target.value
-                                    updateProfile(copy)
-                                }
-                            }></textarea>
-                    </div>
-                </fieldset>
+            <form className="profile">
+                <Col md={4}>
+                    <FormGroup>
+                        <div className="form-group">
+                            <Label htmlFor="specialty">Name:</Label>
+                            <Input
+                                required autoFocus
+                                type="text"
+                                className="form-control"
+                                value={profile.name}
+                                onChange={
+                                    (evt) => {
+                                        const copy = { ...profile }
+                                        copy.name = evt.target.value
+                                        updateProfile(copy)
+                                    }
+                                } />
+                        </div>
+                    </FormGroup>
+                </Col>
+                <Row>
+                    <Col md={3}>
+                        <FormGroup>
+                            <div className="form-group">
+                                <Label htmlFor="name">Phone Number:</Label>
+                                <Input type="text"
+                                    className="form-control"
+                                    value={profile.phoneNumber}
+                                    onChange={
+                                        (evt) => {
+                                            const copy = { ...profile }
+                                            copy.phoneNumber = evt.target.value
+                                            updateProfile(copy)
+                                        }
+                                    } />
+                            </div>
+                        </FormGroup>
+                    </Col>
+                    <Col md={3}>
+                        <FormGroup>
+                            <div className="form-group">
+                                <Label htmlFor="name">Email Address:</Label>
+                                <Input type="text"
+                                    className="form-control"
+                                    value={profile.emailAddress}
+                                    onChange={
+                                        (evt) => {
+                                            const copy = { ...profile }
+                                            copy.emailAddress = evt.target.value
+                                            updateProfile(copy)
+                                        }
+                                    } />
+                            </div>
+                        </FormGroup>
+                    </Col>
+                </Row>
+                <Row>
+                    <Col md={4}>
+                        <FormGroup>
+                            <div className="form-group">
+                                <Label htmlFor="name">Allergies:</Label>
+                                <textarea type="text"
+                                    className="form-control"
+                                    value={profile.allergies}
+                                    onChange={
+                                        (evt) => {
+                                            const copy = { ...profile }
+                                            copy.allergies = evt.target.value
+                                            updateProfile(copy)
+                                        }
+                                    }></textarea>
+                            </div>
+                        </FormGroup>
+                    </Col>
+                    <Col md={4}>
+                        <FormGroup>
+                            <div className="form-group">
+                                <Label htmlFor="name">Green Room Requests:</Label>
+                                <textarea type="text"
+                                    className="form-control"
+                                    value={profile.greenRoomRequests}
+                                    onChange={
+                                        (evt) => {
+                                            const copy = { ...profile }
+                                            copy.greenRoomRequests = evt.target.value
+                                            updateProfile(copy)
+                                        }
+                                    }></textarea>
+                            </div>
+                        </FormGroup>
+                    </Col>
+                </Row>
                 <button
                     onClick={(clickEvent) => handleSaveButtonClick(clickEvent)}
                     className="btn btn-primary">

@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react"
 import { useParams } from "react-router-dom"
-import { getDateDetails, getDateDetailsArtist, getGuestRequests, getScheduleItems } from "../ApiManager"
+import { getAllUsers, getApprovedGuestRequests, getDateDetails, getDateDetailsArtist, getGuestRequests, getRequests, getScheduleItems } from "../ApiManager"
 import "./DateList.css"
 
 export const DateDetails = () => {
@@ -10,6 +10,8 @@ export const DateDetails = () => {
     const [scheduleItems, setScheduleItems] = useState({})
     const [morning, setMorning] = useState({})
     const [afternoon, setAfternoon] = useState({})
+    const [requests, setRequests] = useState([])
+    const [users, setUsers] = useState([])
 
     useEffect(
         () => {
@@ -18,13 +20,17 @@ export const DateDetails = () => {
                     const singleShowDate = data[0]
                     updateShowDate(singleShowDate)
                 })
-            getGuestRequests(showDateId)
+            getApprovedGuestRequests(showDateId)
                 .then((guestArray) => {
                     setGuests(guestArray)
                 })
-            getScheduleItems(showDateId)
-                .then((scheduleArray) => {
-                    setScheduleItems(scheduleArray)
+            getRequests(showDateId)
+                .then((requestArray) => {
+                    setRequests(requestArray)
+                })
+            getAllUsers()
+                .then((userArray) => {
+                    setUsers(userArray)
                 })
         },
         [showDateId]
@@ -46,50 +52,61 @@ export const DateDetails = () => {
     )
 
     return <>
-            <header className="detail__date">{showDate?.date}</header>
+        <header className="detail__date">{showDate?.date}</header>
         <section className="showdetails">
-        <section className="leftSide">
+            <section className="leftSide">
 
-            <div className="showAddress">{showDate?.venue}<br></br>
-                {showDate?.streetAddress}<br></br>
-                {showDate?.city} {showDate?.state}</div>
+                <div className="showAddress">{showDate?.venue}<br></br>
+                    {showDate?.streetAddress}<br></br>
+                    {showDate?.city} {showDate?.state}</div>
 
-            <div className="essentials">
-                <h4>Essential Day Notes:</h4>
-                {showDate?.essentialNotes}</div>
-                
+                <div className="essentials">
+                    <h4>Essential Day Notes:</h4>
+                    {showDate?.essentialNotes}
+                </div>
 
-            <div className="schedule">
-                <h4>Schedule:</h4>
-                {
-                    morning.length && afternoon.length
-                        ?
-                        <>
-                            {
-                                morning.sort((a, b) => { return a.time - b.time }).map(item => {
-                                    return <div key={`schedule--${item.id}`}> {item.time}{item.timeDetail} - {item.description}</div>
-                                })
-                            }
-                            {
 
-                                afternoon.sort((a, b) => { return a.time - b.time }).map(item => {
-                                    return <div key={`schedule--${item.id}`}> {item.time}{item.timeDetail} - {item.description}</div>
-                                })
-                            }
-                        </>
-                        : <></>
-                }
-            </div>
+                <div className="schedule">
+                    <h4>Schedule:</h4>
+                    {
+                        morning.length && afternoon.length
+                            ?
+                            <>
+                                {
+                                    morning.sort((a, b) => { return a.time - b.time }).map(item => {
+                                        return <div key={`schedule--${item.id}`}> {item.time}{item.timeDetail} - {item.description}</div>
+                                    })
+                                }
+                                {
+
+                                    afternoon.sort((a, b) => { return a.time - b.time }).map(item => {
+                                        return <div key={`schedule--${item.id}`}> {item.time}{item.timeDetail} - {item.description}</div>
+                                    })
+                                }
+                            </>
+                            : <></>
+                    }
+                </div>
 
             </section>
 
             <section className="rightSide">
                 <div>
                     <h4>Additional Information:</h4>
-                    {showDate?.other}</div>
+                    {showDate?.other} <br />
+                    {
+                        requests.map(request => {
+                            let foundUser = users.find((user) => {
+                                return user.id === request.userId
+                            })
+                            return <>{foundUser?.name} requests {request.request}<br /></>
+                        })
+                    }
+
+                </div>
                 <div>
                     <h4>Guest List:</h4>
-                    {guests.length
+                    {guests.length 
                         ? guests.map(guest => {
                             return <div key={`guest--${guest.id}`}> {guest.name} - {guest.quantity} tickets</div>
                         })
