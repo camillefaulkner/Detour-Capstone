@@ -1,6 +1,8 @@
 import { useState } from "react"
 import { useNavigate } from "react-router-dom"
+import { Button, Col, FormGroup, Input, Label, Row } from "reactstrap"
 import { saveNewDate } from "../ApiManager"
+import "./DateForm.css"
 
 
 export const NewDateForm = ({ retrieveDates }) => {
@@ -44,130 +46,145 @@ export const NewDateForm = ({ retrieveDates }) => {
     return (
         <form className="showForm">
             <h2 className="showForm__title">New Show Date</h2>
-            <fieldset>
-                <div className="form-group">
-                    <label htmlFor="description">Date:</label>
-                    <input
-                        required autoFocus
-                        type="date"
-                        className="form-control"
-                        value={showDate.date}
-                        onChange={
-                            (evt) => {
-                                const copy = { ...showDate }
-                                copy.date = evt.target.value
-                                update(copy)
-                            }
-                        } />
-                </div>
-            </fieldset>
-            <fieldset>
-                <div className="form-group">
-                    <label htmlFor="description">Venue:</label>
-                    <input
-                        required autoFocus
-                        type="text"
-                        className="form-control"
-                        value={showDate.venue}
-                        onChange={
-                            (evt) => {
-                                const copy = { ...showDate }
-                                copy.venue = evt.target.value
-                                update(copy)
-                            }
-                        } />
-                </div>
-            </fieldset>
-            <fieldset>
-                <div className="form-group">
-                    <label htmlFor="description">Street Address:</label>
-                    <input
-                        required autoFocus
-                        type="text"
-                        className="form-control"
-                        value={showDate.streetAddress}
-                        onChange={
-                            (evt) => {
-                                const copy = { ...showDate }
-                                copy.streetAddress = evt.target.value
-                                update(copy)
-                            }
-                        } />
-                </div>
-            </fieldset>
-            <fieldset>
-                <div className="form-group">
-                    <label htmlFor="description">City:</label>
-                    <input
-                        required autoFocus
-                        type="text"
-                        className="form-control"
-                        value={showDate.city}
-                        onChange={
-                            (evt) => {
-                                const copy = { ...showDate }
-                                copy.city = evt.target.value
-                                update(copy)
-                            }
-                        } />
-                </div>
-            </fieldset>
-            <fieldset>
-                <div className="form-group">
-                    <label htmlFor="description">State:</label>
-                    <input
-                        required autoFocus
-                        type="text"
-                        className="form-control"
-                        value={showDate.state}
-                        onChange={
-                            (evt) => {
-                                const copy = { ...showDate }
-                                copy.state = evt.target.value
-                                update(copy)
-                            }
-                        } />
-                </div>
-            </fieldset>
-            <fieldset>
-                <div className="form-group">
-                    <label htmlFor="description">Essential Notes:</label>
-                    <textarea
-                        required autoFocus
-                        type="text"
-                        className="form-control"
-                        value={showDate.essentialNotes}
-                        onChange={
-                            (evt) => {
-                                const copy = { ...showDate }
-                                copy.essentialNotes = evt.target.value
-                                update(copy)
-                            }
-                        }></textarea>
-                </div>
-            </fieldset>
-            <fieldset>
-                <div className="form-group">
-                    <label htmlFor="description">Other:</label>
-                    <textarea
-                        required autoFocus
-                        type="text"
-                        className="form-control"
-                        value={showDate.other}
-                        onChange={
-                            (evt) => {
-                                const copy = { ...showDate }
-                                copy.other = evt.target.value
-                                update(copy)
-                            }
-                        }></textarea>
-                </div>
-            </fieldset>
-            <button
-                onClick={(clickEvent) => handleSaveButtonClick(clickEvent)}
-                className="btn btn-primary">
-                Add New Date
-            </button>
+            <div className="formbox">
+                <Row>
+                    <Col md={3}>
+                        <FormGroup>
+                            <div className="form-group">
+                                <Label htmlFor="description">Date:</Label>
+                                <Input
+                                    required autoFocus
+                                    type="date"
+                                    className="form-control"
+                                    value={showDate.date}
+                                    onChange={
+                                        (evt) => {
+                                            const copy = { ...showDate }
+                                            copy.date = evt.target.value
+                                            update(copy)
+                                        }
+                                    } />
+                            </div>
+                        </FormGroup>
+                    </Col>
+                    <Col md={5}>
+                        <FormGroup>
+                            <div className="form-group">
+                                <Label htmlFor="description">Venue:</Label>
+                                <Input
+                                    required autoFocus
+                                    type="text"
+                                    className="form-control"
+                                    value={showDate.venue}
+                                    onChange={
+                                        (evt) => {
+                                            const copy = { ...showDate }
+                                            copy.venue = evt.target.value
+                                            update(copy)
+                                        }
+                                    } />
+                            </div>
+                        </FormGroup>
+                    </Col>
+                </Row>
+                <Row>
+                    <Col md={5}>
+                        <FormGroup>
+                            <div className="form-group">
+                                <Label htmlFor="description">Street Address:</Label>
+                                <Input
+                                    required autoFocus
+                                    type="text"
+                                    className="form-control"
+                                    value={showDate.streetAddress}
+                                    onChange={
+                                        (evt) => {
+                                            const copy = { ...showDate }
+                                            copy.streetAddress = evt.target.value
+                                            update(copy)
+                                        }
+                                    } />
+                            </div>
+                        </FormGroup>
+                    </Col>
+                    <Col md={5}>
+                        <FormGroup>
+                            <div className="form-group">
+                                <Label htmlFor="description">City:</Label>
+                                <Input
+                                    required autoFocus
+                                    type="text"
+                                    className="form-control"
+                                    value={showDate.city}
+                                    onChange={
+                                        (evt) => {
+                                            const copy = { ...showDate }
+                                            copy.city = evt.target.value
+                                            update(copy)
+                                        }
+                                    } />
+                            </div>
+                        </FormGroup>
+                    </Col>
+                    <Col md={2}>
+                        <FormGroup>
+                            <div className="form-group">
+                                <Label htmlFor="description">State:</Label>
+                                <Input
+                                    required autoFocus
+                                    type="text"
+                                    className="form-control"
+                                    value={showDate.state}
+                                    onChange={
+                                        (evt) => {
+                                            const copy = { ...showDate }
+                                            copy.state = evt.target.value
+                                            update(copy)
+                                        }
+                                    } />
+                            </div>
+                        </FormGroup>
+                    </Col>
+                </Row>
+                <fieldset>
+                    <div className="form-group">
+                        <label htmlFor="description">Essential Notes:</label>
+                        <textarea
+                            required autoFocus
+                            type="text"
+                            className="form-control"
+                            value={showDate.essentialNotes}
+                            onChange={
+                                (evt) => {
+                                    const copy = { ...showDate }
+                                    copy.essentialNotes = evt.target.value
+                                    update(copy)
+                                }
+                            }></textarea>
+                    </div>
+                </fieldset>
+                <fieldset>
+                    <div className="form-group">
+                        <label htmlFor="description">Other:</label>
+                        <textarea
+                            required autoFocus
+                            type="text"
+                            className="form-control"
+                            value={showDate.other}
+                            onChange={
+                                (evt) => {
+                                    const copy = { ...showDate }
+                                    copy.other = evt.target.value
+                                    update(copy)
+                                }
+                            }></textarea>
+                    </div>
+                </fieldset>
+                <Button
+                    onClick={(clickEvent) => handleSaveButtonClick(clickEvent)} color="danger" outline className="addshowbutton">
+                    Add New Date
+                </Button>
+            </div>
         </form>
     )
 }

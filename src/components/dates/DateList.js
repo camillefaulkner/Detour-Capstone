@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom"
 import { getAllDates } from "../ApiManager"
 import { ShowDate } from "./ShowDate"
 import "./DateList.css"
+import { Button } from "reactstrap"
 
 export const DateList = ({ retrieveDates }) => {
     const [showDates, setShowDates] = useState([])
@@ -33,7 +34,7 @@ export const DateList = ({ retrieveDates }) => {
 
         {
             userObject.manager
-                ? <button className="addShowButton" onClick={() => navigate("/dates/create")}>Add Date</button>
+                ? <Button className="addshowbutton" onClick={() => navigate("/dates/create")}>Add Date</Button>
 
                 : <></>
         }

@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react"
 import { Link } from "react-router-dom"
+import { Button } from "reactstrap"
 import { getAllDates } from "../ApiManager"
 
 export const ShowDate = ({ id, date, venue, city, state, setter, retrieveDates }) => {
@@ -74,7 +75,7 @@ export const ShowDate = ({ id, date, venue, city, state, setter, retrieveDates }
                 {findMonth(dateDisplay.getMonth() + 1)} {dateDisplay.getDate()}
                 <div className="dayLocation" style={{ textDecoration: 'none' }}><h3>{venue}</h3> <br></br> {city} {state}</div>
 
-                <button className="deleteButton" onClick={(evt) => {
+                <Button close className="deleteButton" onClick={(evt) => {
                     evt.preventDefault()
                     fetch(`http://localhost:8088/showDates/${id}`, {
                         method: "DELETE"
@@ -87,7 +88,7 @@ export const ShowDate = ({ id, date, venue, city, state, setter, retrieveDates }
                                 })
                         })
 
-                }}>Delete</button>
+                }} />
             </Link>
         </>
     } else {

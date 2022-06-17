@@ -1,25 +1,16 @@
 import { useEffect, useState } from "react"
 import { getAllDates, getAllUsers, getAllRequests, getPendingGuestRequests, updateGuestRequest, updateGreenRoomRequest, updateAPIGuestRequest } from "../ApiManager"
-
-//need to do all my PUT and DELETE fetch calls
+import "./Requests.css"
 
 
 export const Requests = () => {
-    const [requests, setRequests] = useState([]) //
+    const [requests, setRequests] = useState([])
     const [users, setUsers] = useState([])
     const [showDates, setShowDates] = useState([])
     const [guestRequests, setGuestRequests] = useState([])
 
     const localUser = localStorage.getItem("detour_user")
     const userObject = JSON.parse(localUser)
-
-    const [greenroom, updateGreenRoom] = useState({ //
-        statusId: 1
-    })
-
-    const [guestrequest, updateGuestRequest] = useState({
-        statusId: 1
-    })
 
     useEffect(
         () => {
@@ -42,9 +33,11 @@ export const Requests = () => {
         }, []
     )
 
-    const handleUpdateGreenRoomClick = (event) => {
+    
+
+    const handleUpdateGreenRoomClick = (event, request) => {
         event.preventDefault()
-        return updateGreenRoomRequest(greenroom) 
+        return updateGreenRoomRequest(request)
             .then(() => {
                 getAllRequests()
                     .then((requestArray) => {
@@ -57,9 +50,9 @@ export const Requests = () => {
             })
     }
 
-    const handleUpdateGuestClick = (event) => {
+    const handleUpdateGuestClick = (event, request) => {
         event.preventDefault()
-        return updateAPIGuestRequest(guestrequest) 
+        return updateAPIGuestRequest(request)
             .then(() => {
                 getAllRequests()
                     .then((requestArray) => {
@@ -73,56 +66,55 @@ export const Requests = () => {
     }
 
     return <>
-        <h2>requests</h2>
-        {
-            users.length && requests.length && showDates.length
-                ?
-                requests.map(request => {
-                    let foundUser = users.find((user) => {
-                        return user.id === request.userId
-                    })
-                    let foundShow = showDates.find((show) => {
-                        return show.id === request.showDateId
-                    })
-                    return <div key={`request--${request.id}`}>{request.type} for {request.request} from {foundUser.name} - {foundShow.venue} {foundShow.date}
-                        <button onClick={(clickEvent) => {
-                            request.statusId = 2
-                            updateGreenRoom(request) 
-                            handleUpdateGreenRoomClick(clickEvent)
-                        }}>accept</button>
-                        <button onClick={(clickEvent) => {
-                            request.statusId = 3
-                            updateGreenRoom(request)
-                            handleUpdateGreenRoomClick(clickEvent)
-                        }}>deny</button>
-                    </div>
-                })
 
-                : <></>
-        }
-        {
-            guestRequests.length && showDates.length
-                ? guestRequests.map(request => {
-                    let foundUser = users.find((user) => {
-                        return user.id === request.userId
+        <h2 className="requests">requests</h2>
+        <div className="requestbox">
+            {
+                users.length && requests.length && showDates.length
+                    ?
+                    requests.map(request => {
+                        let foundUser = users.find((user) => {
+                            return user.id === request.userId
+                        })
+                        let foundShow = showDates.find((show) => {
+                            return show.id === request.showDateId
+                        })
+                        return <div className="requestitem" key={`request--${request.id}`}>{request.type} for {request.request} from {foundUser.name} - {foundShow.venue} {foundShow.date}
+                            <button onClick={(clickEvent) => {
+                                request.statusId = 2
+                                handleUpdateGreenRoomClick(clickEvent, request)
+                            }}>accept</button>
+                            <button onClick={(clickEvent) => {
+                                request.statusId = 3
+                                handleUpdateGreenRoomClick(clickEvent, request)
+                            }}>deny</button>
+                        </div>
                     })
-                    let foundShow = showDates.find((show) => {
-                        return show.id === request.showDateId
+
+                    : <></>
+            }
+            {
+                guestRequests.length && showDates.length
+                    ? guestRequests.map(request => {
+                        let foundUser = users.find((user) => {
+                            return user.id === request.userId
+                        })
+                        let foundShow = showDates.find((show) => {
+                            return show.id === request.showDateId
+                        })
+                        return <div className="requestitem" key={`request--${request.id}`}>guest list request for {request.name} - {request.quantity} tickets from {foundUser.name} - {foundShow.venue} {foundShow.date}
+                            <button onClick={(clickEvent) => {
+                                request.statusId = 2
+                                handleUpdateGuestClick(clickEvent, request)
+                            }}>accept</button>
+                            <button onClick={(clickEvent) => {
+                                request.statusId = 3
+                                handleUpdateGuestClick(clickEvent, request)
+                            }}>deny</button>
+                        </div>
                     })
-                    return <div key={`request--${request.id}`}>guest list request for {request.name} - {request.quantity} tickets from {foundUser.name} - {foundShow.venue} {foundShow.date}
-                        <button onClick={(clickEvent) => {
-                            request.statusId = 2
-                            updateGuestRequest(request) //
-                            handleUpdateGuestClick(clickEvent)
-                        }}>accept</button>
-                        <button onClick={(clickEvent) => {
-                            request.statusId = 2
-                            updateGuestRequest(request) //
-                            handleUpdateGuestClick(clickEvent)
-                        }}>deny</button>
-                    </div>
-                })
-                : <></>
-        }
+                    : <></>
+            }
+        </div>
     </>
 }

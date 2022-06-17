@@ -8,3 +8,7 @@
 .leaflet-tile {
     filter: hue-rotate(45deg) !important;
 }
+
+.manila {
+    margin-top: 2rem;
+}

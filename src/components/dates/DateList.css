@@ -7,7 +7,8 @@
 }
 
 .date:hover {
-    background-color: beige;
+    background-color: #3583f1;
+    color: #eaae8f;
     filter: drop-shadow(0 0 0.75rem black);
 }
 
@@ -42,10 +43,10 @@
     background-color: lightcoral;
 }
 
-.addShowButton {
-    margin-top: 1rem;
-    margin-left: 45%;
-    padding: 1rem;
+.overrides .addshowbutton {
+    width: 100%;
+    margin-top: 2rem;
+    margin-bottom: 2rem;
 }
 
 .datelist {

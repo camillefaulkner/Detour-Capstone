@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react"
 import { useNavigate } from "react-router-dom"
-import { getAllDates, getAllRequests, getUserGreenRoomRequests, getUserRequests, saveNewGuest, saveRequest } from "../ApiManager"
+import { getAllDates, getAllRequests, getUserGuestRequests, getUserRequests, saveNewGuest, saveRequest } from "../ApiManager"
 
 export const SubmitRequest = () => {
     const localUser = localStorage.getItem("detour_user")
@@ -27,7 +27,7 @@ export const SubmitRequest = () => {
     const [greenRoomForm, setGreenRoomForm] = useState(false)
     const [showDates, setShowDates] = useState([])
     const [userRequests, setUserRequests] = useState([])
-    const [userGreenRoomRequests, setUserGreenRoomRequests] = useState([])
+    const [allGuestRequests, setAllGuestRequests] = useState([])
 
     useEffect(
         () => {
@@ -39,9 +39,9 @@ export const SubmitRequest = () => {
                 .then((requestArray) => {
                     setUserRequests(requestArray)
                 })
-            getUserGreenRoomRequests(userObject.id)
-                .then((requestArray) => {
-                    setUserGreenRoomRequests(requestArray)
+            getUserGuestRequests(userObject.id)
+                .then((guestArray) => {
+                    setAllGuestRequests(guestArray)
                 })
         }, []
     )
@@ -82,9 +82,9 @@ export const SubmitRequest = () => {
 
         return saveNewGuest(newGuestToSendToAPI)
             .then(() => {
-                getUserGreenRoomRequests(userObject.id)
+                getUserGuestRequests(userObject.id)
                     .then((requestArray) => {
-                        setUserGreenRoomRequests(requestArray)
+                        setAllGuestRequests(requestArray)
                     })
             })
     }
@@ -145,7 +145,7 @@ export const SubmitRequest = () => {
                     greenRoomForm === true
                         ? <>
                             <fieldset>
-                            <h2 className="showForm__title">New Green Room Request</h2>
+                                <h2 className="showForm__title">New Green Room Request</h2>
                                 <div className="form-group">
                                     <label htmlFor="description">Request:</label>
                                     <textarea
@@ -268,8 +268,8 @@ export const SubmitRequest = () => {
                 : <></>
             }
             {
-                userGreenRoomRequests
-                    ? userGreenRoomRequests.map(request => {
+                allGuestRequests
+                    ? allGuestRequests.map(request => {
                         let foundShow = showDates.find((show) => {
                             return show.id === request.showDateId
                         })

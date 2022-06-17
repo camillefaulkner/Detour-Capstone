@@ -110,15 +110,25 @@ export const getRequests = (id) => {
         .then(response => response.json())
 }
 
+export const getApprovedRequests = (id) => {
+    return fetch(`http://localhost:8088/greenRoomRequests?showDateId=${id}&statusId=2`)
+        .then(response => response.json())
+}
+
 export const getUserRequests = (id) => {
     return fetch(`http://localhost:8088/greenRoomRequests?userId=${id}`)
         .then(response => response.json())
 }
 
-export const getUserGreenRoomRequests = (id) => {
-    return fetch(`http://localhost:8088/guestRequests?userId=${id}&statusId=1`)
-    .then(response => response.json())
+export const getUserGuestRequests = (id) => {
+    return fetch(`http://localhost:8088/guestRequests?userId=${id}`)
+        .then(response => response.json())
 }
+
+// export const getUserGreenRoomRequests = (id) => {
+//     return fetch(`http://localhost:8088/guestRequests?userId=${id}&statusId=1`)
+//     .then(response => response.json())
+// }
 
 export const saveRequest = (requestToSendToAPI) => {
     return fetch(`http://localhost:8088/greenRoomRequests`, {
@@ -133,7 +143,7 @@ export const saveRequest = (requestToSendToAPI) => {
 
 export const updateGreenRoomRequest = (greenRoomObj) => {
     return fetch(`http://localhost:8088/greenRoomRequests/${greenRoomObj.id}`, {
-        method: "PATCH",
+        method: "PUT",
         headers: {
             "Content-Type": "application/json"
         },
@@ -144,7 +154,7 @@ export const updateGreenRoomRequest = (greenRoomObj) => {
 
 export const updateAPIGuestRequest = (guestObj) => {
     return fetch(`http://localhost:8088/guestRequests/${guestObj.id}`, {
-        method: "PATCH",
+        method: "PUT",
         headers: {
             "Content-Type": "application/json"
         },

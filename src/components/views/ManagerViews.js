@@ -53,7 +53,8 @@ export const ManagerViews = () => {
 	return (<Routes>
 		<Route path="/" element={
 			<>
-				<h1>detour</h1>
+			<div className="manila">
+				{/* <h1>detour</h1> */}
 				{dataForViz.length
 					? <MapContainer center={[40, -100]} zoom={3} scrollWheelZoom={false}>
 						<TileLayer
@@ -74,6 +75,7 @@ export const ManagerViews = () => {
 					</MapContainer>
 					: <></>
 				}
+				</div>
 
 				<Outlet />
 			</>

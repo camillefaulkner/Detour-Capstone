@@ -49,7 +49,7 @@ export const EssentialDocs = () => {
             <button onClick={uploadImage}>Upload</button>
 
 
-            <AdvancedImage cldImg={myImage} />
+            {/* <AdvancedImage cldImg={myImage} /> */}
 
 
         </>
