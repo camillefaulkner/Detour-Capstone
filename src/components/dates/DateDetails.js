@@ -1,17 +1,18 @@
 import { useState, useEffect } from "react"
 import { useParams } from "react-router-dom"
-import { getAllUsers, getApprovedGuestRequests, getDateDetails, getDateDetailsArtist, getGuestRequests, getRequests, getScheduleItems } from "../ApiManager"
+import { getAllUsers, getApprovedGuestRequests, getDateDetails, getDateDetailsArtist, getDocsForShow, getGuestRequests, getRequests, getScheduleItems } from "../ApiManager"
 import "./DateList.css"
 
 export const DateDetails = () => {
     const { showDateId } = useParams()
-    const [showDate, updateShowDate] = useState({})
-    const [guests, setGuests] = useState({})
-    const [scheduleItems, setScheduleItems] = useState({})
+    const [showDate, updateShowDate] = useState([])
+    const [guests, setGuests] = useState([])
+    const [scheduleItems, setScheduleItems] = useState([])
     const [morning, setMorning] = useState({})
     const [afternoon, setAfternoon] = useState({})
     const [requests, setRequests] = useState([])
     const [users, setUsers] = useState([])
+    const [docs, setDocs] = useState([])
 
     useEffect(
         () => {
@@ -31,6 +32,10 @@ export const DateDetails = () => {
             getAllUsers()
                 .then((userArray) => {
                     setUsers(userArray)
+                })
+            getDocsForShow(showDateId)
+                .then((docArray) => {
+                    setDocs(docArray)
                 })
         },
         [showDateId]
@@ -106,9 +111,18 @@ export const DateDetails = () => {
                 </div>
                 <div>
                     <h4>Guest List:</h4>
-                    {guests.length 
+                    {guests.length
                         ? guests.map(guest => {
                             return <div key={`guest--${guest.id}`}> {guest.name} - {guest.quantity} tickets</div>
+                        })
+                        : <></>
+                    }
+                </div>
+                <div>
+                    <h4>Docs:</h4>
+                    { docs.length
+                        ? docs.map(doc => {
+                            return <img className="image" src={doc.publicURL} />
                         })
                         : <></>
                     }
