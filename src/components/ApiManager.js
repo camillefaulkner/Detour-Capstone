@@ -1,5 +1,5 @@
 import { keys } from "./ApiKey"
-import {Buffer} from 'buffer'
+import { Buffer } from 'buffer'
 
 export const getLogin = (email) => {
     return fetch(`http://localhost:8088/users?emailAddress=${email}`)
@@ -55,6 +55,11 @@ export const getUser = (id) => {
 
 export const getDateDetailsArtist = (showId) => {
     return fetch(`http://localhost:8088/showDates?id=${showId}`)
+        .then(response => response.json())
+}
+
+export const getDocsForShow = (showId) => {
+    return fetch(`http://localhost:8088/docs?showDateId=${showId}`)
         .then(response => response.json())
 }
 
@@ -163,9 +168,24 @@ export const updateAPIGuestRequest = (guestObj) => {
         .then(response => response.json())
 }
 
+export const updateDoc = (docObj) => {
+    return fetch(`http://localhost:8088/docs/${docObj.id}`, {
+        method: "PUT",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify(docObj)
+    })
+        .then(response => response.json())
+}
 
 export const getScheduleItems = (id) => {
     return fetch(`http://localhost:8088/scheduleItems?showDateId=${id}`)
+        .then(response => response.json())
+}
+
+export const getDocs = () => {
+    return fetch(`http://localhost:8088/docs`)
         .then(response => response.json())
 }
 
@@ -187,6 +207,17 @@ export const saveNewScheduleItem = (newScheduleItemToSendToAPI) => {
             "Content-Type": "application/json"
         },
         body: JSON.stringify(newScheduleItemToSendToAPI)
+    })
+        .then(response => response.json())
+}
+
+export const saveDoc = (docToSendToAPI) => {
+    return fetch(`http://localhost:8088/docs`, {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify(docToSendToAPI)
     })
         .then(response => response.json())
 }
@@ -215,5 +246,5 @@ export const getAllFiles = () => {
             Authorization: `Basic ${Buffer.from(keys.cloudinaryAPIkey + ':' + keys.cloudinaryAPIsecret).toString('base64')}`
         }
     })
-    .then(response => response.json())
+        .then(response => response.json())
 }

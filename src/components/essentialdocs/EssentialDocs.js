@@ -1,25 +1,33 @@
 import React, { useEffect, useState } from 'react'
 import { Link, useNavigate } from "react-router-dom"
-import { AdvancedImage } from "@cloudinary/react";
-import { Cloudinary } from "@cloudinary/url-gen";
-import { fetchCloudinary, getAllFiles } from '../ApiManager';
-import { ImageSource } from '@cloudinary/url-gen/qualifiers/source/sourceTypes/ImageSource';
-import { image } from '@cloudinary/url-gen/qualifiers/source';
+import { fetchCloudinary, getAllDates, getAllFiles, getDocs, saveDoc, updateDoc } from '../ApiManager';
+import "./EssentialDocs.css"
+
 
 
 export const EssentialDocs = () => {
-    const [files, setFiles] = useState({})
+    const [publicURLs, setPublicURL] = useState([])
     const [imageSelected, setImageSelected] = useState("")
-    const [imageData, setImageData] = useState("")
+    const [docs, setDocs] = useState([])
+    const [showDates, setShowDates] = useState([])
 
-    // useEffect(
-    //     () => {
-    //         getAllFiles()
-    //             .then((fileArray) => {
-    //                 setFiles(fileArray)
-    //             })
-    //     }, []
-    // )
+    const [doc, update] = useState({
+        publicURL: '',
+    })
+
+    useEffect(
+        () => {
+            getDocs()
+                .then((docArray) => {
+                    setDocs(docArray)
+                })
+            getAllDates()
+                .then((dateArray) => {
+                    setShowDates(dateArray)
+                })
+        }, []
+    )
+
 
     let uploadImage = () => {
         let formData = new FormData()
@@ -27,31 +35,60 @@ export const EssentialDocs = () => {
         formData.append("upload_preset", "detour")
 
         fetchCloudinary(formData)
-        setImageData(fetchCloudinary(formData).data)
-        console.log(imageData)
+            .then((response) => { // get request
+                setPublicURL(response.url)
+                const copy = { ...doc }
+                copy.publicURL = response.url
+                update(copy)
+
+                const docToSendToAPI = {
+                    publicURL: response.url
+                }
+
+                return saveDoc(docToSendToAPI)
+                    .then(() => {
+                        getDocs()
+                            .then((docArray) => {
+                                setDocs(docArray)
+                            })
+                    })
+
+            })
     }
-
-    const cld = new Cloudinary({
-        cloud: {
-            cloudName: 'dyhlcvrqp'
-        }
-    });
-
-    const myImage = cld.image('ydmrixe1bfazcnszrc54')
 
 
     return (
         <>
             <input type="file" onChange={(evt) => {
                 setImageSelected(evt.target.files[0])
-                console.log(imageSelected)
             }} />
-            <button onClick={uploadImage}>Upload</button>
+            <button onClick={
+                uploadImage
+            }>Upload</button>
 
+            {
+                docs
+                    ? docs.map(url => {
+                        return <div key={`doc--${url.id}`} className="imagecard">
+                            <img className="image" src={url.publicURL} />
+                            <label htmlFor="description">Select Show: </label>
+                            <select onChange={
+                                    (evt) => {
+                                        url.showDateId = parseInt(evt.target.value)
+                                        updateDoc(url)
+                                    }
+                                } name="shows" id="shows">
+                                {
+                                    showDates.map(date => {
+                                        return <option key={`date--${date.id}`} value={date.id}>{date.date} - {date.venue}</option>
+                                    })
+                                }
 
-            {/* <AdvancedImage cldImg={myImage} /> */}
-
-
+                            </select>
+                        </div>
+                    })
+                    : <></>
+            }
         </>
     )
 }; 
