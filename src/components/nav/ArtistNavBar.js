@@ -12,9 +12,9 @@ export const ArtistNav = () => {
 
     return (
         <>
-            <Nav tabs className='tabs'>
+            <Nav className='tabs'>
                 <li className="logo">detour</li>
-                <NavItem className="navitemfirst">
+                <NavItem className="navitem">
                     <NavLink className="nav-link" active onClick={handleClick} href="/" style={{ textDecoration: 'none' }}>
                         map
                     </NavLink>
@@ -34,7 +34,7 @@ export const ArtistNav = () => {
                         profile
                     </NavLink>
                 </NavItem>
-                <NavItem className="navitemlast">
+                <NavItem className="navitem">
                     <NavLink className="navbar__link nav-side right auth-login" nav href="" onClick={() => {
                         localStorage.removeItem("detour_user")
                         navigate("/", { replace: true })

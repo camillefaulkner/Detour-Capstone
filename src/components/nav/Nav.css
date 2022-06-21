@@ -6,7 +6,8 @@ li {
 .logo {
     font-weight: bold;
     font-size: larger;
-    margin-right: 15rem;
+    margin-right: 12rem;
+    margin-left: 3rem;
 }
 
 .navbar__logout {
@@ -14,43 +15,43 @@ li {
 }
 
 .navitem {
-    border: #dc3e16 solid 1px;
-    border-top-left-radius: 5px;
-    border-top-right-radius: 5px;
-    border-bottom: 0;
+    background: none;
+    color: #e8463e;
+    border: none;
+    font: inherit;
+    cursor: pointer;
+    outline: inherit;
+    box-shadow: inset 0 0 0 0 #e8463e;
+    margin: 0 -.25rem;
+    padding: 0 .25rem;
+    transition: color .3s ease-in-out, box-shadow .3s ease-in-out;
 }
 
-.navitemfirst {
-    border: #dc3e16 solid 1px;
-    border-top-left-radius: 15px;
-    border-top-right-radius: 5px;
-    border-bottom: 0;
+.overrides .navitem:hover {
+    box-shadow: inset 200px 0 15px 0 #e8463e;
+    text-decoration: line-through;
+    color: #1c141b;
 }
 
-.navitemlast {
-    border: #dc3e16 solid 1px;
-    border-top-left-radius: 5px;
-    border-top-right-radius: 15px;
-    border-bottom: 0;
-}
 
-.overrides .nav-link.active {
-    background-color: #eb9b8b;
-    border-color: #eb9b8b;
-}
 
 .tabs {
-    border-color: #dc3e16;
+    border-color: transparent;
     width: 100%;
     position: relative;
     border-radius: 20px;
     margin-top: 2rem;
 }
 
-.overrides .nav-tabs .nav-link {
+.overrides .nav-link {
     margin-bottom: -1px;
     background: 0 0;
     border: 1px solid hidden;
     border-top-left-radius: 0.25rem;
     border-top-right-radius: 0.25rem;
+    color: #e8463e;
+}
+
+.overrides .nav-link:hover {
+    color: #1c141b;
 }

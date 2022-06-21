@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { Link, useNavigate } from "react-router-dom"
+import { Button } from 'reactstrap';
 import { fetchCloudinary, getAllDates, getAllFiles, getDocs, saveDoc, updateDoc } from '../ApiManager';
 import "./EssentialDocs.css"
 
@@ -58,13 +59,13 @@ export const EssentialDocs = () => {
 
 
     return (
-        <>
+        <div className="doccontainer">
             <input type="file" onChange={(evt) => {
                 setImageSelected(evt.target.files[0])
             }} />
-            <button onClick={
+            <Button onClick={
                 uploadImage
-            }>Upload</button>
+            }>Upload</Button>
 
             {
                 docs
@@ -89,6 +90,6 @@ export const EssentialDocs = () => {
                     })
                     : <></>
             }
-        </>
+        </div>
     )
 }; 

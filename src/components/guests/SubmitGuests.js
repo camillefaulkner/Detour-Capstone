@@ -46,74 +46,76 @@ export const SubmitGuest = () => {
     }
 
     return (
-        <form className="guestForm">
+        <>
             <h2 className="showForm__title">New Guest List Spot</h2>
-            <Row>
-                <Col md={3}>
-                    <fieldset>
-                        <div className="form-group">
-                            <label htmlFor="description">Name:</label>
-                            <input
-                                required autoFocus
-                                type="text"
-                                className="form-control"
-                                value={guest.name}
-                                onChange={
+            <form className="guestForm">
+                <Row>
+                    <Col md={3}>
+                        <fieldset>
+                            <div className="form-group">
+                                <label htmlFor="description">Name:</label>
+                                <input
+                                    required autoFocus
+                                    type="text"
+                                    className="form-control"
+                                    value={guest.name}
+                                    onChange={
+                                        (evt) => {
+                                            const copy = { ...guest }
+                                            copy.name = evt.target.value
+                                            update(copy)
+                                        }
+                                    } />
+                            </div>
+                        </fieldset>
+                    </Col>
+                    <Col md={2}>
+                        <fieldset>
+                            <div className="form-group">
+                                <label htmlFor="description">How Many Tickets?:</label>
+                                <input
+                                    required autoFocus
+                                    type="number"
+                                    className="form-control"
+                                    value={guest.quantity}
+                                    onChange={
+                                        (evt) => {
+                                            const copy = { ...guest }
+                                            copy.quantity = parseInt(evt.target.value)
+                                            update(copy)
+                                        }
+                                    } />
+                            </div>
+                        </fieldset>
+                    </Col>
+                    <Col md={4}>
+                        <fieldset>
+                            <div className="form-group">
+                                <label htmlFor="description">Select Show: </label>
+                                <select onChange={
                                     (evt) => {
                                         const copy = { ...guest }
-                                        copy.name = evt.target.value
+                                        copy.showDateId = parseInt(evt.target.value)
                                         update(copy)
                                     }
-                                } />
-                        </div>
-                    </fieldset>
-                </Col>
-                <Col md={2}>
-                    <fieldset>
-                        <div className="form-group">
-                            <label htmlFor="description">How Many Tickets?:</label>
-                            <input
-                                required autoFocus
-                                type="number"
-                                className="form-control"
-                                value={guest.quantity}
-                                onChange={
-                                    (evt) => {
-                                        const copy = { ...guest }
-                                        copy.quantity = parseInt(evt.target.value)
-                                        update(copy)
+                                } name="shows" id="shows">
+                                    {
+                                        showDates.map(date => {
+                                            return <option key={`date--${date.id}`} value={date.id}>{date.date} - {date.venue}</option>
+                                        })
                                     }
-                                } />
-                        </div>
-                    </fieldset>
-                </Col>
-                <Col md={4}>
-                    <fieldset>
-                        <div className="form-group">
-                            <label htmlFor="description">Select Show: </label>
-                            <select onChange={
-                                (evt) => {
-                                    const copy = { ...guest }
-                                    copy.showDateId = parseInt(evt.target.value)
-                                    update(copy)
-                                }
-                            } name="shows" id="shows">
-                                {
-                                    showDates.map(date => {
-                                        return <option key={`date--${date.id}`} value={date.id}>{date.date} - {date.venue}</option>
-                                    })
-                                }
 
-                            </select>
-                        </div>
-                    </fieldset>
-                </Col>
-            </Row>
-            <button
-                onClick={(clickEvent) => handleSaveButtonClick(clickEvent)}
-                className="btn btn-primary">
-                Submit Guest List Spot
-            </button>
-        </form>
+                                </select>
+                            </div>
+                        </fieldset>
+                    </Col>
+                </Row>
+                <button
+                    onClick={(clickEvent) => handleSaveButtonClick(clickEvent)}
+                    className="btn btn-primary">
+                    Submit Guest List Spot
+                </button>
+            </form>
+        </>
     )
 }

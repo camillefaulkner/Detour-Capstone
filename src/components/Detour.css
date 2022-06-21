@@ -41,7 +41,8 @@
 }
 
 body {
-  background-color: #edd7c2;
-  font-family: 'Roboto', sans-serif;
-  color: #dc3e16;
+  background-color: #1c141b;
+  font-family: 'Helvetica', sans-serif;
+  font-weight: 600;
+  color: #e8463e;
 }

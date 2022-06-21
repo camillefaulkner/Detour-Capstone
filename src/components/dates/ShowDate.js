@@ -63,39 +63,48 @@ export const ShowDate = ({ id, date, venue, city, state, setter, retrieveDates }
             return "Friday"
         } else if (day === 6) {
             return "Saturday"
-        } else if (day === 7) {
+        } else if (day === 0) {
             return "Sunday"
         }
     }
 
     if (userObject.manager) {
         return <>
-            <Link className="date" style={{ textDecoration: 'none' }} to={`/dates/${id}/edit`}>
-                {findDay(dateDisplay.getDay())} <br />
-                {findMonth(dateDisplay.getMonth() + 1)} {dateDisplay.getDate()}
-                <div className="dayLocation" style={{ textDecoration: 'none' }}><h3>{venue}</h3> <br></br> {city} {state}</div>
-
-                <Button close className="deleteButton" onClick={(evt) => {
-                    evt.preventDefault()
-                    fetch(`http://localhost:8088/showDates/${id}`, {
-                        method: "DELETE"
-                    })
-                        .then(() => {
-                            retrieveDates()
-                            getAllDates()
-                                .then((dateArray) => {
-                                    setter(dateArray)
+            {
+                venue !== "off day"
+                    ? <Link className="date" style={{ textDecoration: 'none' }} to={`/dates/${id}/edit`}>
+                        {findDay(dateDisplay.getDay())} <br />
+                        {findMonth(dateDisplay.getMonth() + 1)} {dateDisplay.getDate()}
+                        <div className="dayLocation" style={{ textDecoration: 'none' }}><h3>{venue}</h3> <br></br> {city} {state}</div>
+                        <Button close className="deleteButton" onClick={(evt) => {
+                            evt.preventDefault()
+                            fetch(`http://localhost:8088/showDates/${id}`, {
+                                method: "DELETE"
+                            })
+                                .then(() => {
+                                    retrieveDates()
+                                    getAllDates()
+                                        .then((dateArray) => {
+                                            setter(dateArray)
+                                        })
                                 })
-                        })
 
-                }} />
-            </Link>
+                        }} />
+                    </Link>
+                    : <Link className="date" style={{ textDecoration: 'none' }} to={`/dates/create`}>
+                        {findDay(dateDisplay.getDay())} <br />
+                        {findMonth(dateDisplay.getMonth() + 1)} {dateDisplay.getDate()}
+                        <div className="dayLocation" style={{ textDecoration: 'none' }}><h3>{venue}</h3> <br></br> {city} {state}</div>
+                    </Link>
+            }
         </>
     } else {
 
         return <>
-            <Link className="date" to={`/dates/${id}`}>{date}
-                <div className="dayLocation"><h3>{venue}</h3> <br></br> {city} {state}</div>
+            <Link className="date" style={{ textDecoration: 'none' }} to={`/dates/${id}`}>
+                {findDay(dateDisplay.getDay())} <br />
+                {findMonth(dateDisplay.getMonth() + 1)} {dateDisplay.getDate()}
+                <div className="dayLocation" style={{ textDecoration: 'none' }}><h3>{venue}</h3> <br></br> {city} {state}</div>
             </Link>
         </>
     }

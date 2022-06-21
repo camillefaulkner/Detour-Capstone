@@ -1,13 +1,14 @@
 import { Link} from "react-router-dom"
 import { CrewProfile } from "./ShowCrewProfile"
 import "./Crew.css"
-import { NavLink, Row } from "reactstrap"
+import { Accordion, AccordionHeader, NavLink, Row } from "reactstrap"
 
 export const Crew = ({ id, name }) => {
 
     return <section className="user">
-        <div><NavLink href={`/profile/${id}`}>
-            {name}</NavLink>
+        <div><Link className="usertext" to={`/profile/${id}`}>
+            {name}</Link>
         </div>
+       
     </section>
 }
