@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react"
 import { useNavigate } from "react-router-dom"
-import { Row } from "reactstrap"
+import { Accordion, AccordionBody, AccordionHeader, AccordionItem, Row } from "reactstrap"
 import { getAllUsers } from "../ApiManager"
 import { Crew } from "./Crew"
 import "./Crew.css"
@@ -20,16 +20,25 @@ export const CrewList = () => {
         }, []
     )
 
-    return <Row>
+    
+
+    return <Accordion open="1" toggle={function noRefCheck(){}}>
         {
-            users.map(user => <Crew key={`user--${user.id}`}
-                id={user.id}
-                name={user.name}
-                phone={user.phoneNumber}
-                email={user.emailAddress}
-                allergies={user.allergies}
-                greenRoom={user.greenRoomRequests} />)
+            users.map(user => {
+                return <>
+                    <AccordionItem>
+                        <AccordionHeader targetId="">{user.name}</AccordionHeader>
+                        <AccordionBody accordionId="">
+                            {user.name}
+                            {user.phoneNumber}
+                            {user.emailAddress}
+                            {user.allergies}
+                            {user.greenRoomRequests}
+                        </AccordionBody>
+                    </AccordionItem>
+                </>
+            })
         }
 
-    </Row>
+    </Accordion >
 }

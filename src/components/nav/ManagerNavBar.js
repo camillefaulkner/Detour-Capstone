@@ -6,9 +6,9 @@ export const ManagerNav = () => {
 
 
     return (
-        <Nav tabs className='tabs'>
+        <Nav className='tabs'>
             <li className="logo">detour</li>
-            <NavItem className="navitemfirst">
+            <NavItem className="navitem">
                 <NavLink className="navbar__link" href="/" style={{ textDecoration: 'none' }}>
                     map
                 </NavLink>
@@ -43,7 +43,7 @@ export const ManagerNav = () => {
                     profile
                 </NavLink>
             </NavItem>
-            <NavItem className="navitemlast">
+            <NavItem className="navitem">
                 <NavLink className="navbar__link" href="" onClick={() => {
                     localStorage.removeItem("detour_user")
                     navigate("/", { replace: true })

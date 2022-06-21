@@ -1,13 +1,14 @@
 .date {
     display: flex;
     flex-direction: row;
-    border: solid 1px black;
+    border: solid 1px #cfc9b4;
+    color: #e8463e;
     padding: 2rem;
     justify-content: space-around;
 }
 
 .date:hover {
-    background-color: #3583f1;
+    background-color: #e8463e;
     color: #eaae8f;
     filter: drop-shadow(0 0 0.75rem black);
 }

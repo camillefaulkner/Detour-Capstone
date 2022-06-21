@@ -53,8 +53,7 @@ export const ManagerViews = () => {
 	return (<Routes>
 		<Route path="/" element={
 			<>
-			<div className="manila">
-				{/* <h1>detour</h1> */}
+			<div className="map">
 				{dataForViz.length
 					? <MapContainer center={[40, -100]} zoom={3} scrollWheelZoom={false}>
 						<TileLayer
@@ -63,10 +62,11 @@ export const ManagerViews = () => {
 						/>
 						{dataForViz.map(data => {
 							let foundCity = locations.find((location) => {
-								return location.city.toLowerCase() === data.address.city.toLowerCase()
+								return location.city.toLowerCase() === data?.address.city.toLowerCase()
 							})
 							return <Marker position={[data?.referencePosition?.latitude, data?.referencePosition?.longitude]}>
 								<Popup>
+									{foundCity?.date} <br />
 									{foundCity?.venue} <br /> {foundCity?.city}, {foundCity?.state}
 								</Popup>
 							</Marker>

@@ -1,4 +1,4 @@
-.leaflet-container{
+.leaflet-container {
     width: 50vw;
     height: 50vh;
     margin-left: 20%;
@@ -6,9 +6,12 @@
 }
 
 .leaflet-tile {
-    filter: hue-rotate(45deg) !important;
+    filter: hue-rotate(175deg) !important;
 }
 
-.manila {
-    margin-top: 2rem;
+.map {
+    position: absolute;
+    left: 40%;
+    top: 50%;
+    transform: translate(-50%, -50%);
 }

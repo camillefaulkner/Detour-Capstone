@@ -56,7 +56,8 @@ export const DateDetails = () => {
         }, [scheduleItems]
     )
 
-    return <>
+
+    return <> 
         <header className="detail__date">{showDate?.date}</header>
         <section className="showdetails">
             <section className="leftSide">

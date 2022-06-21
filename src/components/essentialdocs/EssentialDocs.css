@@ -6,3 +6,10 @@
     border: 1px solid black;
     margin: 2rem;
 }
+
+.doccontainer {
+    position: absolute;
+    left: 50%;
+    top: 40%;
+    transform: translate(-50%, -50%);
+}
