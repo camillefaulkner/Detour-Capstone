@@ -1,5 +1,5 @@
 .image {
-    width: 4rem;
+    width: 6rem;
 }
 
 .imagecard {
@@ -8,8 +8,10 @@
 }
 
 .doccontainer {
-    position: absolute;
-    left: 50%;
-    top: 40%;
-    transform: translate(-50%, -50%);
+margin-top: 4rem;
+margin-left: 6rem;
+}
+
+.chooseshow {
+    margin-left: 2rem;
 }

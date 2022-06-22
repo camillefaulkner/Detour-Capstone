@@ -1,10 +1,12 @@
 .date {
     display: flex;
     flex-direction: row;
-    border: solid 1px #cfc9b4;
     color: #e8463e;
     padding: 2rem;
+    border-bottom: 1px solid #eaae8f;
     justify-content: space-around;
+    vertical-align: middle;
+    position: relative;
 }
 
 .date:hover {
@@ -16,6 +18,18 @@
 .dayLocation {
     text-align: center;
     line-height: 0.5rem;
+    position: absolute;
+    margin: 0 auto
+}
+
+.dayDate {
+    margin-left: -55rem;
+    text-align: center;
+}
+
+.dayButton {
+    position: absolute;
+    right: 15%;
 }
 
 .detail__date {
@@ -34,6 +48,9 @@
     display: flex;
     flex-direction: row;
     justify-content: space-around;
+    padding: 2rem;
+    border-radius: 5px;
+    box-shadow: #eaae8f 0px 13px 27px -5px, rgba(0, 0, 0, 0.3) 0px 8px 16px -8px;
 }
 
 .essentials {
@@ -41,7 +58,8 @@
     padding: 2rem;
     padding-top: 0.7rem;
     margin-top: 1rem;
-    background-color: lightcoral;
+    background-color: #fef335;
+    color: #1c141b;
 }
 
 .overrides .addshowbutton {
@@ -56,4 +74,8 @@
 
 .image {
     width: 4rem;
+}
+
+.overrides .addshowbutton {
+    height: 2rem;
 }

@@ -67,13 +67,13 @@ export const DateDetails = () => {
                     {showDate?.city} {showDate?.state}</div>
 
                 <div className="essentials">
-                    <h4>Essential Day Notes:</h4>
+                    <h4>essential notes:</h4>
                     {showDate?.essentialNotes}
                 </div>
 
 
                 <div className="schedule">
-                    <h4>Schedule:</h4>
+                    <h4>schedule:</h4>
                     {
                         morning.length && afternoon.length
                             ?
@@ -98,7 +98,7 @@ export const DateDetails = () => {
 
             <section className="rightSide">
                 <div>
-                    <h4>Additional Information:</h4>
+                    <h4>additional information:</h4>
                     {showDate?.other} <br />
                     {
                         requests.map(request => {
@@ -111,7 +111,7 @@ export const DateDetails = () => {
 
                 </div>
                 <div>
-                    <h4>Guest List:</h4>
+                    <h4>guest list:</h4>
                     {guests.length
                         ? guests.map(guest => {
                             return <div key={`guest--${guest.id}`}> {guest.name} - {guest.quantity} tickets</div>
@@ -120,7 +120,7 @@ export const DateDetails = () => {
                     }
                 </div>
                 <div>
-                    <h4>Docs:</h4>
+                    <h4>docs:</h4>
                     { docs.length
                         ? docs.map(doc => {
                             return <img className="image" src={doc.publicURL} />

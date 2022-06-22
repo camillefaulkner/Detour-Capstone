@@ -1,6 +1,7 @@
 .requests {
     margin-top: 2rem;
     margin-left: 5%;
+    text-decoration: line-through;
 }
 
 .requestbox {
@@ -12,4 +13,20 @@
 
 .requestitem {
     margin-top: 1rem;
+}
+
+.requestform {
+    display: flex;
+    flex-direction: row;
+}
+
+.requestcontainer {
+    padding: 2rem;
+    border-radius: 5px;
+    color: #e8463e;
+    box-shadow: #eaae8f 0px 13px 27px -5px, rgba(0, 0, 0, 0.3) 0px 8px 16px -8px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    min-height: 27.3rem;
 }

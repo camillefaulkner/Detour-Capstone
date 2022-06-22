@@ -9,7 +9,6 @@ import { DateEdit } from "../dates/DateEdit"
 import { NewDateForm } from "../dates/NewDateForm"
 import { SubmitGuest } from "../guests/SubmitGuests"
 import { CrewList } from "../crew/CrewList"
-import { CrewProfile } from "../crew/ShowCrewProfile"
 import { EssentialDocs } from "../essentialdocs/EssentialDocs"
 import { Requests } from "../requests/Requests"
 
@@ -86,7 +85,6 @@ export const ManagerViews = () => {
 		<Route path="/guests" element={<SubmitGuest />} />
 		<Route path="/requests" element={<Requests />} />
 		<Route path="/crew" element={<CrewList />} />
-		<Route path="/profile/:userId" element={<CrewProfile />} />
 		<Route path="/profile" element={<ProfileView />} />
 		<Route path="/essentialdocs" element={<EssentialDocs />} />
 	</Routes>

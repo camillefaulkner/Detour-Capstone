@@ -4,18 +4,15 @@ import { Nav, NavItem, NavLink } from 'reactstrap'
 
 export const ArtistNav = () => {
     const navigate = useNavigate()
-    const [isActive, setIsActive] = useState(false)
 
-    const handleClick = event => {
-        event.currentTarget.classList.toggle('active')
-    }
+    const logo = require('./images/detourLogo.png');
 
     return (
         <>
             <Nav className='tabs'>
-                <li className="logo">detour</li>
+                <img className="logo" src={logo} />
                 <NavItem className="navitem">
-                    <NavLink className="nav-link" active onClick={handleClick} href="/" style={{ textDecoration: 'none' }}>
+                    <NavLink className="nav-link" href="/" style={{ textDecoration: 'none' }}>
                         map
                     </NavLink>
                 </NavItem>
@@ -34,7 +31,7 @@ export const ArtistNav = () => {
                         profile
                     </NavLink>
                 </NavItem>
-                <NavItem className="navitem">
+                <NavItem className="navitemlast">
                     <NavLink className="navbar__link nav-side right auth-login" nav href="" onClick={() => {
                         localStorage.removeItem("detour_user")
                         navigate("/", { replace: true })

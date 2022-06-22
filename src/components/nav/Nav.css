@@ -6,8 +6,10 @@ li {
 .logo {
     font-weight: bold;
     font-size: larger;
-    margin-right: 12rem;
-    margin-left: 3rem;
+    margin-right: 6rem;
+    margin-left: 6rem;
+    width: 10rem;
+    margin-top: -10px;
 }
 
 .navbar__logout {
@@ -29,6 +31,25 @@ li {
 
 .overrides .navitem:hover {
     box-shadow: inset 200px 0 15px 0 #e8463e;
+    text-decoration: line-through;
+    color: #1c141b;
+}
+
+.navitemlast {
+    background: none;
+    color: #e8463e;
+    border: none;
+    font: inherit;
+    cursor: pointer;
+    outline: inherit;
+    box-shadow: inset 0 0 0 0 #fef335;
+    margin: 0 -.25rem;
+    padding: 0 .25rem;
+    transition: color .3s ease-in-out, box-shadow .3s ease-in-out;
+}
+
+.overrides .navitemlast:hover {
+    box-shadow: inset 200px 0 15px 0 #fef335;
     text-decoration: line-through;
     color: #1c141b;
 }

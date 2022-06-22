@@ -45,13 +45,13 @@ export const NewDateForm = ({ retrieveDates }) => {
 
     return (
         <form className="showForm">
-            <h2 className="showForm__title">New Show Date</h2>
+            <h2 className="showForm__title">new show date</h2>
             <div className="formbox">
                 <Row>
                     <Col md={3}>
                         <FormGroup>
                             <div className="form-group">
-                                <Label htmlFor="description">Date:</Label>
+                                <Label htmlFor="description">date:</Label>
                                 <Input
                                     required autoFocus
                                     type="date"
@@ -70,7 +70,7 @@ export const NewDateForm = ({ retrieveDates }) => {
                     <Col md={5}>
                         <FormGroup>
                             <div className="form-group">
-                                <Label htmlFor="description">Venue:</Label>
+                                <Label htmlFor="description">venue:</Label>
                                 <Input
                                     required autoFocus
                                     type="text"
@@ -91,7 +91,7 @@ export const NewDateForm = ({ retrieveDates }) => {
                     <Col md={5}>
                         <FormGroup>
                             <div className="form-group">
-                                <Label htmlFor="description">Street Address:</Label>
+                                <Label htmlFor="description">street address:</Label>
                                 <Input
                                     required autoFocus
                                     type="text"
@@ -110,7 +110,7 @@ export const NewDateForm = ({ retrieveDates }) => {
                     <Col md={5}>
                         <FormGroup>
                             <div className="form-group">
-                                <Label htmlFor="description">City:</Label>
+                                <Label htmlFor="description">city:</Label>
                                 <Input
                                     required autoFocus
                                     type="text"
@@ -129,7 +129,7 @@ export const NewDateForm = ({ retrieveDates }) => {
                     <Col md={2}>
                         <FormGroup>
                             <div className="form-group">
-                                <Label htmlFor="description">State:</Label>
+                                <Label htmlFor="description">state:</Label>
                                 <Input
                                     required autoFocus
                                     type="text"
@@ -148,7 +148,7 @@ export const NewDateForm = ({ retrieveDates }) => {
                 </Row>
                 <fieldset>
                     <div className="form-group">
-                        <label htmlFor="description">Essential Notes:</label>
+                        <label htmlFor="description">essential notes:</label>
                         <textarea
                             required autoFocus
                             type="text"
@@ -165,7 +165,7 @@ export const NewDateForm = ({ retrieveDates }) => {
                 </fieldset>
                 <fieldset>
                     <div className="form-group">
-                        <label htmlFor="description">Other:</label>
+                        <label htmlFor="description">other:</label>
                         <textarea
                             required autoFocus
                             type="text"
@@ -182,7 +182,7 @@ export const NewDateForm = ({ retrieveDates }) => {
                 </fieldset>
                 <Button
                     onClick={(clickEvent) => handleSaveButtonClick(clickEvent)} color="danger" outline className="addshowbutton">
-                    Add New Date
+                    add new date
                 </Button>
             </div>
         </form>

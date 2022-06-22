@@ -72,7 +72,7 @@ export const EssentialDocs = () => {
                     ? docs.map(url => {
                         return <div key={`doc--${url.id}`} className="imagecard">
                             <img className="image" src={url.publicURL} />
-                            <label htmlFor="description">Select Show: </label>
+                            <label className="chooseshow" htmlFor="description">Select Show: </label>
                             <select onChange={
                                     (evt) => {
                                         url.showDateId = parseInt(evt.target.value)
