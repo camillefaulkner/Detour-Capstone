@@ -4,18 +4,95 @@
     width: 80%;
 }
 
+.showForm__title {
+    text-decoration: line-through;
+}
+
 .formbox {
     padding: 2rem;
     border-radius: 5px;
     color: #e8463e;
-    box-shadow: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px, rgba(0, 0, 0, 0.3) 0px 8px 16px -8px;
+    box-shadow: #eaae8f 0px 13px 27px -5px, rgba(0, 0, 0, 0.3) 0px 8px 16px -8px;
 }
 
 .overrides .form-control {
-    background-color: #e8463e;
+    background-color: #eb5952;
 }
 
 .overrides .addshowbutton {
     width: 100%;
     margin-top: 2rem;
 }
+
+.overrides .addshowbutton:hover {
+    background-color: #fef335;
+    color: #1c141b;
+}
+
+
+.schedule, .guestform {
+    background-color: #eaae8f;
+    padding: 2rem;
+    margin-top: 1rem;
+}
+
+.newschedule {
+    background-color: #1c141b;
+    margin-top: 2rem;
+}
+
+.newguest {
+    margin-top: 1rem;
+}
+
+.radio {
+    margin-top: 2.2rem;
+}
+
+.overrides .schedulecollapsible {
+    background-color: #fef335;
+    color: #1c141b;
+    cursor: pointer;
+    padding: 18px;
+    width: 100%;
+    border: none;
+    text-align: left;
+    outline: none;
+    font-size: contain;
+    min-width: 20rem;
+    max-height: 2rem;
+    margin-bottom: 1.25rem;
+    padding-bottom: 3rem;
+    vertical-align: middle;
+  }
+  
+  .overrides .scheduleactive {
+    background-color: lightblue;
+  }
+
+  .overrides .schedulecollapsible:hover {
+      background-color: rgb(127, 159, 170);
+  }
+  
+  .overrides .schedulecollapsible:after {
+    content: '\002B';
+    color: black;
+    font-weight: bold;
+    float: right;
+    margin-left: 5px;
+    margin-bottom: 1rem;
+    margin-top: -2rem;
+  }
+  
+  .overrides .scheduleactive:after {
+    content: "\2212";
+  }
+  
+  .overrides .schedulecontent {
+    padding: 0 18px;
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.2s ease-out;
+    background-color: #1c141b;
+    margin-top: -1rem;
+  }

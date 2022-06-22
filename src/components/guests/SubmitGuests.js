@@ -47,13 +47,13 @@ export const SubmitGuest = () => {
 
     return (
         <>
-            <h2 className="showForm__title">New Guest List Spot</h2>
+            <h2 className="showForm__title">new guest list spot</h2>
             <form className="guestForm">
                 <Row>
                     <Col md={3}>
                         <fieldset>
                             <div className="form-group">
-                                <label htmlFor="description">Name:</label>
+                                <label htmlFor="description">name:</label>
                                 <input
                                     required autoFocus
                                     type="text"
@@ -72,7 +72,7 @@ export const SubmitGuest = () => {
                     <Col md={2}>
                         <fieldset>
                             <div className="form-group">
-                                <label htmlFor="description">How Many Tickets?:</label>
+                                <label htmlFor="description">how many tickets?:</label>
                                 <input
                                     required autoFocus
                                     type="number"
@@ -91,7 +91,7 @@ export const SubmitGuest = () => {
                     <Col md={4}>
                         <fieldset>
                             <div className="form-group">
-                                <label htmlFor="description">Select Show: </label>
+                                <label htmlFor="description">select show: </label>
                                 <select onChange={
                                     (evt) => {
                                         const copy = { ...guest }

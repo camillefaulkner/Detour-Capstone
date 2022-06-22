@@ -12,4 +12,6 @@
 
 .profile__title {
     margin-top: 2rem;
+    margin-left: 2rem;
+    text-decoration: line-through;
 }

@@ -1,10 +1,12 @@
 import React, { useState } from "react"
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom"
+import { Col } from "reactstrap";
 import { getLogin } from "../ApiManager";
+import "./Login.css"
 
 export const Login = () => {
-const [email, set] = useState("")
+    const [email, set] = useState("")
     const navigate = useNavigate()
 
     const handleLogin = (e) => {
@@ -27,31 +29,38 @@ const [email, set] = useState("")
             })
     }
 
+    const logo = require('./images/detourLogo.png');
+
     return (
-        <main className="container--login">
-            <section>
-                <form className="form--login" onSubmit={handleLogin}>
-                    <h1>Detour</h1>
-                    <h2>Please sign in</h2>
+        <main className="login">
+            <form className="loginform" onSubmit={handleLogin}>
+                <div>
+                    <img className="signinlogo" src={logo} />
+                </div>
+                <div>
+                    <h3 className="title">please sign in</h3>
                     <fieldset>
-                        <label htmlFor="inputEmail"> Email address </label>
-                        <input type="email"
-                            value={email}
-                            onChange={evt => set(evt.target.value)}
-                            className="form-control"
-                            placeholder="Email address"
-                            required autoFocus />
+                        <Col md={4}>
+                            <label htmlFor="inputEmail"> email address </label>
+                            <input type="email"
+                                value={email}
+                                onChange={evt => set(evt.target.value)}
+                                className="form-control"
+                                placeholder="email address"
+                                required autoFocus />
+                        </Col>
                     </fieldset>
                     <fieldset>
-                        <button type="submit">
-                            Sign in
+                        <button className="submit" type="submit">
+                            sign in
                         </button>
                     </fieldset>
-                </form>
-            </section>
-            <section className="link--register">
-                <Link to="/register">Not a member yet?</Link>
-            </section>
+
+                    <section className="registerlink">
+                        <Link to="/register">not a member yet?</Link>
+                    </section>
+                </div>
+            </form>
         </main>
     )
 }

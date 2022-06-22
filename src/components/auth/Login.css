@@ -1,0 +1,21 @@
+.title {
+    text-decoration: line-through;
+}
+
+
+.login {
+    margin-top: 10%;
+    margin-left: 40%;
+}
+
+.submit {
+    margin-top: 0.5rem;
+}
+
+.registerlink {
+    margin-top: 1rem;
+}
+
+.signinlogo {
+    margin-bottom: 2rem;
+}

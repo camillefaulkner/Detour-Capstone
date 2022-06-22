@@ -4,10 +4,12 @@ import { Nav, NavItem, NavLink } from "reactstrap"
 export const ManagerNav = () => {
     const navigate = useNavigate()
 
+    const logo = require('./images/detourLogo.png'); 
+
 
     return (
         <Nav className='tabs'>
-            <li className="logo">detour</li>
+            <img className="logo" src={logo}/>
             <NavItem className="navitem">
                 <NavLink className="navbar__link" href="/" style={{ textDecoration: 'none' }}>
                     map
@@ -43,7 +45,7 @@ export const ManagerNav = () => {
                     profile
                 </NavLink>
             </NavItem>
-            <NavItem className="navitem">
+            <NavItem className="navitemlast">
                 <NavLink className="navbar__link" href="" onClick={() => {
                     localStorage.removeItem("detour_user")
                     navigate("/", { replace: true })

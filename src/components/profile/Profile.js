@@ -39,7 +39,7 @@ export const ProfileView = () => {
 
         return updateCustomerProfile(profile)
             .then(() => {
-                setFeedback("Profile has been updated!")
+                setFeedback("profile has been updated!")
             })
 
     }
@@ -49,12 +49,12 @@ export const ProfileView = () => {
             <div className={`${feedback.includes("Error") ? "error" : "feedback"} ${feedback === "" ? "invisible" : "visible"}`}>
                 {feedback}
             </div>
-                <h2 className="profile__title">Profile</h2>
+                <h2 className="profile__title">profile</h2>
             <form className="profile">
                 <Col md={4}>
                     <FormGroup>
                         <div className="form-group">
-                            <Label htmlFor="specialty">Name:</Label>
+                            <Label htmlFor="specialty">name:</Label>
                             <Input
                                 required autoFocus
                                 type="text"
@@ -74,7 +74,7 @@ export const ProfileView = () => {
                     <Col md={3}>
                         <FormGroup>
                             <div className="form-group">
-                                <Label htmlFor="name">Phone Number:</Label>
+                                <Label htmlFor="name">phone number:</Label>
                                 <Input type="text"
                                     className="form-control"
                                     value={profile.phoneNumber}
@@ -91,7 +91,7 @@ export const ProfileView = () => {
                     <Col md={3}>
                         <FormGroup>
                             <div className="form-group">
-                                <Label htmlFor="name">Email Address:</Label>
+                                <Label htmlFor="name">email address:</Label>
                                 <Input type="text"
                                     className="form-control"
                                     value={profile.emailAddress}
@@ -110,7 +110,7 @@ export const ProfileView = () => {
                     <Col md={4}>
                         <FormGroup>
                             <div className="form-group">
-                                <Label htmlFor="name">Allergies:</Label>
+                                <Label htmlFor="name">allergies:</Label>
                                 <textarea type="text"
                                     className="form-control"
                                     value={profile.allergies}
@@ -127,7 +127,7 @@ export const ProfileView = () => {
                     <Col md={4}>
                         <FormGroup>
                             <div className="form-group">
-                                <Label htmlFor="name">Green Room Requests:</Label>
+                                <Label htmlFor="name">green room requests:</Label>
                                 <textarea type="text"
                                     className="form-control"
                                     value={profile.greenRoomRequests}
@@ -145,7 +145,7 @@ export const ProfileView = () => {
                 <button
                     onClick={(clickEvent) => handleSaveButtonClick(clickEvent)}
                     className="btn btn-primary">
-                    Save Profile
+                    save profile
                 </button>
             </form>
         </>

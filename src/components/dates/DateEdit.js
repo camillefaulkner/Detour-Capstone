@@ -123,7 +123,6 @@ export const DateEdit = ({ retrieveDates }) => {
                 let foundUser = users.find((user) => {
                     return user.id === request.userId
                 })
-                console.log(request)
                 value += `${foundUser?.name} requests ${request.request}\n`
             })
         }
@@ -133,13 +132,13 @@ export const DateEdit = ({ retrieveDates }) => {
 
     return <>
         <form className="showForm">
-        <h2 className="showForm__title">Show Date Edit</h2>
+            <h2 className="showForm__title">edit show date</h2>
             <div className="formbox">
                 <Row>
                     <Col md={3}>
                         <FormGroup>
                             <div className="form-group">
-                                <Label htmlFor="description">Date:</Label>
+                                <Label htmlFor="description">date:</Label>
                                 <Input
                                     type="text"
                                     className="form-control"
@@ -157,7 +156,7 @@ export const DateEdit = ({ retrieveDates }) => {
                     <Col md={5}>
                         <FormGroup>
                             <div className="form-group">
-                                <Label htmlFor="description">Venue:</Label>
+                                <Label htmlFor="description">venue:</Label>
                                 <Input
                                     type="text"
                                     className="form-control"
@@ -177,7 +176,7 @@ export const DateEdit = ({ retrieveDates }) => {
                     <Col md={5}>
                         <FormGroup>
                             <div className="form-group">
-                                <Label htmlFor="description">Street Address:</Label>
+                                <Label htmlFor="description">street address:</Label>
                                 <Input
                                     type="text"
                                     className="form-control"
@@ -195,7 +194,7 @@ export const DateEdit = ({ retrieveDates }) => {
                     <Col md={5}>
                         <FormGroup>
                             <div className="form-group">
-                                <Label htmlFor="description">City:</Label>
+                                <Label htmlFor="description">city:</Label>
                                 <Input
                                     type="text"
                                     className="form-control"
@@ -213,7 +212,7 @@ export const DateEdit = ({ retrieveDates }) => {
                     <Col md={2}>
                         <FormGroup>
                             <div className="form-group">
-                                <Label htmlFor="description">State:</Label>
+                                <Label htmlFor="description">state:</Label>
                                 <Input
                                     type="text"
                                     className="form-control"
@@ -231,7 +230,7 @@ export const DateEdit = ({ retrieveDates }) => {
                 </Row>
                 <fieldset>
                     <div className="form-group">
-                        <label htmlFor="description">Essential Notes:</label>
+                        <label htmlFor="description">essential notes:</label>
                         <textarea
                             type="text"
                             style={{
@@ -250,7 +249,7 @@ export const DateEdit = ({ retrieveDates }) => {
                 </fieldset>
                 <fieldset>
                     <div className="form-group">
-                        <label htmlFor="description">Other:</label>
+                        <label htmlFor="description">other:</label>
                         <textarea
                             type="text"
                             style={{
@@ -265,65 +264,77 @@ export const DateEdit = ({ retrieveDates }) => {
                                     assignShowDate(copy)
                                 }
                             }>{showDate.other}
-
                         </textarea>
                     </div>
                 </fieldset>
-
-                <div className="schedule">
-                    <h4>Schedule:</h4>
-                    {
-                        morning.length || afternoon.length
-                            ?
-                            <>
-                                {
-                                    morning.sort((a, b) => { return a.time - b.time }).map(item => {
-                                        return <div key={`schedule--${item.id}`}> {item.time}{item.timeDetail} - {item.description}
-                                            <Button close onClick={(evt) => {
-                                                evt.preventDefault()
-
-                                                fetch(`http://localhost:8088/scheduleItems/${item.id}`, {
-                                                    method: "DELETE"
-                                                })
-                                                    .then(() => {
-                                                        getScheduleItems(showDateId)
-                                                            .then((scheduleArray) => {
-                                                                setScheduleItems(scheduleArray)
-                                                            })
-                                                    })
-
-                                            }} /></div>
-                                    })
-                                }
-                                {
-
-                                    afternoon.sort((a, b) => { return a.time - b.time }).map(item => {
-                                        return <div key={`schedule--${item.id}`}> {item.time}{item.timeDetail} - {item.description}
-                                            <Button close onClick={(evt) => {
-                                                evt.preventDefault()
-
-                                                fetch(`http://localhost:8088/scheduleItems/${item.id}`, {
-                                                    method: "DELETE"
-                                                })
-                                                    .then(() => {
-                                                        getScheduleItems(showDateId)
-                                                            .then((scheduleArray) => {
-                                                                setScheduleItems(scheduleArray)
-                                                            })
-                                                    })
-
-                                            }} /></div>
-                                    })
-                                }
-                            </>
-                            : <></>
+                <hr></hr>
+                <button className="schedulecollapsible" onClick={(clickEvent) => {
+                    clickEvent.preventDefault()
+                    const itemClicked = clickEvent.target
+                    itemClicked.classList.toggle("scheduleactive");
+                    var content = itemClicked.nextElementSibling
+                    if (content.style.maxHeight) {
+                        content.style.maxHeight = null;
+                    } else {
+                        content.style.maxHeight = content.scrollHeight + "px";
                     }
+                }
+                }><h4>schedule:</h4></button>
+                <div className="schedulecontent">
+                    <div className="schedule">
+                        {
+                            morning.length || afternoon.length
+                                ?
+                                <>
+                                    {
+                                        morning.sort((a, b) => { return a.time - b.time }).map(item => {
+                                            return <div key={`schedule--${item.id}`}> {item.time}{item.timeDetail} - {item.description}
+                                                <Button color="danger" close onClick={(evt) => {
+                                                    evt.preventDefault()
+
+                                                    fetch(`http://localhost:8088/scheduleItems/${item.id}`, {
+                                                        method: "DELETE"
+                                                    })
+                                                        .then(() => {
+                                                            getScheduleItems(showDateId)
+                                                                .then((scheduleArray) => {
+                                                                    setScheduleItems(scheduleArray)
+                                                                })
+                                                        })
+
+                                                }} /><hr></hr></div>
+                                        })
+                                    }
+                                    {
+
+                                        afternoon.sort((a, b) => { return a.time - b.time }).map(item => {
+                                            return <div key={`schedule--${item.id}`}> {item.time}{item.timeDetail} - {item.description}
+                                                <Button close onClick={(evt) => {
+                                                    evt.preventDefault()
+
+                                                    fetch(`http://localhost:8088/scheduleItems/${item.id}`, {
+                                                        method: "DELETE"
+                                                    })
+                                                        .then(() => {
+                                                            getScheduleItems(showDateId)
+                                                                .then((scheduleArray) => {
+                                                                    setScheduleItems(scheduleArray)
+                                                                })
+                                                        })
+
+                                                }} /><hr></hr></div>
+                                        })
+                                    }
+                                </>
+                                : <></>
+                        }
+                    </div>
                     <fieldset>
-                        <div className="form-group">
-                            <h4>Submit New Schedule Line Item</h4>
+                        <div className="newschedule">
+                            <h4>new schedule line item</h4>
                             <Row>
                                 <Col md={2}>
-                                    <Label htmlFor="description">Time:</Label>
+                                    <Label htmlFor="description">time:</Label>
                                     <Input
                                         type="text"
                                         className="form-control"
@@ -337,111 +348,131 @@ export const DateEdit = ({ retrieveDates }) => {
                                         } />
                                 </Col>
                                 <Col md={2}>
-                                    <Input onChange={
-                                        (evt) => {
-                                            const copy = { ...scheduleItem }
-                                            copy.timeDetail = evt.target.value
-                                            updateScheduleItem(copy)
-                                        }
-                                    } type="radio" id="am" name="fav_language" value="am" />
-                                    <Label htmlFor="am">am</Label>
+                                    <div className="radio">
+                                        <Input onChange={
+                                            (evt) => {
+                                                const copy = { ...scheduleItem }
+                                                copy.timeDetail = evt.target.value
+                                                updateScheduleItem(copy)
+                                            }
+                                        } type="radio" id="am" name="fav_language" value="am" />
+                                        <Label htmlFor="am">am</Label>
+                                    </div>
                                 </Col>
                                 <Col md={2}>
-                                    <Input onChange={
-                                        (evt) => {
-                                            const copy = { ...scheduleItem }
-                                            copy.timeDetail = evt.target.value
-                                            updateScheduleItem(copy)
-                                        }
-                                    } type="radio" id="pm" name="fav_language" value="pm" />
-                                    <Label htmlFor="pm">pm</Label><br />
+                                    <div className="radio">
+                                        <Input onChange={
+                                            (evt) => {
+                                                const copy = { ...scheduleItem }
+                                                copy.timeDetail = evt.target.value
+                                                updateScheduleItem(copy)
+                                            }
+                                        } type="radio" id="pm" name="fav_language" value="pm" />
+                                        <Label htmlFor="pm">pm</Label><br />
+                                    </div>
                                 </Col>
-                            </Row>
-                            <label htmlFor="description">Description:</label>
-                            <input
-                                type="text"
-                                className="form-control"
-                                value={scheduleItem.description}
-                                onChange={
-                                    (evt) => {
-                                        const copy = { ...scheduleItem }
-                                        copy.description = evt.target.value
-                                        updateScheduleItem(copy)
-                                    }
-                                } />
-                            <button onClick={(clickEvent) => handleSaveScheduleClick(clickEvent)}
-                                className="btn btn-primary">Add New Schedule Item</button>
-                        </div>
-                    </fieldset>
-                </div>
-
-                <div>
-                    <h4>Guest List:</h4>
-                    {guests.length
-                        ? guests.map(guest => {
-                            return <div key={`guest--${guest.id}`}> {guest.name} - {guest.quantity} tickets
-                                <Button close onClick={(evt) => {
-                                    evt.preventDefault()
-
-                                    fetch(`http://localhost:8088/guestRequests/${guest.id}`, {
-                                        method: "DELETE"
-                                    })
-                                        .then(() => {
-                                            getGuestRequests(showDateId)
-                                                .then((guestArray) => {
-                                                    setGuests(guestArray)
-                                                })
-                                        })
-
-                                }} /></div>
-                        })
-                        : <></>
-                    }
-                    <fieldset>
-                        <div className="form-group">
-                            <h4>Submit New Guest Spot:</h4>
-                            <Row>
-                                <Col md={3}>
-                                    <Label htmlFor="description">Name:</Label>
-                                    <Input
-
+                                <Col md={6}>
+                                    <label htmlFor="description">description:</label>
+                                    <input
                                         type="text"
                                         className="form-control"
-                                        value={guest.name}
+                                        value={scheduleItem.description}
                                         onChange={
                                             (evt) => {
-                                                const copy = { ...guest }
-                                                copy.name = evt.target.value
-                                                updateGuest(copy)
-                                            }
-                                        } />
-                                </Col>
-                                <Col md={3}>
-                                    <Label htmlFor="description">How Many Tickets?:</Label>
-                                    <Input
-
-                                        type="number"
-                                        className="form-control"
-                                        value={guest.quantity}
-                                        onChange={
-                                            (evt) => {
-                                                const copy = { ...guest }
-                                                copy.quantity = parseInt(evt.target.value)
-                                                updateGuest(copy)
+                                                const copy = { ...scheduleItem }
+                                                copy.description = evt.target.value
+                                                updateScheduleItem(copy)
                                             }
                                         } />
                                 </Col>
                             </Row>
-                            <button onClick={(clickEvent) => handleSaveGuestClick(clickEvent)}
-                                className="btn btn-primary">Add New Guest Spot</button>
+                            <Button onClick={(clickEvent) => handleSaveScheduleClick(clickEvent)}
+                                className="btn btn-primary">add new schedule item</Button>
                         </div>
                     </fieldset>
                 </div>
+                <hr></hr>
+                <div>
+                    <button className="schedulecollapsible" onClick={(clickEvent) => {
+                        clickEvent.preventDefault()
+                        const itemClicked = clickEvent.target
+                        itemClicked.classList.toggle("scheduleactive");
+                        var content = itemClicked.nextElementSibling
+                        if (content.style.maxHeight) {
+                            content.style.maxHeight = null;
+                        } else {
+                            content.style.maxHeight = content.scrollHeight + "px";
+                        }
+                    }
+                    }><h4>guest list:</h4> </button>
+                    <div className="schedulecontent">
+                        <div className="guestform">
+                            {guests.length
+                                ? guests.map(guest => {
+                                    return <div key={`guest--${guest.id}`}> {guest.name} - {guest.quantity} tickets
+                                        <Button close onClick={(evt) => {
+                                            evt.preventDefault()
 
+                                            fetch(`http://localhost:8088/guestRequests/${guest.id}`, {
+                                                method: "DELETE"
+                                            })
+                                                .then(() => {
+                                                    getGuestRequests(showDateId)
+                                                        .then((guestArray) => {
+                                                            setGuests(guestArray)
+                                                        })
+                                                })
+
+                                        }} /><hr></hr></div>
+                                })
+                                : <></>
+                            }
+                        </div>
+                        <fieldset>
+                            <div className="newguest">
+                                <h4>new guest spot:</h4>
+                                <Row>
+                                    <Col md={3}>
+                                        <Label htmlFor="description">name:</Label>
+                                        <Input
+
+                                            type="text"
+                                            className="form-control"
+                                            value={guest.name}
+                                            onChange={
+                                                (evt) => {
+                                                    const copy = { ...guest }
+                                                    copy.name = evt.target.value
+                                                    updateGuest(copy)
+                                                }
+                                            } />
+                                    </Col>
+                                    <Col md={3}>
+                                        <Label htmlFor="description">how many tickets?:</Label>
+                                        <Input
+
+                                            type="number"
+                                            className="form-control"
+                                            value={guest.quantity}
+                                            onChange={
+                                                (evt) => {
+                                                    const copy = { ...guest }
+                                                    copy.quantity = parseInt(evt.target.value)
+                                                    updateGuest(copy)
+                                                }
+                                            } />
+                                    </Col>
+                                </Row>
+                                <Button onClick={(clickEvent) => handleSaveGuestClick(clickEvent)}
+                                    className="btn btn-primary">add new guest spot</Button>
+                            </div>
+                        </fieldset>
+                    </div>
+                </div>
                 <Button
                     onClick={(clickEvent) => handleSaveButtonClick(clickEvent)}
                     className="addshowbutton">
-                    Save Show Details
+                    save show details
                 </Button>
             </div>
         </form>

@@ -1,8 +1,8 @@
+import { Accordion, AccordionDetails, AccordionSummary, Typography } from "@mui/material"
 import { useState, useEffect } from "react"
 import { useNavigate } from "react-router-dom"
-import { Accordion, AccordionBody, AccordionHeader, AccordionItem, Row } from "reactstrap"
+// import { Accordion, AccordionBody, AccordionHeader, AccordionItem, Row } from "reactstrap"
 import { getAllUsers } from "../ApiManager"
-import { Crew } from "./Crew"
 import "./Crew.css"
 
 export const CrewList = () => {
@@ -20,25 +20,37 @@ export const CrewList = () => {
         }, []
     )
 
-    
 
-    return <Accordion open="1" toggle={function noRefCheck(){}}>
+
+    return <>
+        <h2 className="title">crew</h2>
         {
             users.map(user => {
                 return <>
-                    <AccordionItem>
-                        <AccordionHeader targetId="">{user.name}</AccordionHeader>
-                        <AccordionBody accordionId="">
-                            {user.name}
-                            {user.phoneNumber}
-                            {user.emailAddress}
-                            {user.allergies}
-                            {user.greenRoomRequests}
-                        </AccordionBody>
-                    </AccordionItem>
+                    <div className="crewmember">
+                        <button className="collapsible" onClick={(clickEvent) => {
+                            const itemClicked = clickEvent.target
+                            itemClicked.classList.toggle("active");
+                            var content = itemClicked.nextElementSibling
+                            if (content.style.maxHeight) {
+                                content.style.maxHeight = null;
+                            } else {
+                                content.style.maxHeight = content.scrollHeight + "px";
+                            }
+                        }
+                        }>
+
+                            {user.name}</button>
+                        <div className="content">
+                            phone number: {user.phoneNumber} <br />
+                            email: {user.emailAddress} <br />
+                            allergies: {user.allergies} <br />
+                            green room requests: {user.greenRoomRequests}
+                        </div>
+                    </div>
                 </>
             })
         }
 
-    </Accordion >
+    </>
 }

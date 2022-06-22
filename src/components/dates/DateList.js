@@ -11,7 +11,6 @@ export const DateList = ({ retrieveDates }) => {
     const navigate = useNavigate()
     const localUser = localStorage.getItem("detour_user")
     const userObject = JSON.parse(localUser)
-    const [alldays, setAllDays] = useState([])
 
 
     useEffect(
@@ -19,6 +18,7 @@ export const DateList = ({ retrieveDates }) => {
             getAllDates()
                 .then((dateArray) => {
                     setShowDates(dateArray)
+                    retrieveDates()
                 })
         }, []
     )
@@ -26,7 +26,7 @@ export const DateList = ({ retrieveDates }) => {
     useEffect(
         () => {
             if (showDates.length) {
-             
+
                 var result = showDates.sort(function (a, b) {
                     return Date.parse(a.date) - Date.parse(b.date);
                 }).reduce(function (hash) {
@@ -63,24 +63,27 @@ export const DateList = ({ retrieveDates }) => {
         }, [showDates]
     )
 
-    return <article className="datelist">
-        {
-            offdays.sort((a, b) => { return new Date(a.date) - new Date(b.date) }).map(date => <ShowDate retrieveDates={retrieveDates} key={`date--${date.id}`}
-                id={date.id}
-                date={date.date}
-                venue={date.venue}
-                city={date.city}
-                state={date.state}
-                setter={setShowDates} />)
-        }
+    return <>
+
+        <article className="datelist">
+            {
+                offdays.sort((a, b) => { return new Date(a.date) - new Date(b.date) }).map(date => <ShowDate retrieveDates={retrieveDates} key={`date--${date.id}`}
+                    id={date.id}
+                    date={date.date}
+                    venue={date.venue}
+                    city={date.city}
+                    state={date.state}
+                    setter={setShowDates} />)
+            }
 
 
-        {
-            userObject.manager
-                ? <Button className="addshowbutton" onClick={() => navigate("/dates/create")}>Add Date</Button>
+            {
+                userObject.manager
+                    ? <Button className="addshowbutton" onClick={() => navigate("/dates/create")}>add date</Button>
 
-                : <></>
-        }
+                    : <></>
+            }
 
-    </article>
+        </article>
+    </>
 }

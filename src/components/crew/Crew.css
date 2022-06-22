@@ -19,3 +19,52 @@
     transform: translate(-50%, -50%);
 }
 
+
+.overrides .collapsible {
+    background-color: #fef335;
+    color: black;
+    cursor: pointer;
+    padding: 18px;
+    width: 100%;
+    border: none;
+    text-align: left;
+    outline: none;
+    font-size: contain;
+    min-width: 20rem;
+    max-height: 2rem;
+    margin-bottom: 1.25rem;
+  }
+  
+  .overrides .active {
+    background-color: lightblue;
+  }
+
+  .overrides .collapsible:hover {
+      background-color: rgb(127, 159, 170);
+  }
+  
+  .overrides .collapsible:after {
+    content: '\002B';
+    color: black;
+    font-weight: bold;
+    float: right;
+    margin-left: 5px;
+    margin-bottom: 1rem;
+  }
+  
+  .overrides .active:after {
+    content: "\2212";
+  }
+  
+  .overrides .content {
+    padding: 0 18px;
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.2s ease-out;
+    background-color: #f1f1f1;
+    margin-top: -1rem;
+  }
+
+.crewmember {
+    margin-top: 1rem;
+}
