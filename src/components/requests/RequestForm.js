@@ -3,6 +3,7 @@ import { useEffect, useState } from "react"
 import { useNavigate } from "react-router-dom"
 import { Button, Col, Input, Label, Row } from "reactstrap"
 import { getAllDates, getAllRequests, getUserGuestRequests, getUserRequests, saveNewGuest, saveRequest } from "../ApiManager"
+import { ConvertDate } from "../dates/ConvertDate"
 
 export const SubmitRequest = () => {
     const localUser = localStorage.getItem("detour_user")
@@ -185,7 +186,7 @@ export const SubmitRequest = () => {
                                                     } name="shows" id="shows">
                                                     {
                                                         showDates.sort((a, b) => { return new Date(a.date) - new Date(b.date) }).map(date => {
-                                                            return <MenuItem key={`date--${date.id}`} value={date.id}>{date.date} - {date.venue}</MenuItem>
+                                                            return <MenuItem key={`date--${date.id}`} value={date.id}>{ConvertDate(date.date)} - {date.venue}</MenuItem>
                                                         })
                                                     }
 
@@ -257,7 +258,7 @@ export const SubmitRequest = () => {
                                                         } name="shows" id="shows">
                                                         {
                                                             showDates.sort((a, b) => { return new Date(a.date) - new Date(b.date) }).map(date => {
-                                                                return <MenuItem key={`date--${date.id}`} value={date.id}>{date.date} - {date.venue}</MenuItem  >
+                                                                return <MenuItem key={`date--${date.id}`} value={date.id}> {ConvertDate(date.date)} - {date.venue}</MenuItem  >
                                                             })
                                                         }
 
@@ -284,7 +285,7 @@ export const SubmitRequest = () => {
                             let foundShow = showDates.find((show) => {
                                 return show.id === request.showDateId
                             })
-                            return <>{request.request} for {foundShow.venue} {foundShow.date} - {foundStatus(request.statusId)}<br />
+                            return <>{request.request} for {foundShow.venue} on {ConvertDate(foundShow.date)} - {foundStatus(request.statusId)}<br />
                             </>
                         })
                         : <></>
@@ -296,7 +297,7 @@ export const SubmitRequest = () => {
                                     return show.id === request.showDateId
                                 })
                                 return <>
-                                    {request.name} - {request.quantity} tickets for {foundShow.venue} {foundShow.date} - {foundStatus(request.statusId)}<br />
+                                    {request.name} - {request.quantity} tickets for {foundShow.venue} on {ConvertDate(foundShow.date)} - {foundStatus(request.statusId)}<br />
                                 </>
                             })
                             : <></>

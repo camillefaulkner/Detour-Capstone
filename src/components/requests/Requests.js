@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react"
 import { Button, CloseButton } from 'reactstrap';
 import { getAllDates, getAllUsers, getAllRequests, getPendingGuestRequests, updateGuestRequest, updateGreenRoomRequest, updateAPIGuestRequest } from "../ApiManager"
+import { ConvertDate } from "../dates/ConvertDate";
 import "./Requests.css"
 
 
@@ -111,7 +112,7 @@ export const Requests = () => {
                             return show.id === request.showDateId
                         })
                         return <div className="requestinline">
-                            <div className="requestitem" key={`request--${request.id}`}>{request.type} for {request.request} from {foundUser.name} - {foundShow.venue} {foundShow.date}
+                            <div className="requestitem" key={`request--${request.id}`}>{request.type} from {foundUser.name}: {request.request} for {foundShow.venue} ({ConvertDate(foundShow.date)})
                             </div>
                             <div className="requestbuttons">
                                 <Button className="requestbutton" onClick={(clickEvent) => {
@@ -139,7 +140,7 @@ export const Requests = () => {
                             return show.id === request.showDateId
                         })
                         return <div className="requestinline">
-                            <div className="requestitem" key={`request--${request.id}`}>guest list request for {request.name} - {request.quantity} tickets from {foundUser.name} - {foundShow.venue} {foundShow.date}
+                            <div className="requestitem" key={`request--${request.id}`}>guest list request from {foundUser.name}:  {request.name} needs {request.quantity} tickets for {foundShow.venue} ({ConvertDate(foundShow.date)})
                                 <Button className="requestbutton" onClick={(clickEvent) => {
                                     request.statusId = 2
                                     handleUpdateGuestClick(clickEvent, request)

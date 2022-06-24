@@ -7,6 +7,7 @@ import { useEffect, useState } from "react"
 import { getAllDates, fetchLatandLong } from "../ApiManager"
 import "./Views.css"
 import { SubmitRequest } from "../requests/RequestForm"
+import { ConvertDate } from "../dates/ConvertDate"
 
 
 export const ArtistViews = () => {
@@ -61,7 +62,7 @@ export const ArtistViews = () => {
 								})
 								return <Marker position={[data?.referencePosition?.latitude, data?.referencePosition?.longitude]}>
 									<Popup>
-										{foundCity?.date} <br />
+										{ConvertDate(foundCity?.date)} <br />
 										{foundCity?.venue} <br /> {foundCity?.city}, {foundCity?.state}
 									</Popup>
 								</Marker>

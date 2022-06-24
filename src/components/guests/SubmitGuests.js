@@ -3,6 +3,7 @@ import { useEffect, useState } from "react"
 import { useNavigate } from "react-router-dom"
 import { Button, Col, Row } from "reactstrap"
 import { getAllDates, saveNewGuest } from "../ApiManager"
+import { ConvertDate } from "../dates/ConvertDate"
 import './Guest.css'
 
 export const SubmitGuest = () => {
@@ -106,10 +107,10 @@ export const SubmitGuest = () => {
                                         copy.showDateId = parseInt(evt.target.value)
                                         update(copy)
                                     }
-                                } name="shows" id="shows">
+                                } name="" id="shows">
                                     {
                                         showDates.sort((a, b) => { return new Date(a.date) - new Date(b.date) }).map(date => {
-                                            return <MenuItem key={`date--${date.id}`} value={date.id}>{date.date} - {date.venue}</MenuItem>
+                                            return <MenuItem key={`date--${date.id}`} value={date.id}>{ConvertDate(date.date)} - {date.venue}</MenuItem>
                                         })
                                     }
 

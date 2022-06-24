@@ -11,6 +11,7 @@ import { SubmitGuest } from "../guests/SubmitGuests"
 import { CrewList } from "../crew/CrewList"
 import { EssentialDocs } from "../essentialdocs/EssentialDocs"
 import { Requests } from "../requests/Requests"
+import { ConvertDate } from "../dates/ConvertDate"
 
 
 export const ManagerViews = () => {
@@ -52,35 +53,35 @@ export const ManagerViews = () => {
 	return (<Routes>
 		<Route path="/" element={
 			<>
-			<div className="map">
-				{dataForViz.length
-					? <MapContainer center={[40, -100]} zoom={3} scrollWheelZoom={false}>
-						<TileLayer
-							attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-							url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-						/>
-						{dataForViz.map(data => {
-							let foundCity = locations.find((location) => {
-								return location.city.toLowerCase() === data?.address.city.toLowerCase()
+				<div className="map">
+					{dataForViz.length
+						? <MapContainer center={[40, -100]} zoom={3} scrollWheelZoom={false}>
+							<TileLayer
+								attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+								url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+							/>
+							{dataForViz.map(data => {
+								let foundCity = locations.find((location) => {
+									return location.city.toLowerCase() === data?.address.city.toLowerCase()
+								})
+								return <Marker position={[data?.referencePosition?.latitude, data?.referencePosition?.longitude]}>
+									<Popup>
+										{ConvertDate(foundCity?.date)} <br />
+										{foundCity?.venue} <br /> {foundCity?.city}, {foundCity?.state}
+									</Popup>
+								</Marker>
 							})
-							return <Marker position={[data?.referencePosition?.latitude, data?.referencePosition?.longitude]}>
-								<Popup>
-									{foundCity?.date} <br />
-									{foundCity?.venue} <br /> {foundCity?.city}, {foundCity?.state}
-								</Popup>
-							</Marker>
-						})
-						}
-					</MapContainer>
-					: <></>
-				}
+							}
+						</MapContainer>
+						: <></>
+					}
 				</div>
 
 				<Outlet />
 			</>
 		} />
 		<Route path="/dates" element={<DateList retrieveDates={RetrieveDates} />} />
-		<Route path="/dates/:showDateId/edit" element={<DateEdit retrieveDates={RetrieveDates}/>} />
+		<Route path="/dates/:showDateId/edit" element={<DateEdit retrieveDates={RetrieveDates} />} />
 		<Route path="/dates/create" element={<NewDateForm retrieveDates={RetrieveDates} />} />
 		<Route path="/guests" element={<SubmitGuest />} />
 		<Route path="/requests" element={<Requests />} />

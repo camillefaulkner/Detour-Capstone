@@ -19,7 +19,10 @@
     margin-top: 1rem;
 }
 
-.guestselect {
+.overrides .guestselect {
     background-color: #eb5952;
+}
+
+.newguestshow {
     margin-top: 0.9rem;
 }

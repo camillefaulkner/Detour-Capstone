@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react"
 import { useParams } from "react-router-dom"
 import { getAllUsers, getApprovedGuestRequests, getApprovedRequests, getAssignedDocs, getDateDetails, getDateDetailsArtist, getDocsForShow, getGuestRequests, getRequests, getScheduleItems } from "../ApiManager"
+import { ConvertDate } from "./ConvertDate"
 import "./DateList.css"
 
 export const DateDetails = () => {
@@ -60,43 +61,16 @@ export const DateDetails = () => {
         }, [scheduleItems]
     )
 
-    // let dateArray = showDate?.date?.split("-") 
-    // let dateDisplay = new Date(dateArray[0], dateArray[1] - 1, dateArray[2])
-
-    // let findMonth = (month) => {
-    //     if (month === 1) {
-    //         return `January ${dateDisplay.getDate()}`
-    //     } else if (month === 2) {
-    //         return "February"
-    //     } else if (month === 3) {
-    //         return "March"
-    //     } else if (month === 4) {
-    //         return "April"
-    //     } else if (month === 5) {
-    //         return "May"
-    //     } else if (month === 6) {
-    //         return `June ${dateDisplay.getDate()}`
-    //     } else if (month === 7) {
-    //         return "July"
-    //     } else if (month === 8) {
-    //         return "August"
-    //     } else if (month === 9) {
-    //         return "September"
-    //     } else if (month === 10) {
-    //         return "October"
-    //     } else if (month === 11) {
-    //         return "November"
-    //     } else if (month === 12) {
-    //         return "December"
-    //     }
-    // }
-
-
-
     return <>
-        <h2 className="datedetailtitle">
-            {showDate.date}
-        </h2>
+        {
+            showDate.date
+
+                ? <h2 className="datedetailtitle">
+                    {ConvertDate(showDate.date)}
+                </h2>
+                : <></>
+
+        }
         <section className="showdetails">
             <section className="leftSide">
 
