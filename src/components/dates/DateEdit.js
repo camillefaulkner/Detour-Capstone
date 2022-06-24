@@ -289,7 +289,7 @@ export const DateEdit = ({ retrieveDates }) => {
                                     {
                                         morning.sort((a, b) => { return a.time - b.time }).map(item => {
                                             return <div key={`schedule--${item.id}`}> {item.time}{item.timeDetail} - {item.description}
-                                                <Button color="danger" close onClick={(evt) => {
+                                                <Button className="dateeditclose" color="danger" close onClick={(evt) => {
                                                     evt.preventDefault()
 
                                                     fetch(`http://localhost:8088/scheduleItems/${item.id}`, {
@@ -309,7 +309,7 @@ export const DateEdit = ({ retrieveDates }) => {
 
                                         afternoon.sort((a, b) => { return a.time - b.time }).map(item => {
                                             return <div key={`schedule--${item.id}`}> {item.time}{item.timeDetail} - {item.description}
-                                                <Button close onClick={(evt) => {
+                                                <Button className="dateeditclose" close onClick={(evt) => {
                                                     evt.preventDefault()
 
                                                     fetch(`http://localhost:8088/scheduleItems/${item.id}`, {
@@ -410,7 +410,7 @@ export const DateEdit = ({ retrieveDates }) => {
                             {guests.length
                                 ? guests.map(guest => {
                                     return <div key={`guest--${guest.id}`}> {guest.name} - {guest.quantity} tickets
-                                        <Button close onClick={(evt) => {
+                                        <Button className="dateeditclose" close onClick={(evt) => {
                                             evt.preventDefault()
 
                                             fetch(`http://localhost:8088/guestRequests/${guest.id}`, {
