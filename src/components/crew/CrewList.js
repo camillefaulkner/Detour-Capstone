@@ -23,34 +23,35 @@ export const CrewList = () => {
 
 
     return <>
-        <h2 className="title">crew</h2>
-        {
-            users.map(user => {
-                return <>
-                    <div className="crewmember">
-                        <button className="collapsible" onClick={(clickEvent) => {
-                            const itemClicked = clickEvent.target
-                            itemClicked.classList.toggle("active");
-                            var content = itemClicked.nextElementSibling
-                            if (content.style.maxHeight) {
-                                content.style.maxHeight = null;
-                            } else {
-                                content.style.maxHeight = content.scrollHeight + "px";
+        <h2 className="crewtitle">crew</h2>
+        <div className="crewcontainer">
+            {
+                users.map(user => {
+                    return <>
+                        <div className="crewmember">
+                            <button className="collapsible" onClick={(clickEvent) => {
+                                const itemClicked = clickEvent.target
+                                itemClicked.classList.toggle("active");
+                                var content = itemClicked.nextElementSibling
+                                if (content.style.maxHeight) {
+                                    content.style.maxHeight = null;
+                                } else {
+                                    content.style.maxHeight = content.scrollHeight + "px";
+                                }
                             }
-                        }
-                        }>
+                            }>
 
-                            {user.name}</button>
-                        <div className="content">
-                            phone number: {user.phoneNumber} <br />
-                            email: {user.emailAddress} <br />
-                            allergies: {user.allergies} <br />
-                            green room requests: {user.greenRoomRequests}
+                                {user.name}</button>
+                            <div className="content">
+                                phone number: {user.phoneNumber} <br />
+                                email: {user.emailAddress} <br />
+                                allergies: {user.allergies} <br />
+                                green room requests: {user.greenRoomRequests}
+                            </div>
                         </div>
-                    </div>
-                </>
-            })
-        }
-
+                    </>
+                })
+            }
+        </div>
     </>
 }

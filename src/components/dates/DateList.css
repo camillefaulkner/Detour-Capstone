@@ -32,11 +32,9 @@
     right: 15%;
 }
 
-.detail__date {
-    display: flex;
-    justify-content: center;
-    font-weight: 800;
-    margin-bottom: 2rem;
+.datedetailtitle {
+    margin-top: 5%;
+    margin-left: 5%;
 }
 
 .showAddress {
@@ -78,4 +76,55 @@
 
 .overrides .addshowbutton {
     height: 2rem;
+}
+
+
+.overrides .datedetailcollapsible {
+    background-color: #fef335;
+    color: black;
+    cursor: pointer;
+    padding: 18px;
+    width: 100%;
+    border: none;
+    text-align: left;
+    outline: none;
+    font-size: contain;
+    min-width: 20rem;
+    max-height: 4rem;
+    margin-bottom: 1.25rem;
+    margin-top: 1rem;
+}
+
+.overrides .datedetailactive {
+    background-color: #e8463e;
+}
+
+.overrides .datedetailcollapsible:hover {
+    background-color: #e8463e;
+}
+
+.overrides .datedetailcollapsible:after {
+    content: '\002B';
+    color: black;
+    font-weight: bold;
+    float: right;
+    margin-left: 5px;
+    margin-bottom: 1rem;
+}
+
+.overrides .datedetailactive:after {
+    content: "\2212";
+}
+
+.overrides .datedetailcontent {
+    padding: 0 18px;
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.2s ease-out;
+    background-color: #f1f1f1;
+    margin-top: -1rem;
+}
+
+.datedetaildoc {
+    margin-top: 1rem;
 }

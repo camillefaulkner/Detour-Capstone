@@ -49,7 +49,6 @@ export const ArtistViews = () => {
 		<Route path="/" element={
 			<>
 				<div className="map">
-					{/* <h1>detour</h1> */}
 					{dataForViz.length
 						? <MapContainer center={[40, -100]} zoom={3} scrollWheelZoom={false}>
 							<TileLayer
@@ -62,6 +61,7 @@ export const ArtistViews = () => {
 								})
 								return <Marker position={[data?.referencePosition?.latitude, data?.referencePosition?.longitude]}>
 									<Popup>
+										{foundCity?.date} <br />
 										{foundCity?.venue} <br /> {foundCity?.city}, {foundCity?.state}
 									</Popup>
 								</Marker>

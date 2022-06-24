@@ -1,7 +1,8 @@
+import { FormControl, InputLabel, MenuItem, Select } from '@mui/material';
 import React, { useEffect, useState } from 'react'
 import { Link, useNavigate } from "react-router-dom"
 import { Button } from 'reactstrap';
-import { fetchCloudinary, getAllDates, getAllFiles, getDocs, saveDoc, updateDoc } from '../ApiManager';
+import { fetchCloudinary, getAllDates, getAllFiles, getDocs, saveDoc, saveDocAssign, updateDoc } from '../ApiManager';
 import "./EssentialDocs.css"
 
 
@@ -32,11 +33,11 @@ export const EssentialDocs = () => {
 
     let uploadImage = () => {
         let formData = new FormData()
-        formData.append("file", imageSelected)
+        formData.append("file", imageSelected) 
         formData.append("upload_preset", "detour")
 
         fetchCloudinary(formData)
-            .then((response) => { // get request
+            .then((response) => {
                 setPublicURL(response.url)
                 const copy = { ...doc }
                 copy.publicURL = response.url
@@ -58,38 +59,48 @@ export const EssentialDocs = () => {
     }
 
 
-    return (
+    return (<>
+        <h2 className="doctitle">essential docs</h2>
         <div className="doccontainer">
             <input type="file" onChange={(evt) => {
                 setImageSelected(evt.target.files[0])
             }} />
-            <Button onClick={
-                uploadImage
-            }>Upload</Button>
+            <Button onClick={uploadImage}>Upload</Button>
 
             {
                 docs
                     ? docs.map(url => {
                         return <div key={`doc--${url.id}`} className="imagecard">
                             <img className="image" src={url.publicURL} />
-                            <label className="chooseshow" htmlFor="description">Select Show: </label>
-                            <select onChange={
-                                    (evt) => {
-                                        url.showDateId = parseInt(evt.target.value)
-                                        updateDoc(url)
-                                    }
-                                } name="shows" id="shows">
-                                {
-                                    showDates.map(date => {
-                                        return <option key={`date--${date.id}`} value={date.id}>{date.date} - {date.venue}</option>
-                                    })
-                                }
+                            <FormControl sx={{ m: 1, minWidth: 200 }} size="small">
+                                <InputLabel id="simple-select" className="chooseshow" htmlFor="description">select show: </InputLabel>
+                                <Select
+                                    labelId="simple-select"
+                                    label="select show"
+                                    onChange={
+                                        (evt) => {
+                                            const docAssignToSendToAPI = {
+                                                docId: url.id,
+                                                showDateId: parseInt(evt.target.value)
+                                            }
 
-                            </select>
+                                            return saveDocAssign(docAssignToSendToAPI)
+
+                                        }
+                                    } name="shows" id="shows">
+                                    {
+                                        showDates.sort((a, b) => { return new Date(a.date) - new Date(b.date) }).map(date => {
+                                            return <MenuItem key={`date--${date.id}`} value={date.id}>{date.date} - {date.venue}</MenuItem>
+                                        })
+                                    }
+
+                                </Select>
+                            </FormControl>
                         </div>
                     })
                     : <></>
             }
         </div>
+    </>
     )
 }; 

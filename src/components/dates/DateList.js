@@ -56,7 +56,6 @@ export const DateList = ({ retrieveDates }) => {
                     };
                 }(Object.create(null)), []);
 
-                // offdateArray.push(result)
                 setOffDays(result);
             }
 
@@ -67,7 +66,7 @@ export const DateList = ({ retrieveDates }) => {
 
         <article className="datelist">
             {
-                offdays.sort((a, b) => { return new Date(a.date) - new Date(b.date) }).map(date => <ShowDate retrieveDates={retrieveDates} key={`date--${date.id}`}
+                offdays.sort((a, b) => { return new Date(a.date) - new Date(b.date) }).map(date => <ShowDate retrieveDates={retrieveDates} 
                     id={date.id}
                     date={date.date}
                     venue={date.venue}

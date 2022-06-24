@@ -5,7 +5,7 @@ import { Nav, NavItem, NavLink } from 'reactstrap'
 export const ArtistNav = () => {
     const navigate = useNavigate()
 
-    const logo = require('./images/detourLogo.png');
+    const logo = require('./images/detourLogo.png')
 
     return (
         <>
@@ -17,22 +17,22 @@ export const ArtistNav = () => {
                     </NavLink>
                 </NavItem>
                 <NavItem className="navitem">
-                    <NavLink className="navbar__link" nav href="/dates" style={{ textDecoration: 'none' }}>
+                    <NavLink className="navbar__link" href="/dates" style={{ textDecoration: 'none' }}>
                         dates
                     </NavLink>
                 </NavItem>
                 <NavItem className="navitem">
-                    <NavLink className="navbar__link" nav href="/createrequest" style={{ textDecoration: 'none' }}>
+                    <NavLink className="navbar__link" href="/createrequest" style={{ textDecoration: 'none' }}>
                         requests
                     </NavLink>
                 </NavItem>
                 <NavItem className="navitem">
-                    <NavLink className="navbar__link" nav href="/profile" style={{ textDecoration: 'none' }}>
+                    <NavLink className="navbar__link" href="/profile" style={{ textDecoration: 'none' }}>
                         profile
                     </NavLink>
                 </NavItem>
                 <NavItem className="navitemlast">
-                    <NavLink className="navbar__link nav-side right auth-login" nav href="" onClick={() => {
+                    <NavLink className="navbar__link nav-side right auth-login" href="#" onClick={() => {
                         localStorage.removeItem("detour_user")
                         navigate("/", { replace: true })
                     }}>logout</NavLink>
