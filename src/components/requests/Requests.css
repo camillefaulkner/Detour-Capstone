@@ -1,21 +1,26 @@
-.requests {
-    margin-top: 2rem;
+.requesttitle {
+    margin-top: 5%;
     margin-left: 5%;
     text-decoration: line-through;
 }
 
 .requestbox {
-    position: absolute;
-    left: 50%;
-    top: 40%;
-    transform: translate(-50%, -50%);
+    margin-top: 2rem;
+    margin-left: 6rem;
+    padding: 2rem;
+    border-radius: 5px;
+    color: #e8463e;
+    box-shadow: #eaae8f 0px 13px 27px -5px, rgba(0, 0, 0, 0.3) 0px 8px 16px -8px;
+    width: 75%;
+    text-align: center;
 }
 
-.requestitem {
-    margin-top: 1rem;
+.requestinline {
+    margin-top: 3rem;
 }
 
-.requestform {
+.requestform,
+.requestinline {
     display: flex;
     flex-direction: row;
 }
@@ -29,4 +34,26 @@
     flex-direction: row;
     justify-content: space-around;
     min-height: 27.3rem;
+}
+
+.requestbuttons {
+    margin-left: 1rem;
+    margin-top: -0.5rem;
+}
+
+.requestbutton {
+    margin-right: 1rem;
+    margin-left: 1rem;
+}
+
+.requestformbutton {
+    margin-top: 1rem;
+}
+
+.requestguestselect {
+    background-color: #eb5952;
+}
+
+.requestformradio {
+    margin-left: 1rem;
 }

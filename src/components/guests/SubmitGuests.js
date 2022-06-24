@@ -1,6 +1,7 @@
+import { FormControl, InputLabel, MenuItem, Select } from "@mui/material"
 import { useEffect, useState } from "react"
 import { useNavigate } from "react-router-dom"
-import { Col, Row } from "reactstrap"
+import { Button, Col, Row } from "reactstrap"
 import { getAllDates, saveNewGuest } from "../ApiManager"
 import './Guest.css'
 
@@ -47,52 +48,59 @@ export const SubmitGuest = () => {
 
     return (
         <>
-            <h2 className="showForm__title">new guest list spot</h2>
+            <h2 className="guestForm__title">new guest list spot</h2>
             <form className="guestForm">
                 <Row>
-                    <Col md={3}>
-                        <fieldset>
-                            <div className="form-group">
-                                <label htmlFor="description">name:</label>
-                                <input
-                                    required autoFocus
-                                    type="text"
-                                    className="form-control"
-                                    value={guest.name}
-                                    onChange={
-                                        (evt) => {
-                                            const copy = { ...guest }
-                                            copy.name = evt.target.value
-                                            update(copy)
-                                        }
-                                    } />
-                            </div>
-                        </fieldset>
+                    <Col md={4}>
+                        <div className="newguestname">
+                            <fieldset>
+                                <div className="form-group">
+                                    <label htmlFor="description">name:</label>
+                                    <input
+                                        required autoFocus
+                                        type="text"
+                                        className="form-control"
+                                        value={guest.name}
+                                        onChange={
+                                            (evt) => {
+                                                const copy = { ...guest }
+                                                copy.name = evt.target.value
+                                                update(copy)
+                                            }
+                                        } />
+                                </div>
+                            </fieldset>
+                        </div>
                     </Col>
-                    <Col md={2}>
-                        <fieldset>
-                            <div className="form-group">
-                                <label htmlFor="description">how many tickets?:</label>
-                                <input
-                                    required autoFocus
-                                    type="number"
-                                    className="form-control"
-                                    value={guest.quantity}
-                                    onChange={
-                                        (evt) => {
-                                            const copy = { ...guest }
-                                            copy.quantity = parseInt(evt.target.value)
-                                            update(copy)
-                                        }
-                                    } />
-                            </div>
-                        </fieldset>
+                    <Col md={3}>
+                        <div className="newguestticket">
+                            <fieldset>
+                                <div className="form-group">
+                                    <label htmlFor="description">how many tickets?:</label>
+                                    <input
+                                        required autoFocus
+                                        type="number"
+                                        className="form-control"
+                                        value={guest.quantity}
+                                        onChange={
+                                            (evt) => {
+                                                const copy = { ...guest }
+                                                copy.quantity = parseInt(evt.target.value)
+                                                update(copy)
+                                            }
+                                        } />
+                                </div>
+                            </fieldset>
+                        </div>
                     </Col>
                     <Col md={4}>
-                        <fieldset>
-                            <div className="form-group">
-                                <label htmlFor="description">select show: </label>
-                                <select onChange={
+                        <div className="newguestshow">
+                            <FormControl sx={{ m: 1, minWidth: 200 }} size="small">
+                                <InputLabel id="simple-select" htmlFor="description">select show: </InputLabel>
+                                <Select
+                                    className="guestselect"
+                                    labelId="simple-select"
+                                    label="select show" onChange={
                                     (evt) => {
                                         const copy = { ...guest }
                                         copy.showDateId = parseInt(evt.target.value)
@@ -100,21 +108,21 @@ export const SubmitGuest = () => {
                                     }
                                 } name="shows" id="shows">
                                     {
-                                        showDates.map(date => {
-                                            return <option key={`date--${date.id}`} value={date.id}>{date.date} - {date.venue}</option>
+                                        showDates.sort((a, b) => { return new Date(a.date) - new Date(b.date) }).map(date => {
+                                            return <MenuItem key={`date--${date.id}`} value={date.id}>{date.date} - {date.venue}</MenuItem>
                                         })
                                     }
 
-                                </select>
-                            </div>
-                        </fieldset>
+                                </Select>
+                            </FormControl>
+                        </div>
                     </Col>
                 </Row>
-                <button
+                <Button
                     onClick={(clickEvent) => handleSaveButtonClick(clickEvent)}
-                    className="btn btn-primary">
+                    className="newguestbutton">
                     Submit Guest List Spot
-                </button>
+                </Button>
             </form>
         </>
     )

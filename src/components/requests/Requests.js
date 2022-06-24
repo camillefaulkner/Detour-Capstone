@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react"
+import { Button, CloseButton } from 'reactstrap';
 import { getAllDates, getAllUsers, getAllRequests, getPendingGuestRequests, updateGuestRequest, updateGreenRoomRequest, updateAPIGuestRequest } from "../ApiManager"
 import "./Requests.css"
 
@@ -14,7 +15,7 @@ export const Requests = () => {
 
     useEffect(
         () => {
-            getAllRequests() //
+            getAllRequests()
                 .then((requestArray) => {
                     setRequests(requestArray)
                 })
@@ -33,7 +34,7 @@ export const Requests = () => {
         }, []
     )
 
-    
+
 
     const handleUpdateGreenRoomClick = (event, request) => {
         event.preventDefault()
@@ -65,9 +66,39 @@ export const Requests = () => {
             })
     }
 
+    let findMonth = (month) => {
+        if (month === 1) {
+            return "January"
+        } else if (month === 2) {
+            return "February"
+        } else if (month === 3) {
+            return "March"
+        } else if (month === 4) {
+            return "April"
+        } else if (month === 5) {
+            return "May"
+        } else if (month === 6) {
+            return "June"
+        } else if (month === 7) {
+            return "July"
+        } else if (month === 8) {
+            return "August"
+        } else if (month === 9) {
+            return "September"
+        } else if (month === 10) {
+            return "October"
+        } else if (month === 11) {
+            return "November"
+        } else if (month === 12) {
+            return "December"
+        }
+    }
+
+
+
     return <>
 
-        <h2 className="requests">requests</h2>
+        <h2 className="requesttitle">requests</h2>
         <div className="requestbox">
             {
                 users.length && requests.length && showDates.length
@@ -79,15 +110,20 @@ export const Requests = () => {
                         let foundShow = showDates.find((show) => {
                             return show.id === request.showDateId
                         })
-                        return <div className="requestitem" key={`request--${request.id}`}>{request.type} for {request.request} from {foundUser.name} - {foundShow.venue} {foundShow.date}
-                            <button onClick={(clickEvent) => {
-                                request.statusId = 2
-                                handleUpdateGreenRoomClick(clickEvent, request)
-                            }}>accept</button>
-                            <button onClick={(clickEvent) => {
-                                request.statusId = 3
-                                handleUpdateGreenRoomClick(clickEvent, request)
-                            }}>deny</button>
+                        return <div className="requestinline">
+                            <div className="requestitem" key={`request--${request.id}`}>{request.type} for {request.request} from {foundUser.name} - {foundShow.venue} {foundShow.date}
+                            </div>
+                            <div className="requestbuttons">
+                                <Button className="requestbutton" onClick={(clickEvent) => {
+                                    request.statusId = 2
+                                    handleUpdateGreenRoomClick(clickEvent, request)
+                                }}>accept</Button>
+                                <CloseButton
+                                    variant="white" onClick={(clickEvent) => {
+                                        request.statusId = 3
+                                        handleUpdateGreenRoomClick(clickEvent, request)
+                                    }}></CloseButton>
+                            </div>
                         </div>
                     })
 
@@ -102,15 +138,17 @@ export const Requests = () => {
                         let foundShow = showDates.find((show) => {
                             return show.id === request.showDateId
                         })
-                        return <div className="requestitem" key={`request--${request.id}`}>guest list request for {request.name} - {request.quantity} tickets from {foundUser.name} - {foundShow.venue} {foundShow.date}
-                            <button onClick={(clickEvent) => {
-                                request.statusId = 2
-                                handleUpdateGuestClick(clickEvent, request)
-                            }}>accept</button>
-                            <button onClick={(clickEvent) => {
-                                request.statusId = 3
-                                handleUpdateGuestClick(clickEvent, request)
-                            }}>deny</button>
+                        return <div className="requestinline">
+                            <div className="requestitem" key={`request--${request.id}`}>guest list request for {request.name} - {request.quantity} tickets from {foundUser.name} - {foundShow.venue} {foundShow.date}
+                                <Button className="requestbutton" onClick={(clickEvent) => {
+                                    request.statusId = 2
+                                    handleUpdateGuestClick(clickEvent, request)
+                                }}>accept</Button>
+                                <CloseButton variant="white" onClick={(clickEvent) => {
+                                    request.statusId = 3
+                                    handleUpdateGuestClick(clickEvent, request)
+                                }}></CloseButton>
+                            </div>
                         </div>
                     })
                     : <></>

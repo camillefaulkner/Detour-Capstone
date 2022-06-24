@@ -2,10 +2,22 @@
     text-decoration: line-through;
 }
 
+.registertitle {
+    text-decoration: line-through;
+    margin-bottom: 3rem;
+}
+
 
 .login {
     margin-top: 10%;
     margin-left: 40%;
+}
+
+
+.registerlogin {
+    margin-top: 10%;
+    display: flex;
+    justify-content: center;
 }
 
 .submit {
@@ -18,4 +30,9 @@
 
 .signinlogo {
     margin-bottom: 2rem;
+}
+
+.imamgr {
+    margin-top: 1rem;
+    margin-bottom: 1rem;
 }

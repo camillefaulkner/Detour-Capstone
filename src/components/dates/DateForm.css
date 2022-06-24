@@ -1,18 +1,17 @@
-.showForm {
-    margin-top: 2rem;
-    margin-left: 5%;
-    width: 80%;
-}
-
 .showForm__title {
     text-decoration: line-through;
+    margin-top: 5%;
+    margin-left: 5%;
 }
 
 .formbox {
+    margin-top: 2rem;
+    margin-left: 6rem;
     padding: 2rem;
     border-radius: 5px;
     color: #e8463e;
     box-shadow: #eaae8f 0px 13px 27px -5px, rgba(0, 0, 0, 0.3) 0px 8px 16px -8px;
+    width: 80%;
 }
 
 .overrides .form-control {
@@ -30,7 +29,8 @@
 }
 
 
-.schedule, .guestform {
+.schedule,
+.guestform {
     background-color: #eaae8f;
     padding: 2rem;
     margin-top: 1rem;
@@ -64,17 +64,17 @@
     margin-bottom: 1.25rem;
     padding-bottom: 3rem;
     vertical-align: middle;
-  }
-  
-  .overrides .scheduleactive {
-    background-color: lightblue;
-  }
+}
 
-  .overrides .schedulecollapsible:hover {
-      background-color: rgb(127, 159, 170);
-  }
-  
-  .overrides .schedulecollapsible:after {
+.overrides .scheduleactive {
+    background-color: #e8463e;
+}
+
+.overrides .schedulecollapsible:hover {
+    background-color: #e8463e;
+}
+
+.overrides .schedulecollapsible:after {
     content: '\002B';
     color: black;
     font-weight: bold;
@@ -82,17 +82,22 @@
     margin-left: 5px;
     margin-bottom: 1rem;
     margin-top: -2rem;
-  }
-  
-  .overrides .scheduleactive:after {
+}
+
+.overrides .scheduleactive:after {
     content: "\2212";
-  }
-  
-  .overrides .schedulecontent {
+}
+
+.overrides .schedulecontent {
     padding: 0 18px;
     max-height: 0;
-    overflow: hidden;
+    overflow: scroll;
     transition: max-height 0.2s ease-out;
     background-color: #1c141b;
     margin-top: -1rem;
-  }
+}
+
+.dateeditschedule {
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+}

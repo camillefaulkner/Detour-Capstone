@@ -234,7 +234,7 @@ export const DateEdit = ({ retrieveDates }) => {
                         <textarea
                             type="text"
                             style={{
-                                height: "10rem"
+                                height: "7rem"
                             }}
                             className="form-control"
                             value={showDate.essentialNotes}
@@ -253,7 +253,7 @@ export const DateEdit = ({ retrieveDates }) => {
                         <textarea
                             type="text"
                             style={{
-                                height: "10rem"
+                                height: "7rem"
                             }}
                             className="form-control"
                             value={populateValue(showDate)}
@@ -387,7 +387,7 @@ export const DateEdit = ({ retrieveDates }) => {
                                 </Col>
                             </Row>
                             <Button onClick={(clickEvent) => handleSaveScheduleClick(clickEvent)}
-                                className="btn btn-primary">add new schedule item</Button>
+                                className="dateeditschedule">add new schedule item</Button>
                         </div>
                     </fieldset>
                 </div>
@@ -464,7 +464,7 @@ export const DateEdit = ({ retrieveDates }) => {
                                     </Col>
                                 </Row>
                                 <Button onClick={(clickEvent) => handleSaveGuestClick(clickEvent)}
-                                    className="btn btn-primary">add new guest spot</Button>
+                                    className="dateeditschedule">add new guest spot</Button>
                             </div>
                         </fieldset>
                     </div>

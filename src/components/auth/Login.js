@@ -1,7 +1,7 @@
 import React, { useState } from "react"
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom"
-import { Col } from "reactstrap";
+import { Button, Col } from "reactstrap";
 import { getLogin } from "../ApiManager";
 import "./Login.css"
 
@@ -46,14 +46,13 @@ export const Login = () => {
                                 value={email}
                                 onChange={evt => set(evt.target.value)}
                                 className="form-control"
-                                placeholder="email address"
                                 required autoFocus />
                         </Col>
                     </fieldset>
                     <fieldset>
-                        <button className="submit" type="submit">
+                        <Button className="submit" type="submit">
                             sign in
-                        </button>
+                        </Button>
                     </fieldset>
 
                     <section className="registerlink">

@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react"
-import { Col, FormGroup, Input, Label, Row } from "reactstrap"
+import { Button, Col, FormGroup, Input, Label, Row } from "reactstrap"
 import { getCustomerProfile, updateCustomerProfile } from "../ApiManager"
 import "./Profile.css"
 
@@ -142,11 +142,11 @@ export const ProfileView = () => {
                         </FormGroup>
                     </Col>
                 </Row>
-                <button
+                <Button
                     onClick={(clickEvent) => handleSaveButtonClick(clickEvent)}
                     className="btn btn-primary">
                     save profile
-                </button>
+                </Button>
             </form>
         </>
     )

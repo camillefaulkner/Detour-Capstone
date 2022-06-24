@@ -90,8 +90,24 @@ export const saveNewDate = (showDateToSendToAPI) => {
         .then(response => response.json())
 }
 
+export const saveDocAssign = (docAssignToSendToAPI) => {
+    return fetch(`http://localhost:8088/assignDocToShow`, {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify(docAssignToSendToAPI)
+    })
+        .then(response => response.json())
+}
+
 export const getGuestRequests = (id) => {
     return fetch(`http://localhost:8088/guestRequests?showDateId=${id}`)
+        .then(response => response.json())
+}
+
+export const getAssignedDocs = (id) => {
+    return fetch(`http://localhost:8088/assignDocToShow?showDateId=${id}&_expand=doc`)
         .then(response => response.json())
 }
 
@@ -130,10 +146,6 @@ export const getUserGuestRequests = (id) => {
         .then(response => response.json())
 }
 
-// export const getUserGreenRoomRequests = (id) => {
-//     return fetch(`http://localhost:8088/guestRequests?userId=${id}&statusId=1`)
-//     .then(response => response.json())
-// }
 
 export const saveRequest = (requestToSendToAPI) => {
     return fetch(`http://localhost:8088/greenRoomRequests`, {
@@ -239,12 +251,12 @@ export const fetchCloudinary = (formData) => {
         .then(response => response.json())
 }
 
-export const getAllFiles = () => {
-    let API = `https://api.cloudinary.com/v1_1/${keys.cloudinary}/resources/image`
-    return fetch(`${API}`, {
-        headers: {
-            Authorization: `Basic ${Buffer.from(keys.cloudinaryAPIkey + ':' + keys.cloudinaryAPIsecret).toString('base64')}`
-        }
-    })
-        .then(response => response.json())
-}
+// export const getAllFiles = () => {
+//     let API = `https://api.cloudinary.com/v1_1/${keys.cloudinary}/resources/image`
+//     return fetch(`${API}`, {
+//         headers: {
+//             Authorization: `Basic ${Buffer.from(keys.cloudinaryAPIkey + ':' + keys.cloudinaryAPIsecret).toString('base64')}`
+//         }
+//     })
+//         .then(response => response.json())
+// }

@@ -1,6 +1,8 @@
 import { useState } from "react"
 import { useNavigate } from "react-router-dom"
 import { getHandleRegister, saveNewUser } from "../ApiManager"
+import { Button, Col, Input, Label, Row } from "reactstrap"
+import "./Login.css"
 
 export const Register = (props) => {
     const [user, setUser] = useState({
@@ -41,57 +43,80 @@ export const Register = (props) => {
     }
 
     const updateUser = (evt) => {
-        const copy = {...user}
+        const copy = { ...user }
         copy[evt.target.id] = evt.target.value
         setUser(copy)
     }
 
     return (
-        <main style={{ textAlign: "center" }}>
-            <form className="form--login" onSubmit={handleRegister}>
-                <h1 className="h3 mb-3 font-weight-normal">Please Register for Detour</h1>
-                <fieldset>
-                    <label htmlFor="fullName"> Full Name </label>
-                    <input onChange={updateUser}
-                           type="text" id="name" className="form-control"
-                           placeholder="Enter your name" required autoFocus />
-                </fieldset>
-                <fieldset>
-                    <label htmlFor="phoneNumber"> Phone Number </label>
-                    <input onChange={updateUser}
-                        type="phoneNumber" id="phoneNumber" className="form-control"
-                        placeholder="Phone Number" required />
-                </fieldset>
-                <fieldset>
-                    <label htmlFor="email"> Email address </label>
-                    <input onChange={updateUser}
-                        type="email" id="emailAddress" className="form-control"
-                        placeholder="Email address" required />
-                </fieldset>
-                <fieldset>
-                    <label htmlFor="allergies"> Allergies </label>
-                    <input onChange={updateUser}
-                        type="allergies" id="allergies" className="form-control"
-                        placeholder="If none, type 'none'" required />
-                </fieldset>
-                <fieldset>
-                    <label htmlFor="greenroom"> Green Room Requests</label>
-                    <input onChange={updateUser}
-                        type="greenroom" id="greenRoomRequests" className="form-control"
-                        placeholder="Green room requests" required />
-                </fieldset>
-                <fieldset>
+        <main className="registerlogin" style={{ textAlign: "center" }}>
+            <form onSubmit={handleRegister}>
+                <h3 className="registertitle">please register for detour</h3>
+                <Row>
+                    <Col md={3}>
+                        <fieldset>
+                            <label htmlFor="fullName"> full name </label>
+                            <input onChange={updateUser}
+                                type="text" id="name" className="form-control"
+                                placeholder="Enter your name" required autoFocus />
+                        </fieldset>
+                    </Col>
+                    <Col md={4}>
+                        <fieldset>
+                            <label htmlFor="phoneNumber"> phone number </label>
+                            <input onChange={updateUser}
+                                type="phoneNumber" id="phoneNumber" className="form-control"
+                                placeholder="Phone Number" required />
+                        </fieldset>
+                    </Col>
+                    <Col md={5}>
+                        <fieldset>
+                            <label htmlFor="email"> email address </label>
+                            <input onChange={updateUser}
+                                type="email" id="emailAddress" className="form-control"
+                                placeholder="Email address" required />
+                        </fieldset>
+                    </Col>
+                </Row>
+                <Row>
+                    <Col md={4}>
+                        <fieldset>
+                            <label htmlFor="allergies"> allergies </label>
+                            <textarea
+                                type="text"
+                                style={{
+                                    height: "7rem"
+                                }} onChange={updateUser}
+                                id="allergies" className="form-control"
+                                placeholder="If none, type 'none'" required></textarea>
+                        </fieldset>
+                    </Col>
+                    <Col md={5}>
+                        <fieldset>
+                            <label htmlFor="greenroom"> green room requests</label>
+                            <textarea
+                                type="text"
+                                style={{
+                                    height: "7rem"
+                                }} onChange={updateUser}
+                                id="greenRoomRequests" className="form-control"
+                                placeholder="Green room requests" required></textarea>
+                        </fieldset>
+                    </Col>
+                </Row>
+                <fieldset className="imamgr">
                     <input onChange={(evt) => {
-                        const copy = {...user}
+                        const copy = { ...user }
                         copy.isManager = evt.target.checked
                         setUser(copy)
                     }}
                         type="checkbox" id="isManager" />
-                    <label htmlFor="email"> I am a Tour Manager </label>
+                    <label htmlFor="email"> i am a tour manager </label>
                 </fieldset>
                 <fieldset>
-                    <button type="submit"> Register </button>
+                    <Button type="submit"> Register </Button>
                 </fieldset>
+
             </form>
         </main>
     )
