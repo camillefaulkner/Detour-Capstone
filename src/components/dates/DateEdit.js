@@ -38,7 +38,6 @@ export const DateEdit = ({ retrieveDates }) => {
 
     const [scheduleItem, updateScheduleItem] = useState({
         time: "",
-        timeDetail: "",
         description: "",
         showDateId: parseInt(showDateId)
     })
@@ -74,10 +73,17 @@ export const DateEdit = ({ retrieveDates }) => {
         () => {
             if (scheduleItems.length) {
                 let foundMorningSchedule = scheduleItems?.filter((scheduleItem) => {
-                    return scheduleItem.timeDetail === "am"
+                    let timeArray = scheduleItem.time.split(":")
+                    if (timeArray[0] < 12) {
+                        return scheduleItem
+                    }
                 })
+
                 let foundAfternoonSchedule = scheduleItems?.filter((scheduleItem) => {
-                    return scheduleItem.timeDetail === "pm"
+                    let timeArray = scheduleItem.time.split(":")
+                    if (timeArray[0] >= 12) {
+                        return scheduleItem
+                    }
                 })
                 setMorning(foundMorningSchedule)
                 setAfternoon(foundAfternoonSchedule)
@@ -127,6 +133,15 @@ export const DateEdit = ({ retrieveDates }) => {
             })
         }
         return value
+    }
+
+    const findTime = (time) => {
+        let timeArray = time.split(":")
+        if (timeArray[0] < 12) {
+            return `${timeArray[0]}:${timeArray[1]} am`
+        } else if (timeArray[0] >= 12) {
+            return `${timeArray[0] - 12}:${timeArray[1]} pm`
+        }
     }
 
 
@@ -287,8 +302,8 @@ export const DateEdit = ({ retrieveDates }) => {
                                 ?
                                 <>
                                     {
-                                        morning.sort((a, b) => { return a.time - b.time }).map(item => {
-                                            return <div key={`schedule--${item.id}`}> {item.time}{item.timeDetail} - {item.description}
+                                        morning.sort((a, b) => { return a.time.localeCompare(b.time) }).map(item => { 
+                                            return <div key={`schedule--${item.id}`}> {findTime(item.time)} - {item.description}
                                                 <Button className="dateeditclose" color="danger" close onClick={(evt) => {
                                                     evt.preventDefault()
 
@@ -307,8 +322,8 @@ export const DateEdit = ({ retrieveDates }) => {
                                     }
                                     {
 
-                                        afternoon.sort((a, b) => { return a.time - b.time }).map(item => {
-                                            return <div key={`schedule--${item.id}`}> {item.time}{item.timeDetail} - {item.description}
+                                        afternoon.sort((a, b) => { return a.time.localeCompare(b.time) }).map(item => {
+                                            return <div key={`schedule--${item.id}`}> {findTime(item.time)} - {item.description}
                                                 <Button className="dateeditclose" close onClick={(evt) => {
                                                     evt.preventDefault()
 
@@ -333,10 +348,10 @@ export const DateEdit = ({ retrieveDates }) => {
                         <div className="newschedule">
                             <h4>new schedule line item</h4>
                             <Row>
-                                <Col md={2}>
-                                    <Label htmlFor="description">time:</Label>
+                                <Col md={3}>
+                                    <Label htmlFor="time">time:</Label>
                                     <Input
-                                        type="text"
+                                        type="time" id="time" name="time"
                                         className="form-control"
                                         value={scheduleItem.time}
                                         onChange={
@@ -347,35 +362,11 @@ export const DateEdit = ({ retrieveDates }) => {
                                             }
                                         } />
                                 </Col>
-                                <Col md={2}>
-                                    <div className="radio">
-                                        <Input onChange={
-                                            (evt) => {
-                                                const copy = { ...scheduleItem }
-                                                copy.timeDetail = evt.target.value
-                                                updateScheduleItem(copy)
-                                            }
-                                        } type="radio" id="am" name="fav_language" value="am" />
-                                        <Label htmlFor="am">am</Label>
-                                    </div>
-                                </Col>
-                                <Col md={2}>
-                                    <div className="radio">
-                                        <Input onChange={
-                                            (evt) => {
-                                                const copy = { ...scheduleItem }
-                                                copy.timeDetail = evt.target.value
-                                                updateScheduleItem(copy)
-                                            }
-                                        } type="radio" id="pm" name="fav_language" value="pm" />
-                                        <Label htmlFor="pm">pm</Label><br />
-                                    </div>
-                                </Col>
                                 <Col md={6}>
                                     <label htmlFor="description">description:</label>
                                     <input
                                         type="text"
-                                        className="form-control"
+                                        className="datedetailtimedesc form-control"
                                         value={scheduleItem.description}
                                         onChange={
                                             (evt) => {
@@ -435,7 +426,6 @@ export const DateEdit = ({ retrieveDates }) => {
                                     <Col md={3}>
                                         <Label htmlFor="description">name:</Label>
                                         <Input
-
                                             type="text"
                                             className="form-control"
                                             value={guest.name}
@@ -450,7 +440,6 @@ export const DateEdit = ({ retrieveDates }) => {
                                     <Col md={3}>
                                         <Label htmlFor="description">how many tickets?:</Label>
                                         <Input
-
                                             type="number"
                                             className="form-control"
                                             value={guest.quantity}

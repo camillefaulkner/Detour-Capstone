@@ -1,9 +1,9 @@
-import { Outlet, Route, Routes } from "react-router-dom"
+import { Link, Outlet, Route, Routes } from "react-router-dom"
 import { DateList } from "../dates/DateList"
 import { ProfileView } from "../profile/Profile"
 import { MapContainer, Marker, Popup, TileLayer, useMap } from 'react-leaflet'
 import { useEffect, useState } from "react"
-import { getAllDates, fetchLatandLong } from "../ApiManager"
+import { getAllDates, fetchLatandLong, getCoffeeShops } from "../ApiManager"
 import "./Views.css"
 import { DateEdit } from "../dates/DateEdit"
 import { NewDateForm } from "../dates/NewDateForm"
@@ -17,6 +17,7 @@ import { ConvertDate } from "../dates/ConvertDate"
 export const ManagerViews = () => {
 	const [locations, setLocations] = useState({})
 	const [dataForViz, setDataForViz] = useState([])
+	const [coffeeList, setCoffeeList] = useState([])
 	const RetrieveDates = () => {
 		getAllDates()
 			.then((dateArray) => {
@@ -50,6 +51,13 @@ export const ManagerViews = () => {
 		[locations]
 	)
 
+	const foundCoffeeShops = (lat, long) => {
+		getCoffeeShops(lat, long)
+			.then((coffeebusinesses) => {
+				setCoffeeList(coffeebusinesses.businesses)
+			})
+	}
+
 	return (<Routes>
 		<Route path="/" element={
 			<>
@@ -68,6 +76,22 @@ export const ManagerViews = () => {
 									<Popup>
 										{ConvertDate(foundCity?.date)} <br />
 										{foundCity?.venue} <br /> {foundCity?.city}, {foundCity?.state}
+										<br /><br />
+										<button className="coffee" onClick={() => {
+											foundCoffeeShops(data?.referencePosition?.latitude, data?.referencePosition?.longitude)
+										}
+										}>coffee?</button>
+										{
+											coffeeList.length
+												? coffeeList.map(coffee => {
+													return <><br />{coffee.name} - {coffee.location.address1}</>
+												})
+												: <></>
+										}
+										<button onClick={() => {
+											setCoffeeList([])
+										}
+										}>no coffee.</button>
 									</Popup>
 								</Marker>
 							})

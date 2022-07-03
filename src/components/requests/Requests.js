@@ -141,6 +141,8 @@ export const Requests = () => {
                         })
                         return <div className="requestinline">
                             <div className="requestitem" key={`request--${request.id}`}>guest list request from {foundUser.name}:  {request.name} needs {request.quantity} tickets for {foundShow.venue} ({ConvertDate(foundShow.date)})
+                            </div>
+                            <div className="requestbuttons">
                                 <Button className="requestbutton" onClick={(clickEvent) => {
                                     request.statusId = 2
                                     handleUpdateGuestClick(clickEvent, request)

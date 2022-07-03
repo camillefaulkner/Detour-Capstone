@@ -50,16 +50,32 @@ export const DateDetails = () => {
         () => {
             if (scheduleItems.length) {
                 let foundMorningSchedule = scheduleItems?.filter((scheduleItem) => {
-                    return scheduleItem.timeDetail === "am"
+                    let timeArray = scheduleItem.time.split(":")
+                    if (timeArray[0] < 12) {
+                        return scheduleItem
+                    }
                 })
+
                 let foundAfternoonSchedule = scheduleItems?.filter((scheduleItem) => {
-                    return scheduleItem.timeDetail === "pm"
+                    let timeArray = scheduleItem.time.split(":")
+                    if (timeArray[0] >= 12) {
+                        return scheduleItem
+                    }
                 })
                 setMorning(foundMorningSchedule)
                 setAfternoon(foundAfternoonSchedule)
             }
         }, [scheduleItems]
     )
+
+    const findTime = (time) => {
+        let timeArray = time.split(":")
+        if (timeArray[0] < 12) {
+            return `${timeArray[0]}:${timeArray[1]} am`
+        } else if (timeArray[0] >= 12) {
+            return `${timeArray[0] - 12}:${timeArray[1]} pm`
+        }
+    }
 
     return <>
         {
@@ -91,14 +107,14 @@ export const DateDetails = () => {
                             ?
                             <>
                                 {
-                                    morning.sort((a, b) => { return a.time - b.time }).map(item => {
-                                        return <div key={`schedule--${item.id}`}> {item.time}{item.timeDetail} - {item.description}</div>
+                                    morning.sort((a, b) => { return a.time.localeCompare(b.time) }).map(item => {
+                                        return <div key={`schedule--${item.id}`}> {findTime(item.time)} - {item.description}</div>
                                     })
                                 }
                                 {
 
-                                    afternoon.sort((a, b) => { return a.time - b.time }).map(item => {
-                                        return <div key={`schedule--${item.id}`}> {item.time}{item.timeDetail} - {item.description}</div>
+                                    afternoon.sort((a, b) => { return a.time.localeCompare(b.time) }).map(item => {
+                                        return <div key={`schedule--${item.id}`}> {findTime(item.time)} - {item.description}</div>
                                     })
                                 }
                             </>
