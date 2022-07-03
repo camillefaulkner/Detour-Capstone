@@ -53,7 +53,6 @@ export const NewDateForm = ({ retrieveDates }) => {
                             <div className="form-group">
                                 <Label htmlFor="description">date:</Label>
                                 <Input
-                                    required autoFocus
                                     type="date"
                                     className="form-control"
                                     value={showDate.date}
@@ -72,7 +71,6 @@ export const NewDateForm = ({ retrieveDates }) => {
                             <div className="form-group">
                                 <Label htmlFor="description">venue:</Label>
                                 <Input
-                                    required autoFocus
                                     type="text"
                                     className="form-control"
                                     value={showDate.venue}
@@ -93,7 +91,6 @@ export const NewDateForm = ({ retrieveDates }) => {
                             <div className="form-group">
                                 <Label htmlFor="description">street address:</Label>
                                 <Input
-                                    required autoFocus
                                     type="text"
                                     className="form-control"
                                     value={showDate.streetAddress}
@@ -112,7 +109,6 @@ export const NewDateForm = ({ retrieveDates }) => {
                             <div className="form-group">
                                 <Label htmlFor="description">city:</Label>
                                 <Input
-                                    required autoFocus
                                     type="text"
                                     className="form-control"
                                     value={showDate.city}
@@ -131,7 +127,6 @@ export const NewDateForm = ({ retrieveDates }) => {
                             <div className="form-group">
                                 <Label htmlFor="description">state:</Label>
                                 <Input
-                                    required autoFocus
                                     type="text"
                                     className="form-control"
                                     value={showDate.state}
@@ -150,7 +145,6 @@ export const NewDateForm = ({ retrieveDates }) => {
                     <div className="form-group">
                         <label htmlFor="description">essential notes:</label>
                         <textarea
-                            required autoFocus
                             type="text"
                             className="form-control"
                             value={showDate.essentialNotes}
@@ -167,7 +161,6 @@ export const NewDateForm = ({ retrieveDates }) => {
                     <div className="form-group">
                         <label htmlFor="description">other:</label>
                         <textarea
-                            required autoFocus
                             type="text"
                             className="form-control"
                             value={showDate.other}

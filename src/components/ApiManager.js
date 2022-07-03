@@ -251,12 +251,15 @@ export const fetchCloudinary = (formData) => {
         .then(response => response.json())
 }
 
-// export const getAllFiles = () => {
-//     let API = `https://api.cloudinary.com/v1_1/${keys.cloudinary}/resources/image`
-//     return fetch(`${API}`, {
-//         headers: {
-//             Authorization: `Basic ${Buffer.from(keys.cloudinaryAPIkey + ':' + keys.cloudinaryAPIsecret).toString('base64')}`
-//         }
-//     })
-//         .then(response => response.json())
-// }
+export const getCoffeeShops = (lat, long) => {
+    let API = `https://cors-anywhere.herokuapp.com/https://api.yelp.com/v3/businesses/search?&categories=coffee&open_now=true&limit=7&latitude=${lat}&longitude=${long}`
+    let key = `${keys.yelp}`
+    return fetch(`${API}`, {
+        headers: {
+            Authorization: `Bearer ${key}`,
+            Origin: `localhost`,
+            withCredentials: true,
+        }
+    })
+        .then(response => response.json())
+}
