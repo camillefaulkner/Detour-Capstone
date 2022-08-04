@@ -17,15 +17,13 @@ export const Register = (props) => {
 
     const registerNewUser = () => {
         return saveNewUser(user)
-            .then(createdUser => {
-                if (createdUser.hasOwnProperty("id")) {
-                    localStorage.setItem("detour_user", JSON.stringify({
-                        id: createdUser.id,
-                        manager: createdUser.isManager
-                    }))
-
-                    navigate("/")
-                }
+        .then(data => {
+            if (data.valid) {
+                localStorage.setItem("dt_token", data.token)
+                localStorage.setItem("dt_manager", data.manager)
+                localStorage.setItem("dt_currentuser", data.current_user)
+                navigate("/")
+            }
             })
     }
 

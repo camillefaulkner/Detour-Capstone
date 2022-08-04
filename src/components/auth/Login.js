@@ -13,14 +13,11 @@ export const Login = () => {
         e.preventDefault()
 
         return getLogin(email)
-            .then(foundUsers => {
-                if (foundUsers.length === 1) {
-                    const user = foundUsers[0]
-                    localStorage.setItem("detour_user", JSON.stringify({
-                        id: user.id,
-                        manager: user.isManager
-                    }))
-
+            .then(data => {
+                if (data.valid) {
+                    localStorage.setItem("dt_token", data.token)
+                    localStorage.setItem("dt_manager", data.manager)
+                    localStorage.setItem("dt_currentuser", data.current_user)
                     navigate("/")
                 }
                 else {
