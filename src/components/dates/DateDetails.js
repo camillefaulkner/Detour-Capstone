@@ -19,8 +19,7 @@ export const DateDetails = () => {
         () => {
             getDateDetailsArtist(showDateId)
                 .then((data) => {
-                    const singleShowDate = data[0]
-                    updateShowDate(singleShowDate)
+                    updateShowDate(data)
                 })
             getScheduleItems(showDateId)
                 .then((scheduleArray) => {
@@ -48,15 +47,15 @@ export const DateDetails = () => {
 
     useEffect(
         () => {
-            if (scheduleItems.length) {
-                let foundMorningSchedule = scheduleItems?.filter((scheduleItem) => {
+            if (showDate.schedule_items?.length) {
+                let foundMorningSchedule = showDate.schedule_items?.filter((scheduleItem) => {
                     let timeArray = scheduleItem.time.split(":")
                     if (timeArray[0] < 12) {
                         return scheduleItem
                     }
                 })
 
-                let foundAfternoonSchedule = scheduleItems?.filter((scheduleItem) => {
+                let foundAfternoonSchedule = showDate.schedule_items?.filter((scheduleItem) => {
                     let timeArray = scheduleItem.time.split(":")
                     if (timeArray[0] >= 12) {
                         return scheduleItem
@@ -139,13 +138,11 @@ export const DateDetails = () => {
                     }>additional information:</button>
                     <div className="datedetailcontent">
                         {showDate?.other} <br />
-                        {
-                            requests.map(request => {
-                                let foundUser = users.find((user) => {
-                                    return user.id === request.userId
-                                })
-                                return <>{foundUser?.name} requests {request.request}<br /></>
+                        { showDate.gr_requests
+                            ? showDate.gr_requests.map(request => {
+                                return <>{request.user?.user?.first_name} requests {request.request}<br /></>
                             })
+                            :<></>
                         }
                     </div>
                 </div>
@@ -162,9 +159,9 @@ export const DateDetails = () => {
                     }
                     }>guest list:</button>
                     <div className="datedetailcontent">
-                        {guests.length
-                            ? guests.map(guest => {
-                                return <div key={`guest--${guest.id}`}> {guest.name} - {guest.quantity} tickets</div>
+                        {showDate.guest_requests
+                            ? showDate.guest_requests.map(guest => {
+                                return <div> {guest.name} - {guest.quantity} tickets</div>
                             })
                             : <></>
                         }

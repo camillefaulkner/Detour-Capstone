@@ -6,11 +6,11 @@ import { getAllDates, getAllRequests, getUserGuestRequests, getUserRequests, sav
 import { ConvertDate } from "../dates/ConvertDate"
 
 export const SubmitRequest = () => {
-    const localUser = localStorage.getItem("detour_user")
-    const userObject = JSON.parse(localUser)
+    const localUser = localStorage.getItem("dt_currentuser")
+
 
     const [request, update] = useState({
-        userId: userObject.id,
+        userId: localUser,
         type: "",
         request: "",
         showDateId: 1,
@@ -21,7 +21,7 @@ export const SubmitRequest = () => {
         name: "",
         quantity: 0,
         showDateId: 1,
-        userId: userObject.id,
+        userId: localUser,
         statusId: 1
     })
 
@@ -38,11 +38,11 @@ export const SubmitRequest = () => {
                 .then((dateArray) => {
                     setShowDates(dateArray)
                 })
-            getUserRequests(userObject.id)
+            getUserRequests(localUser)
                 .then((requestArray) => {
                     setUserRequests(requestArray)
                 })
-            getUserGuestRequests(userObject.id)
+            getUserGuestRequests(localUser)
                 .then((guestArray) => {
                     setAllGuestRequests(guestArray)
                 })
@@ -55,7 +55,7 @@ export const SubmitRequest = () => {
         event.preventDefault()
 
         const requestToSendToAPI = {
-            userId: userObject.id,
+            userId: localUser,
             type: request.type,
             request: request.request,
             showDateId: request.showDateId,
@@ -64,7 +64,7 @@ export const SubmitRequest = () => {
 
         return saveRequest(requestToSendToAPI)
             .then(() => {
-                getUserRequests(userObject.id)
+                getUserRequests(localUser)
                     .then((requestArray) => {
                         setUserRequests(requestArray)
                     })
@@ -85,23 +85,11 @@ export const SubmitRequest = () => {
 
         return saveNewGuest(newGuestToSendToAPI)
             .then(() => {
-                getUserGuestRequests(userObject.id)
+                getUserGuestRequests(localUser)
                     .then((requestArray) => {
                         setAllGuestRequests(requestArray)
                     })
             })
-    }
-
-
-    let foundStatus = (statusId) => {
-        if (statusId === 1) {
-            return <>pending</>
-        } else if (statusId === 3) {
-            return <>denied</>
-        }
-        else if (statusId === 2) {
-            return <>confirmed</>
-        }
     }
 
 
@@ -285,7 +273,8 @@ export const SubmitRequest = () => {
                             let foundShow = showDates.find((show) => {
                                 return show.id === request.showDateId
                             })
-                            return <>{request.request} for {foundShow.venue} on {ConvertDate(foundShow.date)} - {foundStatus(request.statusId)}<br />
+                            return <>
+                            {request.request} for {request.show_date.venue} on {ConvertDate(request.show_date.date)} - {request.status.status}<br />
                             </>
                         })
                         : <></>
@@ -293,11 +282,8 @@ export const SubmitRequest = () => {
                     {
                         allGuestRequests
                             ? allGuestRequests.map(request => {
-                                let foundShow = showDates.find((show) => {
-                                    return show.id === request.showDateId
-                                })
                                 return <>
-                                    {request.name} - {request.quantity} tickets for {foundShow.venue} on {ConvertDate(foundShow.date)} - {foundStatus(request.statusId)}<br />
+                                    {request.name} - {request.quantity} tickets for {request.show_date.venue} on {ConvertDate(request.show_date.date)} - {request.status.status}<br />
                                 </>
                             })
                             : <></>

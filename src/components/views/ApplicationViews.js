@@ -4,10 +4,9 @@ import { ManagerViews } from "./ManagerViews"
 
 export const ApplicationViews = () => {
 
-    const localUser = localStorage.getItem("detour_user")
-    const userObject = JSON.parse(localUser)
+    const localUser = localStorage.getItem("dt_manager")
 
-    if (userObject.manager) {
+    if (localUser === "true") {
         return <ManagerViews />
     } else {
         return <ArtistViews />

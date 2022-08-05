@@ -9,8 +9,7 @@ export const DateList = ({ retrieveDates }) => {
     const [showDates, setShowDates] = useState([])
     const [offdays, setOffDays] = useState([])
     const navigate = useNavigate()
-    const localUser = localStorage.getItem("detour_user")
-    const userObject = JSON.parse(localUser)
+    const localUser = localStorage.getItem("dt_manager")
 
 
     useEffect(
@@ -77,7 +76,7 @@ export const DateList = ({ retrieveDates }) => {
 
 
             {
-                userObject.manager
+                localUser === "true"
                     ? <Button className="addshowbutton" onClick={() => navigate("/dates/create")}>add date</Button>
 
                     : <></>

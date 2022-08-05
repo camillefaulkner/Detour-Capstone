@@ -7,12 +7,17 @@ import "./Login.css"
 
 export const Login = () => {
     const [email, set] = useState("")
+    const [pass, setPass ]= useState("")
     const navigate = useNavigate()
 
     const handleLogin = (e) => {
         e.preventDefault()
+        const user = {
+            username: email,
+            password: pass
+        }
 
-        return getLogin(email)
+        return getLogin(user)
             .then(data => {
                 if (data.valid) {
                     localStorage.setItem("dt_token", data.token)
@@ -39,11 +44,22 @@ export const Login = () => {
                     <fieldset>
                         <Col md={4}>
                             <label htmlFor="inputEmail"> email address </label>
-                            <input type="email"
+                            <input type="text"
                                 value={email}
                                 onChange={evt => set(evt.target.value)}
                                 className="form-control"
                                 required autoFocus />
+                        </Col>
+                    </fieldset>
+
+                    <fieldset>
+                        <Col md={4}>
+                            <label htmlFor="inputEmail"> password </label>
+                            <input type="password"
+                                value={pass}
+                                onChange={evt => setPass(evt.target.value)}
+                                className="form-control"
+                                required />
                         </Col>
                     </fieldset>
                     <fieldset>

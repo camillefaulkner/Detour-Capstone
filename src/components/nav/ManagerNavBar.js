@@ -47,8 +47,8 @@ export const ManagerNav = () => {
             </NavItem>
             <NavItem className="navitemlast">
                 <NavLink className="navbar__link" href="" onClick={() => {
-                    localStorage.removeItem("detour_user")
-                    navigate("/", { replace: true })
+                    localStorage.removeItem("dt_token")
+                    navigate("/login", { replace: true })
                 }}>logout</NavLink>
             </NavItem>
         </Nav>

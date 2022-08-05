@@ -6,8 +6,7 @@ import { getAllDates } from "../ApiManager"
 export const ShowDate = ({ id, date, venue, city, state, setter, retrieveDates }) => {
     const [showDates, setShowDates] = useState({})
 
-    const localUser = localStorage.getItem("detour_user")
-    const userObject = JSON.parse(localUser)
+    const localUser = localStorage.getItem("dt_manager")
 
     useEffect(
         () => {
@@ -68,7 +67,7 @@ export const ShowDate = ({ id, date, venue, city, state, setter, retrieveDates }
         }
     }
 
-    if (userObject.manager) {
+    if (localUser === "true") {
         return <>
             <div className="datecontainer">
                 {
@@ -82,8 +81,11 @@ export const ShowDate = ({ id, date, venue, city, state, setter, retrieveDates }
                             <div className="dayButton">
                                 <Button close className="deleteButton" onClick={(evt) => {
                                     evt.preventDefault()
-                                    fetch(`http://localhost:8088/showDates/${id}`, {
-                                        method: "DELETE"
+                                    fetch(`http://localhost:8000/showDates/${id}`, {
+                                        method: "DELETE",
+                                        headers: {
+                                            "Authorization": `Token ${localStorage.getItem("dt_token")}`,
+                                        }
                                     })
                                         .then(() => {
                                             retrieveDates()

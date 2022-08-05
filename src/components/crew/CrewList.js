@@ -1,15 +1,11 @@
 import { Accordion, AccordionDetails, AccordionSummary, Typography } from "@mui/material"
 import { useState, useEffect } from "react"
 import { useNavigate } from "react-router-dom"
-// import { Accordion, AccordionBody, AccordionHeader, AccordionItem, Row } from "reactstrap"
 import { getAllUsers } from "../ApiManager"
 import "./Crew.css"
 
 export const CrewList = () => {
     const [users, setUsers] = useState([])
-    const navigate = useNavigate()
-    const localUser = localStorage.getItem("detour_user")
-    const userObject = JSON.parse(localUser)
 
     useEffect(
         () => {
@@ -41,12 +37,12 @@ export const CrewList = () => {
                             }
                             }>
 
-                                {user.name}</button>
+                                {user.full_name}</button>
                             <div className="content">
-                                phone number: {user.phoneNumber} <br />
-                                email: {user.emailAddress} <br />
+                                phone number: {user.phone_number} <br />
+                                email: {user.user.email} <br />
                                 allergies: {user.allergies} <br />
-                                green room requests: {user.greenRoomRequests}
+                                green room requests: {user.greenroom_requests}
                             </div>
                         </div>
                     </>

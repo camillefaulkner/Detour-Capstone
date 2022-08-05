@@ -14,7 +14,7 @@ export const DateEdit = ({ retrieveDates }) => {
     const [requests, setRequests] = useState({})
     const [users, setUsers] = useState({})
 
-    const localUser = localStorage.getItem("detour_user")
+    const localUser = localStorage.getItem("dt_currentuser")
     const userObject = JSON.parse(localUser)
 
     const [showDate, assignShowDate] = useState({
@@ -32,7 +32,7 @@ export const DateEdit = ({ retrieveDates }) => {
         name: "",
         quantity: 0,
         showDateId: parseInt(showDateId),
-        userId: userObject.id,
+        userId: userObject,
         statusId: 2
     })
 

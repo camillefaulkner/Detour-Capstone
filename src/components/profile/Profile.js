@@ -5,25 +5,24 @@ import "./Profile.css"
 
 export const ProfileView = () => {
 
-    const localUser = localStorage.getItem("detour_user")
-    const userObject = JSON.parse(localUser)
+    const localUser = localStorage.getItem("dt_manager")
+    const localUserId = localStorage.getItem("dt_currentuser")
 
     const [profile, updateProfile] = useState({
-        name: "",
-        phoneNumber: "",
-        emailAddress: "",
+        first_name: "",
+        phone_number: "",
+        email: "",
         allergies: "",
-        greenRoomRequests: "",
-        isManager: userObject.isManager
+        greenroom_requests: "",
+        is_staff: localUser
     })
     const [feedback, setFeedback] = useState("")
 
 
     useEffect(() => {
-        getCustomerProfile(userObject)
+        getCustomerProfile(localUserId)
             .then((data) => {
-                const memberObject = data[0]
-                updateProfile(memberObject)
+                updateProfile(data)
             })
     }, [])
 
@@ -44,6 +43,18 @@ export const ProfileView = () => {
 
     }
 
+    const changeProfileState = (domEvent) => {
+        const copy = { ...profile }
+        copy[domEvent.target.name] = domEvent.target.value
+        updateProfile(copy)
+    }
+
+    const changeUserState = (domEvent) => {
+        const copy = { ...profile }
+        copy.user[domEvent.target.name] = domEvent.target.value
+        updateProfile(copy)
+    }
+
     return (
         <>
             <div className={`${feedback.includes("Error") ? "error" : "feedback"} ${feedback === "" ? "invisible" : "visible"}`}>
@@ -58,13 +69,12 @@ export const ProfileView = () => {
                             <Input
                                 required autoFocus
                                 type="text"
+                                name="first_name"
                                 className="form-control"
-                                value={profile.name}
+                                value={profile.user?.first_name}
                                 onChange={
                                     (evt) => {
-                                        const copy = { ...profile }
-                                        copy.name = evt.target.value
-                                        updateProfile(copy)
+                                        changeUserState(evt)
                                     }
                                 } />
                         </div>
@@ -77,12 +87,11 @@ export const ProfileView = () => {
                                 <Label htmlFor="name">phone number:</Label>
                                 <Input type="text"
                                     className="form-control"
-                                    value={profile.phoneNumber}
+                                    name="phone_number"
+                                    value={profile.phone_number}
                                     onChange={
                                         (evt) => {
-                                            const copy = { ...profile }
-                                            copy.phoneNumber = evt.target.value
-                                            updateProfile(copy)
+                                            changeProfileState(evt)
                                         }
                                     } />
                             </div>
@@ -94,12 +103,11 @@ export const ProfileView = () => {
                                 <Label htmlFor="name">email address:</Label>
                                 <Input type="text"
                                     className="form-control"
-                                    value={profile.emailAddress}
+                                    name="email"
+                                    value={profile.user?.email}
                                     onChange={
                                         (evt) => {
-                                            const copy = { ...profile }
-                                            copy.emailAddress = evt.target.value
-                                            updateProfile(copy)
+                                            changeUserState(evt)
                                         }
                                     } />
                             </div>
@@ -113,12 +121,11 @@ export const ProfileView = () => {
                                 <Label htmlFor="name">allergies:</Label>
                                 <textarea type="text"
                                     className="form-control"
+                                    name="allergies"
                                     value={profile.allergies}
                                     onChange={
                                         (evt) => {
-                                            const copy = { ...profile }
-                                            copy.allergies = evt.target.value
-                                            updateProfile(copy)
+                                            changeProfileState(evt)
                                         }
                                     }></textarea>
                             </div>
@@ -130,12 +137,11 @@ export const ProfileView = () => {
                                 <Label htmlFor="name">green room requests:</Label>
                                 <textarea type="text"
                                     className="form-control"
-                                    value={profile.greenRoomRequests}
+                                    name="greenroom_requests"
+                                    value={profile.greenroom_requests}
                                     onChange={
                                         (evt) => {
-                                            const copy = { ...profile }
-                                            copy.greenRoomRequests = evt.target.value
-                                            updateProfile(copy)
+                                            changeProfileState(evt)
                                         }
                                     }></textarea>
                             </div>

@@ -1,16 +1,31 @@
 import { keys } from "./ApiKey"
 import { Buffer } from 'buffer'
 
-export const getLogin = (email) => {
-    return fetch(`http://localhost:8000/`,{
+
+export const getLogin = (user) => {
+    return fetch("http://localhost:8000/login", {
         method: "POST",
         headers: {
-            "Authorization": `Token ${localStorage.getItem("dt_token")}`
-        }
+            "Content-Type": "application/json",
+            "Accept": "application/json"
+        },
+        body: JSON.stringify(user)
     })
-    
         .then(res => res.json())
 }
+
+export const getHandleRegister = (user) => {
+    return fetch("http://localhost:8000/register", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+            "Accept": "application/json"
+        },
+        body: JSON.stringify(user)
+    })
+        .then(res => res.json())
+}
+
 
 export const saveNewUser = (user) => {
     return fetch("http://localhost:8000/users", {
@@ -24,17 +39,9 @@ export const saveNewUser = (user) => {
         .then(res => res.json())
 }
 
-export const getHandleRegister = (user) => {
-    return fetch(`http://localhost:8000/users?emailAddress=${user.email}`, {
-        headers: {
-            "Authorization": `Token ${localStorage.getItem("dt_token")}`
-        }
-    })
-        .then(res => res.json())
-}
 
 export const getCustomerProfile = (userObject) => {
-    return fetch(`http://localhost:8000/users?id=${userObject.id}`, {
+    return fetch(`http://localhost:8000/users/${userObject}`, {
         headers: {
             "Authorization": `Token ${localStorage.getItem("dt_token")}`
         }
@@ -51,7 +58,6 @@ export const updateCustomerProfile = (profile) => {
         },
         body: JSON.stringify(profile)
     })
-        .then(response => response.json())
 }
 
 export const getAllDates = () => {
@@ -82,7 +88,7 @@ export const getUser = (id) => {
 }
 
 export const getDateDetailsArtist = (showId) => {
-    return fetch(`http://localhost:8000/showDates?id=${showId}`, {
+    return fetch(`http://localhost:8000/showDates/${showId}`, {
         headers: {
             "Authorization": `Token ${localStorage.getItem("dt_token")}`
         }
@@ -117,7 +123,6 @@ export const updateShowDate = (showDate) => {
         },
         body: JSON.stringify(showDate)
     })
-        .then(response => response.json())
 }
 
 export const saveNewDate = (showDateToSendToAPI) => {
@@ -247,8 +252,8 @@ export const updateGreenRoomRequest = (greenRoomObj) => {
         },
         body: JSON.stringify(greenRoomObj)
     })
-        .then(response => response.json())
 }
+
 
 export const updateAPIGuestRequest = (guestObj) => {
     return fetch(`http://localhost:8000/guestRequests/${guestObj.id}`, {
@@ -259,7 +264,6 @@ export const updateAPIGuestRequest = (guestObj) => {
         },
         body: JSON.stringify(guestObj)
     })
-        .then(response => response.json())
 }
 
 export const updateDoc = (docObj) => {
@@ -271,7 +275,6 @@ export const updateDoc = (docObj) => {
         },
         body: JSON.stringify(docObj)
     })
-        .then(response => response.json())
 }
 
 export const getScheduleItems = (id) => {
