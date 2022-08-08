@@ -158,14 +158,14 @@ export const getGuestRequests = (id) => {
         .then(response => response.json())
 }
 
-export const getAssignedDocs = (id) => {
-    return fetch(`http://localhost:8000/assignDocToShow?showDateId=${id}&_expand=doc`, {
-        headers: {
-            "Authorization": `Token ${localStorage.getItem("dt_token")}`
-        }
-    })
-        .then(response => response.json())
-}
+// export const getAssignedDocs = (id) => {
+//     return fetch(`http://localhost:8000/assignDocToShow?showDateId=${id}&_expand=doc`, {
+//         headers: {
+//             "Authorization": `Token ${localStorage.getItem("dt_token")}`
+//         }
+//     })
+//         .then(response => response.json())
+// }
 
 export const getApprovedGuestRequests = (id) => {
     return fetch(`http://localhost:8000/guestRequests?showDateId=${id}&statusId=2`, {
@@ -360,3 +360,13 @@ export const getCoffeeShops = (lat, long) => {
     })
         .then(response => response.json())
 }
+
+export const coffeeAPI = (lat, long) => {
+    return fetch(`http://localhost:8000/datacollection/yelp_api?lat=${lat}&long=${long}`, {
+        headers: {
+            "Authorization": `Token ${localStorage.getItem("dt_token")}`
+        }
+    })
+        .then(response => response.json())
+}
+

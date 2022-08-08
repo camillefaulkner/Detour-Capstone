@@ -7,15 +7,15 @@ import { ConvertDate } from "../dates/ConvertDate"
 import './Guest.css'
 
 export const SubmitGuest = () => {
-    const localUser = localStorage.getItem("detour_user")
-    const userObject = JSON.parse(localUser)
+    const localUser = localStorage.getItem("dt_currentuser")
+
     const [showDates, setShowDates] = useState([])
 
     const [guest, update] = useState({
         name: "",
         quantity: 0,
         showDateId: 1,
-        userId: userObject.id,
+        userId: localUser,
         statusId: 2
     })
 

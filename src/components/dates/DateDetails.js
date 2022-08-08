@@ -7,13 +7,13 @@ import "./DateList.css"
 export const DateDetails = () => {
     const { showDateId } = useParams()
     const [showDate, updateShowDate] = useState([])
-    const [guests, setGuests] = useState([])
-    const [scheduleItems, setScheduleItems] = useState([])
+    // const [guests, setGuests] = useState([])
+    // const [scheduleItems, setScheduleItems] = useState([])
     const [morning, setMorning] = useState([])
     const [afternoon, setAfternoon] = useState([])
-    const [requests, setRequests] = useState([])
-    const [users, setUsers] = useState([])
-    const [docs, setDocs] = useState([])
+    // const [requests, setRequests] = useState([])
+    // const [users, setUsers] = useState([])
+    // const [docs, setDocs] = useState([])
 
     useEffect(
         () => {
@@ -21,26 +21,26 @@ export const DateDetails = () => {
                 .then((data) => {
                     updateShowDate(data)
                 })
-            getScheduleItems(showDateId)
-                .then((scheduleArray) => {
-                    setScheduleItems(scheduleArray)
-                })
-            getApprovedGuestRequests(showDateId)
-                .then((guestArray) => {
-                    setGuests(guestArray)
-                })
-            getApprovedRequests(showDateId)
-                .then((requestArray) => {
-                    setRequests(requestArray)
-                })
-            getAllUsers()
-                .then((userArray) => {
-                    setUsers(userArray)
-                })
-            getAssignedDocs(showDateId)
-                .then((docArray) => {
-                    setDocs(docArray)
-                })
+            // getScheduleItems(showDateId)
+            //     .then((scheduleArray) => {
+            //         setScheduleItems(scheduleArray)
+            //     })
+            // getApprovedGuestRequests(showDateId)
+            //     .then((guestArray) => {
+            //         setGuests(guestArray)
+            //     })
+            // getApprovedRequests(showDateId)
+            //     .then((requestArray) => {
+            //         setRequests(requestArray)
+            //     })
+            // getAllUsers()
+            //     .then((userArray) => {
+            //         setUsers(userArray)
+            //     })
+            // getAssignedDocs(showDateId)
+            //     .then((docArray) => {
+            //         setDocs(docArray)
+            //     })
         },
         [showDateId]
     )
@@ -64,7 +64,7 @@ export const DateDetails = () => {
                 setMorning(foundMorningSchedule)
                 setAfternoon(foundAfternoonSchedule)
             }
-        }, [scheduleItems]
+        }, [showDate.schedule_items]
     )
 
     const findTime = (time) => {
@@ -169,9 +169,9 @@ export const DateDetails = () => {
                 </div>
                 <div>
                     <h4 className="datedetaildoc">docs:</h4>
-                    {docs.length
-                        ? docs.map(doc => {
-                            return <img className="image" src={doc.doc.publicURL} />
+                    {showDate.docs?.length
+                        ? showDate.docs.map(doc => {
+                            return <img className="image" src={doc.publicURL} />
                         })
                         : <></>
                     }

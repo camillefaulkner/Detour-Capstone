@@ -4,7 +4,7 @@ import { DateList } from "../dates/DateList"
 import { ProfileView } from "../profile/Profile"
 import { MapContainer, Marker, Popup, TileLayer, useMap } from 'react-leaflet'
 import { useEffect, useState } from "react"
-import { getAllDates, fetchLatandLong, getCoffeeShops } from "../ApiManager"
+import { getAllDates, fetchLatandLong, coffeeAPI } from "../ApiManager"
 import "./Views.css"
 import { SubmitRequest } from "../requests/RequestForm"
 import { ConvertDate } from "../dates/ConvertDate"
@@ -48,7 +48,7 @@ export const ArtistViews = () => {
 	)
 
 	const foundCoffeeShops = (lat, long) => {
-		getCoffeeShops(lat, long)
+		coffeeAPI(lat, long)
 			.then((coffeebusinesses) => {
 				setCoffeeList(coffeebusinesses.businesses)
 			})

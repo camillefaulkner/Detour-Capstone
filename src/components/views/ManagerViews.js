@@ -3,7 +3,7 @@ import { DateList } from "../dates/DateList"
 import { ProfileView } from "../profile/Profile"
 import { MapContainer, Marker, Popup, TileLayer, useMap } from 'react-leaflet'
 import { useEffect, useState } from "react"
-import { getAllDates, fetchLatandLong, getCoffeeShops } from "../ApiManager"
+import { getAllDates, fetchLatandLong, getCoffeeShops, coffeeAPI } from "../ApiManager"
 import "./Views.css"
 import { DateEdit } from "../dates/DateEdit"
 import { NewDateForm } from "../dates/NewDateForm"
@@ -52,7 +52,7 @@ export const ManagerViews = () => {
 	)
 
 	const foundCoffeeShops = (lat, long) => {
-		getCoffeeShops(lat, long)
+		coffeeAPI(lat, long)
 			.then((coffeebusinesses) => {
 				setCoffeeList(coffeebusinesses.businesses)
 			})
