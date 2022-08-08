@@ -195,7 +195,7 @@ export const DateEdit = ({ retrieveDates }) => {
                                 <Input
                                     type="text"
                                     className="form-control"
-                                    value={showDate.streetAddress}
+                                    value={showDate.street_address}
                                     onChange={
                                         (evt) => {
                                             const copy = { ...showDate }
@@ -252,7 +252,7 @@ export const DateEdit = ({ retrieveDates }) => {
                                 height: "7rem"
                             }}
                             className="form-control"
-                            value={showDate.essentialNotes}
+                            value={showDate.essential_notes}
                             onChange={
                                 (evt) => {
                                     const copy = { ...showDate }

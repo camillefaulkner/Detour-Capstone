@@ -43,7 +43,7 @@ export const Login = () => {
                     <h3 className="title">please sign in</h3>
                     <fieldset>
                         <Col md={4}>
-                            <label htmlFor="inputEmail"> email address </label>
+                            <label htmlFor="inputEmail"> username </label>
                             <input type="text"
                                 value={email}
                                 onChange={evt => set(evt.target.value)}

@@ -4,19 +4,8 @@ import { Button } from "reactstrap"
 import { getAllDates } from "../ApiManager"
 
 export const ShowDate = ({ id, date, venue, city, state, setter, retrieveDates }) => {
-    const [showDates, setShowDates] = useState({})
 
     const localUser = localStorage.getItem("dt_manager")
-
-    useEffect(
-        () => {
-            getAllDates()
-                .then((dateArray) => {
-                    setShowDates(dateArray)
-                })
-        },
-        []
-    )
     
     let dateArray = date.split("-")
     let dateDisplay = new Date(dateArray[0], dateArray[1] - 1, dateArray[2])
@@ -88,7 +77,7 @@ export const ShowDate = ({ id, date, venue, city, state, setter, retrieveDates }
                                         }
                                     })
                                         .then(() => {
-                                            retrieveDates()
+                                            // retrieveDates()
                                             getAllDates()
                                                 .then((dateArray) => {
                                                     setter(dateArray)

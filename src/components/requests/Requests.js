@@ -11,9 +11,6 @@ export const Requests = () => {
     const [showDates, setShowDates] = useState([])
     const [guestRequests, setGuestRequests] = useState([])
 
-    // const localUser = localStorage.getItem("detour_user")
-    // const userObject = JSON.parse(localUser)
-
     useEffect(
         () => {
             getAllRequests()
@@ -34,7 +31,6 @@ export const Requests = () => {
                 })
         }, []
     )
-
 
 
     const handleUpdateGreenRoomClick = (event, request) => {

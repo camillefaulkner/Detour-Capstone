@@ -17,7 +17,7 @@ export const DateList = ({ retrieveDates }) => {
             getAllDates()
                 .then((dateArray) => {
                     setShowDates(dateArray)
-                    retrieveDates()
+                    // retrieveDates()
                 })
         }, []
     )

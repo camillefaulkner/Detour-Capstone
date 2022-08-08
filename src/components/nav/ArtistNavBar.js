@@ -12,7 +12,7 @@ export const ArtistNav = () => {
             <Nav className='tabs'>
                 <img className="logo" src={logo} />
                 <NavItem className="navitem">
-                    <NavLink className="nav-link" href="/" style={{ textDecoration: 'none' }}>
+                    <NavLink className="nav-link" href="/map" style={{ textDecoration: 'none' }}>
                         map
                     </NavLink>
                 </NavItem>

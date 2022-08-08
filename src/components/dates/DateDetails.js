@@ -1,19 +1,15 @@
 import { useState, useEffect } from "react"
 import { useParams } from "react-router-dom"
-import { getAllUsers, getApprovedGuestRequests, getApprovedRequests, getAssignedDocs, getDateDetails, getDateDetailsArtist, getDocsForShow, getGuestRequests, getRequests, getScheduleItems } from "../ApiManager"
+import { getDateDetailsArtist } from "../ApiManager"
 import { ConvertDate } from "./ConvertDate"
 import "./DateList.css"
 
 export const DateDetails = () => {
     const { showDateId } = useParams()
     const [showDate, updateShowDate] = useState([])
-    // const [guests, setGuests] = useState([])
-    // const [scheduleItems, setScheduleItems] = useState([])
     const [morning, setMorning] = useState([])
     const [afternoon, setAfternoon] = useState([])
-    // const [requests, setRequests] = useState([])
-    // const [users, setUsers] = useState([])
-    // const [docs, setDocs] = useState([])
+
 
     useEffect(
         () => {
@@ -21,26 +17,6 @@ export const DateDetails = () => {
                 .then((data) => {
                     updateShowDate(data)
                 })
-            // getScheduleItems(showDateId)
-            //     .then((scheduleArray) => {
-            //         setScheduleItems(scheduleArray)
-            //     })
-            // getApprovedGuestRequests(showDateId)
-            //     .then((guestArray) => {
-            //         setGuests(guestArray)
-            //     })
-            // getApprovedRequests(showDateId)
-            //     .then((requestArray) => {
-            //         setRequests(requestArray)
-            //     })
-            // getAllUsers()
-            //     .then((userArray) => {
-            //         setUsers(userArray)
-            //     })
-            // getAssignedDocs(showDateId)
-            //     .then((docArray) => {
-            //         setDocs(docArray)
-            //     })
         },
         [showDateId]
     )
@@ -90,12 +66,12 @@ export const DateDetails = () => {
             <section className="leftSide">
 
                 <div className="showAddress">{showDate?.venue}<br></br>
-                    {showDate?.streetAddress}<br></br>
+                    {showDate?.street_address}<br></br>
                     {showDate?.city} {showDate?.state}</div>
 
                 <div className="essentials">
                     <h4>essential notes:</h4>
-                    {showDate?.essentialNotes}
+                    {showDate?.essential_notes}
                 </div>
 
 

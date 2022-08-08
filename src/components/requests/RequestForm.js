@@ -270,9 +270,6 @@ export const SubmitRequest = () => {
                     <h2>all requests:</h2>
                     {userRequests
                         ? userRequests.map(request => {
-                            let foundShow = showDates.find((show) => {
-                                return show.id === request.showDateId
-                            })
                             return <>
                             {request.request} for {request.show_date.venue} on {ConvertDate(request.show_date.date)} - {request.status.status}<br />
                             </>
