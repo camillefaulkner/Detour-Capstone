@@ -11,7 +11,7 @@ export const ManagerNav = () => {
         <Nav className='tabs'>
             <img className="logo" src={logo}/>
             <NavItem className="navitem">
-                <NavLink className="navbar__link" href="/" style={{ textDecoration: 'none' }}>
+                <NavLink className="navbar__link" href="/map" style={{ textDecoration: 'none' }}>
                     map
                 </NavLink>
             </NavItem>
@@ -47,8 +47,8 @@ export const ManagerNav = () => {
             </NavItem>
             <NavItem className="navitemlast">
                 <NavLink className="navbar__link" href="" onClick={() => {
-                    localStorage.removeItem("detour_user")
-                    navigate("/", { replace: true })
+                    localStorage.removeItem("dt_token")
+                    navigate("/login", { replace: true })
                 }}>logout</NavLink>
             </NavItem>
         </Nav>

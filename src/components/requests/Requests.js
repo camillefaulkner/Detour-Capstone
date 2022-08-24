@@ -11,9 +11,6 @@ export const Requests = () => {
     const [showDates, setShowDates] = useState([])
     const [guestRequests, setGuestRequests] = useState([])
 
-    const localUser = localStorage.getItem("detour_user")
-    const userObject = JSON.parse(localUser)
-
     useEffect(
         () => {
             getAllRequests()
@@ -34,7 +31,6 @@ export const Requests = () => {
                 })
         }, []
     )
-
 
 
     const handleUpdateGreenRoomClick = (event, request) => {
@@ -140,15 +136,15 @@ export const Requests = () => {
                             return show.id === request.showDateId
                         })
                         return <div className="requestinline">
-                            <div className="requestitem" key={`request--${request.id}`}>guest list request from {foundUser.name}:  {request.name} needs {request.quantity} tickets for {foundShow.venue} ({ConvertDate(foundShow.date)})
+                            <div className="requestitem" key={`request--${request.id}`}>guest list request from {request.user.full_name}:  {request.name} needs {request.quantity} tickets for {request.show_date.venue} ({ConvertDate(request.show_date.date)})
                             </div>
                             <div className="requestbuttons">
                                 <Button className="requestbutton" onClick={(clickEvent) => {
-                                    request.statusId = 2
+                                    request.status.id = 2
                                     handleUpdateGuestClick(clickEvent, request)
                                 }}>accept</Button>
                                 <CloseButton variant="white" onClick={(clickEvent) => {
-                                    request.statusId = 3
+                                    request.status.id = 3
                                     handleUpdateGuestClick(clickEvent, request)
                                 }}></CloseButton>
                             </div>

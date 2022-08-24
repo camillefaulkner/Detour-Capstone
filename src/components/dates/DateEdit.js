@@ -14,7 +14,7 @@ export const DateEdit = ({ retrieveDates }) => {
     const [requests, setRequests] = useState({})
     const [users, setUsers] = useState({})
 
-    const localUser = localStorage.getItem("detour_user")
+    const localUser = localStorage.getItem("dt_currentuser")
     const userObject = JSON.parse(localUser)
 
     const [showDate, assignShowDate] = useState({
@@ -32,7 +32,7 @@ export const DateEdit = ({ retrieveDates }) => {
         name: "",
         quantity: 0,
         showDateId: parseInt(showDateId),
-        userId: userObject.id,
+        userId: userObject,
         statusId: 2
     })
 
@@ -195,7 +195,7 @@ export const DateEdit = ({ retrieveDates }) => {
                                 <Input
                                     type="text"
                                     className="form-control"
-                                    value={showDate.streetAddress}
+                                    value={showDate.street_address}
                                     onChange={
                                         (evt) => {
                                             const copy = { ...showDate }
@@ -252,7 +252,7 @@ export const DateEdit = ({ retrieveDates }) => {
                                 height: "7rem"
                             }}
                             className="form-control"
-                            value={showDate.essentialNotes}
+                            value={showDate.essential_notes}
                             onChange={
                                 (evt) => {
                                     const copy = { ...showDate }

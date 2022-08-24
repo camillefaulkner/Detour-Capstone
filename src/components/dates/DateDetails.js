@@ -1,46 +1,21 @@
 import { useState, useEffect } from "react"
 import { useParams } from "react-router-dom"
-import { getAllUsers, getApprovedGuestRequests, getApprovedRequests, getAssignedDocs, getDateDetails, getDateDetailsArtist, getDocsForShow, getGuestRequests, getRequests, getScheduleItems } from "../ApiManager"
+import { getDateDetailsArtist } from "../ApiManager"
 import { ConvertDate } from "./ConvertDate"
 import "./DateList.css"
 
 export const DateDetails = () => {
     const { showDateId } = useParams()
     const [showDate, updateShowDate] = useState([])
-    const [guests, setGuests] = useState([])
-    const [scheduleItems, setScheduleItems] = useState([])
     const [morning, setMorning] = useState([])
     const [afternoon, setAfternoon] = useState([])
-    const [requests, setRequests] = useState([])
-    const [users, setUsers] = useState([])
-    const [docs, setDocs] = useState([])
+
 
     useEffect(
         () => {
             getDateDetailsArtist(showDateId)
                 .then((data) => {
-                    const singleShowDate = data[0]
-                    updateShowDate(singleShowDate)
-                })
-            getScheduleItems(showDateId)
-                .then((scheduleArray) => {
-                    setScheduleItems(scheduleArray)
-                })
-            getApprovedGuestRequests(showDateId)
-                .then((guestArray) => {
-                    setGuests(guestArray)
-                })
-            getApprovedRequests(showDateId)
-                .then((requestArray) => {
-                    setRequests(requestArray)
-                })
-            getAllUsers()
-                .then((userArray) => {
-                    setUsers(userArray)
-                })
-            getAssignedDocs(showDateId)
-                .then((docArray) => {
-                    setDocs(docArray)
+                    updateShowDate(data)
                 })
         },
         [showDateId]
@@ -48,15 +23,15 @@ export const DateDetails = () => {
 
     useEffect(
         () => {
-            if (scheduleItems.length) {
-                let foundMorningSchedule = scheduleItems?.filter((scheduleItem) => {
+            if (showDate.schedule_items?.length) {
+                let foundMorningSchedule = showDate.schedule_items?.filter((scheduleItem) => {
                     let timeArray = scheduleItem.time.split(":")
                     if (timeArray[0] < 12) {
                         return scheduleItem
                     }
                 })
 
-                let foundAfternoonSchedule = scheduleItems?.filter((scheduleItem) => {
+                let foundAfternoonSchedule = showDate.schedule_items?.filter((scheduleItem) => {
                     let timeArray = scheduleItem.time.split(":")
                     if (timeArray[0] >= 12) {
                         return scheduleItem
@@ -65,7 +40,7 @@ export const DateDetails = () => {
                 setMorning(foundMorningSchedule)
                 setAfternoon(foundAfternoonSchedule)
             }
-        }, [scheduleItems]
+        }, [showDate.schedule_items]
     )
 
     const findTime = (time) => {
@@ -91,12 +66,12 @@ export const DateDetails = () => {
             <section className="leftSide">
 
                 <div className="showAddress">{showDate?.venue}<br></br>
-                    {showDate?.streetAddress}<br></br>
+                    {showDate?.street_address}<br></br>
                     {showDate?.city} {showDate?.state}</div>
 
                 <div className="essentials">
                     <h4>essential notes:</h4>
-                    {showDate?.essentialNotes}
+                    {showDate?.essential_notes}
                 </div>
 
 
@@ -139,13 +114,11 @@ export const DateDetails = () => {
                     }>additional information:</button>
                     <div className="datedetailcontent">
                         {showDate?.other} <br />
-                        {
-                            requests.map(request => {
-                                let foundUser = users.find((user) => {
-                                    return user.id === request.userId
-                                })
-                                return <>{foundUser?.name} requests {request.request}<br /></>
+                        { showDate.gr_requests
+                            ? showDate.gr_requests.map(request => {
+                                return <>{request.user?.user?.first_name} requests {request.request}<br /></>
                             })
+                            :<></>
                         }
                     </div>
                 </div>
@@ -162,9 +135,9 @@ export const DateDetails = () => {
                     }
                     }>guest list:</button>
                     <div className="datedetailcontent">
-                        {guests.length
-                            ? guests.map(guest => {
-                                return <div key={`guest--${guest.id}`}> {guest.name} - {guest.quantity} tickets</div>
+                        {showDate.guest_requests
+                            ? showDate.guest_requests.map(guest => {
+                                return <div> {guest.name} - {guest.quantity} tickets</div>
                             })
                             : <></>
                         }
@@ -172,9 +145,9 @@ export const DateDetails = () => {
                 </div>
                 <div>
                     <h4 className="datedetaildoc">docs:</h4>
-                    {docs.length
-                        ? docs.map(doc => {
-                            return <img className="image" src={doc.doc.publicURL} />
+                    {showDate.docs?.length
+                        ? showDate.docs.map(doc => {
+                            return <img className="image" src={doc.publicURL} />
                         })
                         : <></>
                     }

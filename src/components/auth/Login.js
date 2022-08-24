@@ -7,20 +7,22 @@ import "./Login.css"
 
 export const Login = () => {
     const [email, set] = useState("")
+    const [pass, setPass ]= useState("")
     const navigate = useNavigate()
 
     const handleLogin = (e) => {
         e.preventDefault()
+        const user = {
+            username: email,
+            password: pass
+        }
 
-        return getLogin(email)
-            .then(foundUsers => {
-                if (foundUsers.length === 1) {
-                    const user = foundUsers[0]
-                    localStorage.setItem("detour_user", JSON.stringify({
-                        id: user.id,
-                        manager: user.isManager
-                    }))
-
+        return getLogin(user)
+            .then(data => {
+                if (data.valid) {
+                    localStorage.setItem("dt_token", data.token)
+                    localStorage.setItem("dt_manager", data.manager)
+                    localStorage.setItem("dt_currentuser", data.current_user)
                     navigate("/")
                 }
                 else {
@@ -41,12 +43,23 @@ export const Login = () => {
                     <h3 className="title">please sign in</h3>
                     <fieldset>
                         <Col md={4}>
-                            <label htmlFor="inputEmail"> email address </label>
-                            <input type="email"
+                            <label htmlFor="inputEmail"> username </label>
+                            <input type="text"
                                 value={email}
                                 onChange={evt => set(evt.target.value)}
                                 className="form-control"
                                 required autoFocus />
+                        </Col>
+                    </fieldset>
+
+                    <fieldset>
+                        <Col md={4}>
+                            <label htmlFor="inputEmail"> password </label>
+                            <input type="password"
+                                value={pass}
+                                onChange={evt => setPass(evt.target.value)}
+                                className="form-control"
+                                required />
                         </Col>
                     </fieldset>
                     <fieldset>

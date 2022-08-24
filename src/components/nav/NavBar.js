@@ -5,10 +5,10 @@ import "./Nav.css"
 
 export const NavBar = () => {
 
-    const localUser = localStorage.getItem("detour_user")
+    const localUser = localStorage.getItem("dt_manager")
     const userObject = JSON.parse(localUser)
 
-    if (userObject.manager) {
+    if (userObject) {
         return <ManagerNav />
     } else {
         return <ArtistNav />

@@ -19,20 +19,16 @@ export const NewDateForm = ({ retrieveDates }) => {
 
     const navigate = useNavigate()
 
-    const localUser = localStorage.getItem("detour_user")
-    const userObject = JSON.parse(localUser)
-
     const handleSaveButtonClick = (event) => {
         event.preventDefault()
 
         const newShowToSendToAPI = {
-            userId: userObject.id,
             date: showDate.date,
             venue: showDate.venue,
-            streetAddress: showDate.streetAddress,
+            street_address: showDate.streetAddress,
             city: showDate.city,
             state: showDate.state,
-            essentialNotes: showDate.essentialNotes,
+            essential_notes: showDate.essentialNotes,
             other: showDate.other
         }
 

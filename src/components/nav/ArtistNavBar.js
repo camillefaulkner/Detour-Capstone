@@ -12,7 +12,7 @@ export const ArtistNav = () => {
             <Nav className='tabs'>
                 <img className="logo" src={logo} />
                 <NavItem className="navitem">
-                    <NavLink className="nav-link" href="/" style={{ textDecoration: 'none' }}>
+                    <NavLink className="nav-link" href="/map" style={{ textDecoration: 'none' }}>
                         map
                     </NavLink>
                 </NavItem>
@@ -33,8 +33,8 @@ export const ArtistNav = () => {
                 </NavItem>
                 <NavItem className="navitemlast">
                     <NavLink className="navbar__link nav-side right auth-login" href="#" onClick={() => {
-                        localStorage.removeItem("detour_user")
-                        navigate("/", { replace: true })
+                        localStorage.removeItem("dt_token")
+                        navigate("/login", { replace: true })
                     }}>logout</NavLink>
                 </NavItem>
             </Nav>
