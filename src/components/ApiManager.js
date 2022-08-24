@@ -3,7 +3,7 @@ import { Buffer } from 'buffer'
 
 
 export const getLogin = (user) => {
-    return fetch("http://localhost:8000/login", {
+    return fetch("https://detour-backend.herokuapp.com/login", {
         method: "POST",
         headers: {
             "Content-Type": "application/json",
@@ -15,7 +15,7 @@ export const getLogin = (user) => {
 }
 
 export const getHandleRegister = (user) => {
-    return fetch("http://localhost:8000/register", {
+    return fetch("https://detour-backend.herokuapp.com/register", {
         method: "POST",
         headers: {
             "Content-Type": "application/json",
@@ -28,7 +28,7 @@ export const getHandleRegister = (user) => {
 
 
 export const saveNewUser = (user) => {
-    return fetch("http://localhost:8000/users", {
+    return fetch("https://detour-backend.herokuapp.com/users", {
         method: "POST",
         headers: {
             "Authorization": `Token ${localStorage.getItem("dt_token")}`,
@@ -41,7 +41,7 @@ export const saveNewUser = (user) => {
 
 
 export const getCustomerProfile = (userObject) => {
-    return fetch(`http://localhost:8000/users/${userObject}`, {
+    return fetch(`https://detour-backend.herokuapp.com/users/${userObject}`, {
         headers: {
             "Authorization": `Token ${localStorage.getItem("dt_token")}`
         }
@@ -50,7 +50,7 @@ export const getCustomerProfile = (userObject) => {
 }
 
 export const updateCustomerProfile = (profile) => {
-    return fetch(`http://localhost:8000/users/${profile.id}`, {
+    return fetch(`https://detour-backend.herokuapp.com/users/${profile.id}`, {
         method: "PUT",
         headers: {
             "Authorization": `Token ${localStorage.getItem("dt_token")}`,
@@ -61,7 +61,7 @@ export const updateCustomerProfile = (profile) => {
 }
 
 export const getAllDates = () => {
-    return fetch('http://localhost:8000/showDates', {
+    return fetch('https://detour-backend.herokuapp.com/showDates', {
         headers: {
             "Authorization": `Token ${localStorage.getItem("dt_token")}`
         }
@@ -70,7 +70,7 @@ export const getAllDates = () => {
 }
 
 export const getAllUsers = () => {
-    return fetch('http://localhost:8000/users', {
+    return fetch('https://detour-backend.herokuapp.com/users', {
         headers: {
             "Authorization": `Token ${localStorage.getItem("dt_token")}`
         }
@@ -79,7 +79,7 @@ export const getAllUsers = () => {
 }
 
 export const getUser = (id) => {
-    return fetch(`http://localhost:8000/users?id=${id}`, {
+    return fetch(`https://detour-backend.herokuapp.com/users?id=${id}`, {
         headers: {
             "Authorization": `Token ${localStorage.getItem("dt_token")}`
         }
@@ -88,7 +88,7 @@ export const getUser = (id) => {
 }
 
 export const getDateDetailsArtist = (showId) => {
-    return fetch(`http://localhost:8000/showDates/${showId}`, {
+    return fetch(`https://detour-backend.herokuapp.com/showDates/${showId}`, {
         headers: {
             "Authorization": `Token ${localStorage.getItem("dt_token")}`
         }
@@ -97,7 +97,7 @@ export const getDateDetailsArtist = (showId) => {
 }
 
 export const getDocsForShow = (showId) => {
-    return fetch(`http://localhost:8000/docs?showDateId=${showId}`, {
+    return fetch(`https://detour-backend.herokuapp.com/docs?showDateId=${showId}`, {
         headers: {
             "Authorization": `Token ${localStorage.getItem("dt_token")}`
         }
@@ -106,7 +106,7 @@ export const getDocsForShow = (showId) => {
 }
 
 export const getDateDetailsManager = (showId) => {
-    return fetch(`http://localhost:8000/showDates/${showId}`, {
+    return fetch(`https://detour-backend.herokuapp.com/showDates/${showId}`, {
         headers: {
             "Authorization": `Token ${localStorage.getItem("dt_token")}`
         }
@@ -115,7 +115,7 @@ export const getDateDetailsManager = (showId) => {
 }
 
 export const updateShowDate = (showDate) => {
-    return fetch(`http://localhost:8000/showDates/${showDate.id}`, {
+    return fetch(`https://detour-backend.herokuapp.com/showDates/${showDate.id}`, {
         method: "PUT",
         headers: {
             "Authorization": `Token ${localStorage.getItem("dt_token")}`,
@@ -126,7 +126,7 @@ export const updateShowDate = (showDate) => {
 }
 
 export const saveNewDate = (showDateToSendToAPI) => {
-    return fetch(`http://localhost:8000/showDates`, {
+    return fetch(`https://detour-backend.herokuapp.com/showDates`, {
         method: "POST",
         headers: {
             "Authorization": `Token ${localStorage.getItem("dt_token")}`,
@@ -138,7 +138,7 @@ export const saveNewDate = (showDateToSendToAPI) => {
 }
 
 export const saveDocAssign = (docAssignToSendToAPI) => {
-    return fetch(`http://localhost:8000/assignDocToShow`, {
+    return fetch(`https://detour-backend.herokuapp.com/assignDocToShow`, {
         method: "POST",
         headers: {
             "Authorization": `Token ${localStorage.getItem("dt_token")}`,
@@ -150,7 +150,7 @@ export const saveDocAssign = (docAssignToSendToAPI) => {
 }
 
 export const getGuestRequests = (id) => {
-    return fetch(`http://localhost:8000/guestRequests?showDateId=${id}`, {
+    return fetch(`https://detour-backend.herokuapp.com/guestRequests?showDateId=${id}`, {
         headers: {
             "Authorization": `Token ${localStorage.getItem("dt_token")}`
         }
@@ -168,7 +168,7 @@ export const getGuestRequests = (id) => {
 // }
 
 export const getApprovedGuestRequests = (id) => {
-    return fetch(`http://localhost:8000/guestRequests?showDateId=${id}&statusId=2`, {
+    return fetch(`https://detour-backend.herokuapp.com/guestRequests?showDateId=${id}&statusId=2`, {
         headers: {
             "Authorization": `Token ${localStorage.getItem("dt_token")}`
         }
@@ -177,7 +177,7 @@ export const getApprovedGuestRequests = (id) => {
 }
 
 export const getPendingGuestRequests = () => {
-    return fetch(`http://localhost:8000/guestRequests?statusId=1`, {
+    return fetch(`https://detour-backend.herokuapp.com/guestRequests?statusId=1`, {
         headers: {
             "Authorization": `Token ${localStorage.getItem("dt_token")}`
         }
@@ -186,7 +186,7 @@ export const getPendingGuestRequests = () => {
 }
 
 export const getAllRequests = () => {
-    return fetch(`http://localhost:8000/greenRoomRequests?statusId=1`, {
+    return fetch(`https://detour-backend.herokuapp.com/greenRoomRequests?statusId=1`, {
         headers: {
             "Authorization": `Token ${localStorage.getItem("dt_token")}`
         }
@@ -195,7 +195,7 @@ export const getAllRequests = () => {
 }
 
 export const getRequests = (id) => {
-    return fetch(`http://localhost:8000/greenRoomRequests?showDateId=${id}`, {
+    return fetch(`https://detour-backend.herokuapp.com/greenRoomRequests?showDateId=${id}`, {
         headers: {
             "Authorization": `Token ${localStorage.getItem("dt_token")}`
         }
@@ -204,7 +204,7 @@ export const getRequests = (id) => {
 }
 
 export const getApprovedRequests = (id) => {
-    return fetch(`http://localhost:8000/greenRoomRequests?showDateId=${id}&statusId=2`, {
+    return fetch(`https://detour-backend.herokuapp.com/greenRoomRequests?showDateId=${id}&statusId=2`, {
         headers: {
             "Authorization": `Token ${localStorage.getItem("dt_token")}`
         }
@@ -213,7 +213,7 @@ export const getApprovedRequests = (id) => {
 }
 
 export const getUserRequests = (id) => {
-    return fetch(`http://localhost:8000/greenRoomRequests?userId=${id}`, {
+    return fetch(`https://detour-backend.herokuapp.com/greenRoomRequests?userId=${id}`, {
         headers: {
             "Authorization": `Token ${localStorage.getItem("dt_token")}`
         }
@@ -222,7 +222,7 @@ export const getUserRequests = (id) => {
 }
 
 export const getUserGuestRequests = (id) => {
-    return fetch(`http://localhost:8000/guestRequests?userId=${id}`, {
+    return fetch(`https://detour-backend.herokuapp.com/guestRequests?userId=${id}`, {
         headers: {
             "Authorization": `Token ${localStorage.getItem("dt_token")}`
         }
@@ -232,7 +232,7 @@ export const getUserGuestRequests = (id) => {
 
 
 export const saveRequest = (requestToSendToAPI) => {
-    return fetch(`http://localhost:8000/greenRoomRequests`, {
+    return fetch(`https://detour-backend.herokuapp.com/greenRoomRequests`, {
         method: "POST",
         headers: {
             "Authorization": `Token ${localStorage.getItem("dt_token")}`,
@@ -244,7 +244,7 @@ export const saveRequest = (requestToSendToAPI) => {
 }
 
 export const updateGreenRoomRequest = (greenRoomObj) => {
-    return fetch(`http://localhost:8000/greenRoomRequests/${greenRoomObj.id}`, {
+    return fetch(`https://detour-backend.herokuapp.com/greenRoomRequests/${greenRoomObj.id}`, {
         method: "PUT",
         headers: {
             "Authorization": `Token ${localStorage.getItem("dt_token")}`,
@@ -256,7 +256,7 @@ export const updateGreenRoomRequest = (greenRoomObj) => {
 
 
 export const updateAPIGuestRequest = (guestObj) => {
-    return fetch(`http://localhost:8000/guestRequests/${guestObj.id}`, {
+    return fetch(`https://detour-backend.herokuapp.com/guestRequests/${guestObj.id}`, {
         method: "PUT",
         headers: {
             "Authorization": `Token ${localStorage.getItem("dt_token")}`,
@@ -267,7 +267,7 @@ export const updateAPIGuestRequest = (guestObj) => {
 }
 
 export const updateDoc = (docObj) => {
-    return fetch(`http://localhost:8000/docs/${docObj.id}`, {
+    return fetch(`https://detour-backend.herokuapp.com/docs/${docObj.id}`, {
         method: "PUT",
         headers: {
             "Authorization": `Token ${localStorage.getItem("dt_token")}`,
@@ -278,7 +278,7 @@ export const updateDoc = (docObj) => {
 }
 
 export const getScheduleItems = (id) => {
-    return fetch(`http://localhost:8000/scheduleItems?showDateId=${id}`, {
+    return fetch(`https://detour-backend.herokuapp.com/scheduleItems?showDateId=${id}`, {
         headers: {
             "Authorization": `Token ${localStorage.getItem("dt_token")}`
         }
@@ -287,7 +287,7 @@ export const getScheduleItems = (id) => {
 }
 
 export const getDocs = () => {
-    return fetch(`http://localhost:8000/docs`, {
+    return fetch(`https://detour-backend.herokuapp.com/docs`, {
         headers: {
             "Authorization": `Token ${localStorage.getItem("dt_token")}`
         }
@@ -296,7 +296,7 @@ export const getDocs = () => {
 }
 
 export const saveNewGuest = (newGuestToSendToAPI) => {
-    return fetch(`http://localhost:8000/guestRequests`, {
+    return fetch(`https://detour-backend.herokuapp.com/guestRequests`, {
         method: "POST",
         headers: {
             "Authorization": `Token ${localStorage.getItem("dt_token")}`,
@@ -308,7 +308,7 @@ export const saveNewGuest = (newGuestToSendToAPI) => {
 }
 
 export const saveNewScheduleItem = (newScheduleItemToSendToAPI) => {
-    return fetch(`http://localhost:8000/scheduleItems`, {
+    return fetch(`https://detour-backend.herokuapp.com/scheduleItems`, {
         method: "POST",
         headers: {
             "Authorization": `Token ${localStorage.getItem("dt_token")}`,
@@ -320,7 +320,7 @@ export const saveNewScheduleItem = (newScheduleItemToSendToAPI) => {
 }
 
 export const saveDoc = (docToSendToAPI) => {
-    return fetch(`http://localhost:8000/docs`, {
+    return fetch(`https://detour-backend.herokuapp.com/docs`, {
         method: "POST",
         headers: {
             "Authorization": `Token ${localStorage.getItem("dt_token")}`,
@@ -362,7 +362,7 @@ export const getCoffeeShops = (lat, long) => {
 }
 
 export const coffeeAPI = (lat, long) => {
-    return fetch(`http://localhost:8000/datacollection/yelp_api?lat=${lat}&long=${long}`, {
+    return fetch(`https://detour-backend.herokuapp.com/datacollection/yelp_api?lat=${lat}&long=${long}`, {
         headers: {
             "Authorization": `Token ${localStorage.getItem("dt_token")}`
         }

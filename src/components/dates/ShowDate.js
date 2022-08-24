@@ -70,7 +70,7 @@ export const ShowDate = ({ id, date, venue, city, state, setter, retrieveDates }
                             <div className="dayButton">
                                 <Button close className="deleteButton" onClick={(evt) => {
                                     evt.preventDefault()
-                                    fetch(`http://localhost:8000/showDates/${id}`, {
+                                    fetch(`https://detour-backend.herokuapp.com/showDates/${id}`, {
                                         method: "DELETE",
                                         headers: {
                                             "Authorization": `Token ${localStorage.getItem("dt_token")}`,

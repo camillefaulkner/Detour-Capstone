@@ -307,7 +307,7 @@ export const DateEdit = ({ retrieveDates }) => {
                                                 <Button className="dateeditclose" color="danger" close onClick={(evt) => {
                                                     evt.preventDefault()
 
-                                                    fetch(`http://localhost:8088/scheduleItems/${item.id}`, {
+                                                    fetch(`https://detour-backend.herokuapp.com/scheduleItems/${item.id}`, {
                                                         method: "DELETE"
                                                     })
                                                         .then(() => {
@@ -327,7 +327,7 @@ export const DateEdit = ({ retrieveDates }) => {
                                                 <Button className="dateeditclose" close onClick={(evt) => {
                                                     evt.preventDefault()
 
-                                                    fetch(`http://localhost:8088/scheduleItems/${item.id}`, {
+                                                    fetch(`https://detour-backend.herokuapp.com/scheduleItems/${item.id}`, {
                                                         method: "DELETE"
                                                     })
                                                         .then(() => {
@@ -404,7 +404,7 @@ export const DateEdit = ({ retrieveDates }) => {
                                         <Button className="dateeditclose" close onClick={(evt) => {
                                             evt.preventDefault()
 
-                                            fetch(`http://localhost:8088/guestRequests/${guest.id}`, {
+                                            fetch(`https://detour-backend.herokuapp.com/guestRequests/${guest.id}`, {
                                                 method: "DELETE"
                                             })
                                                 .then(() => {
