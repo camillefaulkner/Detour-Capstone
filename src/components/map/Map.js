@@ -70,7 +70,7 @@ export const MapView = ({ retrieveDates }) => {
                             }
                             }>coffee?</button>
                             {
-                                coffeeList.length
+                                coffeeList?.length
                                     ? coffeeList.map(coffee => {
                                         return <><br />{coffee.name} - {coffee.location.address1}</>
                                     })
