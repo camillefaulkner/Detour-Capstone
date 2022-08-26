@@ -23,7 +23,7 @@ export const Login = () => {
                     localStorage.setItem("dt_token", data.token)
                     localStorage.setItem("dt_manager", data.manager)
                     localStorage.setItem("dt_currentuser", data.current_user)
-                    navigate("/")
+                    navigate("/map")
                 }
                 else {
                     window.alert("Invalid login")

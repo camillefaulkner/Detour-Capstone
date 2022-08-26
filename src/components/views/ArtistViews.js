@@ -34,7 +34,7 @@ export const ArtistViews = () => {
 				<Outlet />
 			</>
 		} />
-		<Route path="/map" element={<MapView retrieveDates={RetrieveDates} />} />
+		< Route path="/map" element={<MapView retrieveDates={RetrieveDates} />} />
 		< Route path="/dates" element={< DateList />} />
 		< Route path="/dates/:showDateId" element={< DateDetails />} />
 		< Route path="/profile" element={< ProfileView />} />
